@@ -29,13 +29,15 @@ client.on('message', async message => {
     return;
   const args = SpaceSplit(message.content.slice(prefix.length));
   const command = args.shift();
-  const commandList = Object.keys(commands);
-  if (commandList.includes(command)) {
+  const commandList = Object.keys(commands.commands);
+  const aliasList = Object.keys(commands.aliases);
+  const cur = commandList.includes(command) || commandList.includes(aliasList[command]);
+  if (cur) {
     let cursor = commandArgs[command];
     if (cursor.args.some(x => x.length === args.length)) {
       let result;
       try {
-        result = await commands[command](message, args, client);
+        result = await commands.commands[command](message, args, client);
       } catch {
         result = ':x: Something went wrong.....';
       };
