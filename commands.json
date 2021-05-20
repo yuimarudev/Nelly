@@ -1,2 +1,11 @@
 {
+  "aliases": {
+    "h": "help"
+  },
+  "commands": {
+    "help": {
+      "description": "",
+      "args": [["command"],[]],
+      "details": ""
+    }
 }
