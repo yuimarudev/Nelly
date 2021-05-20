@@ -24,6 +24,6 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-  if(message.author.bot || message.system || (message.content.startsWith(prefix) || (message.mentions.users.has(client.user) && message.content.match(new RegExp(`<@!?${client.user.id}>`)))))
+  if(message.author.bot || message.system || (!message.content.startsWith(prefix) || (!message.mentions.users.has(client.user) && !message.content.match(new RegExp(`<@!?${client.user.id}>`)))))
     return;
 });
