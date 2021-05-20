@@ -1,0 +1,19 @@
+{
+  "name": "nelly",
+  "version": "1.0.0",
+  "description": "ツ",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sueqkjs/Nelly.git"
+  },
+  "author": "Sueqkjs",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/Sueqkjs/Nelly/issues"
+  },
+  "homepage": "https://github.com/Sueqkjs/Nelly#readme"
+}
