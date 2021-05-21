@@ -43,8 +43,8 @@ client.on('message', async message => {
     return;
   const args = SpaceSplit(message.content.slice(prefix.length));
   let command = args.shift();
-  const commandList = Object.keys(commands.commands);
-  const aliasList = Object.keys(commands.aliases);
+  const commandList = Object.keys(commandsArgs.commands);
+  const aliasList = Object.keys(commandsArgs.aliases);
   const curs = commandList.includes(command) ? command : false || commandList.includes(aliasList[command]) ? commandList[aliasList[command]] : false;
   if (curs) {
     let cursor = commandArgs[curs];
