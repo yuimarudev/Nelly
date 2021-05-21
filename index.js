@@ -25,7 +25,7 @@ for(let key in env) {
 };
 process.stdin.on('data', chunk => {
   chunk = String(chunk);
-  if(chunk.match('sine')) {
+  if(typeof chunk.match === "function" && chunk.match('sine')) {
     console.log('グハッ！');
     process.exit();
   };
