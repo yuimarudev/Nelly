@@ -3,6 +3,7 @@ const leven = require('levenshtein');
 const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
+const SpaceSplit = require('./spliter.js');
 const commandArgs = require('./commands.json');
 const commands = {};
 const prefix = '%';
@@ -24,6 +25,7 @@ for(let key in env) {
 };
 
 client.on('ready', () => {
+  console.log('Please wait.............');
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
     .map(x => x.replace(/\.js$/,''));
   for (let command of list) {
@@ -31,18 +33,20 @@ client.on('ready', () => {
     commands[command] = run;
     console.log('loaded \'' + command + '\'');
   };
+  console.log('ready');
 });
 
 client.on('message', async message => {
-  if(message.author.bot || (!message.content.startsWith(prefix) || (!message.mentions.users.has(client.user) && !message.content.match(new RegExp(`<@!?${client.user.id}>`))) ) )
+  if(message.author.bot) return;
+  if(!message.content.startsWith(prefix) || !message.mentions.users.has(client.user))
     return;
   const args = SpaceSplit(message.content.slice(prefix.length));
   let command = args.shift();
   const commandList = Object.keys(commands.commands);
   const aliasList = Object.keys(commands.aliases);
-  const curs = commandList.includes(command) ? command : false || commandList.includes(aliasList[command]) ? command = aliasList[command] : false;
+  const curs = commandList.includes(command) ? command : false || commandList.includes(aliasList[command]) ? commandList[aliasList[command]] : false;
   if (curs) {
-    let cursor = commandArgs[command];
+    let cursor = commandArgs[curs];
     if (cursor.args.some(x => x.length === args.length)) {
       let result;
       try {
@@ -57,7 +61,7 @@ client.on('message', async message => {
   } else {
     let dym = commandList
       .reduce((acc, cur) => {
-        let { distance } = new leven(curs, input);
+        let { distance } = new leven(cur, curs);
         return distance < acc[0] ? [distance, cur] : acc;
       }, [3, ""])[1];
      return dym ?
