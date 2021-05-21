@@ -1,3 +1,3 @@
-module.exports = async(message) => {
-  return void await message.channel.send(`pong!🏓 ${message.client.ws.ping}`);
+module.exports = async (message, _, client) => {
+  return void await message.channel.send(`pong!🏓 ${client.ws.ping}`);
 };
