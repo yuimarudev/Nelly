@@ -52,7 +52,7 @@ client.on('message', async message => {
         return distance < acc[0] ? [distance, cur] : acc;
       }, [3, ""])[1];
      return dym ?
-     message.reply(':thinking: コマンドを間違えているようです。\nもしかして: ' dym) :
+     message.reply(':thinking: コマンドを間違えているようです。\nもしかして: ' + dym) :
      void 0;
   };
 });
