@@ -39,7 +39,7 @@ client.on('ready', () => {
 
 client.on('message', async message => {
   if(message.author.bot) return;
-  if(!message.content.startsWith(prefix) || !message.mentions.users.has(client.user))
+  if(!message.content.startsWith(prefix) || !message.mentions.users.has(client.user.id))
     return;
   const args = SpaceSplit(message.content.slice(prefix.length));
   let command = args.shift();
