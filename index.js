@@ -2,10 +2,12 @@ const discord = require('discord.js');
 const leven = require('levenshtein');
 const fs = require('fs');
 const path = require('path');
+const dotenv = require('dotenv');
 const commandArgs = require('./commands.json');
 const commands = {};
 const prefix = '%';
 const { Client, MessageEmbed, Intents, MessageAttachment } = discord;
+const env = dotenv.parse(fs.readFileSync(path.join(__dirname, '.env')));
 global.client = new Client({
   intent: Intents.NON_PRIVILEGED,
   ws: {
@@ -13,6 +15,10 @@ global.client = new Client({
   }
 });
 global.queue = new Map();
+
+for(let key in env) {
+  process.env[key] = env[key];
+};
 
 client.on('ready', () => {
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
@@ -28,11 +34,11 @@ client.on('message', async message => {
   if(message.author.bot || message.system || (!message.content.startsWith(prefix) || (!message.mentions.users.has(client.user) && !message.content.match(new RegExp(`<@!?${client.user.id}>`)))))
     return;
   const args = SpaceSplit(message.content.slice(prefix.length));
-  const command = args.shift();
+  let command = args.shift();
   const commandList = Object.keys(commands.commands);
   const aliasList = Object.keys(commands.aliases);
-  const cur = commandList.includes(command) || commandList.includes(aliasList[command]);
-  if (cur) {
+  const curs = commandList.includes(command) ? command : false || commandList.includes(aliasList[command]) ? command = aliasList[command] : false;
+  if (curs) {
     let cursor = commandArgs[command];
     if (cursor.args.some(x => x.length === args.length)) {
       let result;
@@ -48,7 +54,7 @@ client.on('message', async message => {
   } else {
     let dym = commandList
       .reduce((acc, cur) => {
-        let { distance } = new leven(cur, input);
+        let { distance } = new leven(curs, input);
         return distance < acc[0] ? [distance, cur] : acc;
       }, [3, ""])[1];
      return dym ?
@@ -56,3 +62,5 @@ client.on('message', async message => {
      void 0;
   };
 });
+
+client.login(process.env.token);
