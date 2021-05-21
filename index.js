@@ -23,6 +23,13 @@ global.queue = new Map();
 for(let key in env) {
   process.env[key] = env[key];
 };
+process.stdin.on('data', chunk => {
+  chunk = String(chunk);
+  if(chunk.match('sine')) {
+    console.log('グハッ！');
+    process.exit();
+  };
+});
 
 client.on('ready', () => {
   console.log('Please wait.............');
@@ -43,15 +50,16 @@ client.on('message', async message => {
     return;
   const args = SpaceSplit(message.content.slice(prefix.length));
   let command = args.shift();
-  const commandList = Object.keys(commandsArgs.commands);
-  const aliasList = Object.keys(commandsArgs.aliases);
-  const curs = commandList.includes(command) ? command : false || commandList.includes(aliasList[command]) ? commandList[aliasList[command]] : false;
+  const commandList = Object.keys(commandArgs.commands);
+  const aliasList = Object.keys(commandArgs.aliases);
+  const curs = commandList.includes(command) ? command : false || commandList.includes(aliasList[command]) ? aliasList[command] : false;
+  console.log(curs)
   if (curs) {
-    let cursor = commandArgs[curs];
+    let cursor = commandArgs.commands[curs];
     if (cursor.args.some(x => x.length === args.length)) {
       let result;
       try {
-        result = await commands.commands[curs](message, args, client);
+        result = await commands[curs](message, args, client);
       } catch(ex) {
         result = ':x: おっと、なにかが上手くいかなかったみたいですね\nエラー内容: ```js\n' + ex.message + '\n```';
       };
