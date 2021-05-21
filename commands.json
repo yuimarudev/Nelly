@@ -3,9 +3,10 @@
     "h": "help"
   },
   "commands": {
-    "help": {
-      "description": "",
-      "args": [["command"],[]],
+    "ping": {
+      "description": "ping pong",
+      "args": [[]],
       "details": ""
     }
+  }
 }
