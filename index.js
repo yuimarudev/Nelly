@@ -27,6 +27,7 @@ for(let key in env) {
 client.on('ready', () => {
   console.log('Please wait.............');
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
+    .filter(x => x.endsWith('.js'))
     .map(x => x.replace(/\.js$/,''));
   for (let command of list) {
     let run = require(path.join(__dirname, 'commands', command));
