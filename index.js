@@ -11,7 +11,10 @@ const env = dotenv.parse(fs.readFileSync(path.join(__dirname, '.env')));
 global.client = new Client({
   intents: Intents.NON_PRIVILEGED,
   ws: {
-    intents: Intents.NON_PRIVILEGED
+    intents: Intents.NON_PRIVILEGED,
+    properties: {
+        $browser: 'Discord Android'
+    }
   }
 });
 global.queue = new Map();
