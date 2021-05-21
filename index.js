@@ -45,7 +45,7 @@ client.on('message', async message => {
       try {
         result = await commands.commands[command](message, args, client);
       } catch(ex) {
-        result = ':x: Something went wrong.....\nInfo: ' + ex.message;
+        result = ':x: おっと、なにかが上手くいかなかったみたいですね\nエラー内容: ' + ex.message;
       };
       if (result) return message.channel.send(result);
     } else {
