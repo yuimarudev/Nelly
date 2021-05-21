@@ -17,7 +17,7 @@ global.queue = new Map();
 client.on('ready', () => {
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
     .map(x => x.replace(/\.js$/,''));
-  for(let command of list){
+  for (let command of list) {
     let run = require(path.join(__dirname, 'commands', command));
     commands[command] = run;
     console.log('loaded \'' + command + '\'');
@@ -41,7 +41,7 @@ client.on('message', async message => {
       } catch(ex) {
         result = ':x: Something went wrong.....\nInfo: ' + ex.message;
       };
-      if(result) return message.channel.send(result);
+      if (result) return message.channel.send(result);
     } else {
       return message.reply(':x: 引数が間違っています。引数は`' + prefix + 'help ' + command + '`で確認してください。');
     };
