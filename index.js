@@ -50,9 +50,9 @@ client.on('message', async message => {
     return;
   const args = SpaceSplit(message.content.slice(prefix.length));
   let command = args.shift();
-  const commandList = Object.keys(commandArgs.commands);
+  const commandDict = commandArgs.commands;
   const aliasList = Object.keys(commandArgs.aliases);
-  const curs = commandList.includes(command) ? command : false || commandList.includes(aliasList[command]) ? aliasList[command] : false;
+  const curs = command in commandDict ? command : false || aliasList[command] in commandDict ? aliasList[command] : false;
   console.log(curs)
   if (curs) {
     let cursor = commandArgs.commands[curs];
@@ -68,7 +68,7 @@ client.on('message', async message => {
       return message.reply(':x: 引数が間違っています。引数は`' + prefix + 'help ' + command + '`で確認してください。');
     };
   } else {
-    let dym = commandList
+    let dym = Object.keys(commandDict)
       .reduce((acc, cur) => {
         let { distance } = new leven(cur, curs);
         return distance < acc[0] ? [distance, cur] : acc;
