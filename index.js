@@ -9,9 +9,9 @@ const prefix = '%';
 const { Client, MessageEmbed, Intents, MessageAttachment } = discord;
 const env = dotenv.parse(fs.readFileSync(path.join(__dirname, '.env')));
 global.client = new Client({
-  intent: Intents.NON_PRIVILEGED,
+  intents: Intents.NON_PRIVILEGED,
   ws: {
-    intent: Intents.NON_PRIVILEGED
+    intents: Intents.NON_PRIVILEGED
   }
 });
 global.queue = new Map();
