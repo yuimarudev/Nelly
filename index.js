@@ -34,7 +34,7 @@ client.on('ready', () => {
 });
 
 client.on('message', async message => {
-  if(message.author.bot || message.system || (!message.content.startsWith(prefix) || (!message.mentions.users.has(client.user) && !message.content.match(new RegExp(`<@!?${client.user.id}>`)))))
+  if(message.author.bot || (!message.content.startsWith(prefix) || (!message.mentions.users.has(client.user) && !message.content.match(new RegExp(`<@!?${client.user.id}>`))) ) )
     return;
   const args = SpaceSplit(message.content.slice(prefix.length));
   let command = args.shift();
@@ -46,9 +46,9 @@ client.on('message', async message => {
     if (cursor.args.some(x => x.length === args.length)) {
       let result;
       try {
-        result = await commands.commands[command](message, args, client);
+        result = await commands.commands[curs](message, args, client);
       } catch(ex) {
-        result = ':x: おっと、なにかが上手くいかなかったみたいですね\nエラー内容: ' + ex.message;
+        result = ':x: おっと、なにかが上手くいかなかったみたいですね\nエラー内容: ```js\n' + ex.message + '\n```';
       };
       if (result) return message.channel.send(result);
     } else {
