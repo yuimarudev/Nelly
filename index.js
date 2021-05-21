@@ -38,8 +38,8 @@ client.on('message', async message => {
       let result;
       try {
         result = await commands.commands[command](message, args, client);
-      } catch {
-        result = ':x: Something went wrong.....';
+      } catch(ex) {
+        result = ':x: Something went wrong.....\nInfo: ' + ex.message;
       };
       if(result) return message.channel.send(result);
     } else {
