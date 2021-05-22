@@ -28,6 +28,7 @@ for(let key in env) {
   process.env[key] = env[key];
 };
 
+
 process.stdin.on('data', chunk => {
   chunk = String(chunk);
   if(typeof chunk.match === "function" && chunk.match('sine')) {
