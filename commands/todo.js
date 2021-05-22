@@ -1,5 +1,17 @@
 const toDoList = [ ];
 
+const logPath = "./todo.log";
+
+if (fs.existsSync(logPath)) {
+  const addend = JSON.parse(
+    fs.readFileSync(logPath, "utf-8")
+  );
+  toDoList.push(...addend);
+}
+const logTheList = () => {
+  fs.writeFileSync(logPath, JSON.stringify(toDoList));
+};
+
 module.exports = async (message, args, client) => {
   switch (args.shift()) {
     case "show":
@@ -22,6 +34,7 @@ async function showList(m) {
 
 async function addToList(m, args) {
   toDoList.push(args[0]);
+  logTheList();
   await m.channel.send(
     `:white_check_mark: This is not supported yet.`
   );
@@ -35,6 +48,7 @@ async function deleteElement(m, args) {
     );
   if (index < toDoList) {
     let [spliced] = toDoList.splice(index, 1);
+    logTheList();
     await m.channel.send(
       `:white_check_mark: Eliminated: ${spliced}`
     );
