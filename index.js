@@ -90,8 +90,8 @@ client.on('message', async message => {
 });
 
 client.on('voiceStateUpdate', (oldState, newState) => {
-    oldState.channel.member.find(({id})=>id===client.user.id) &&
-    !newState.channel.member.find(({id})=>id===client.user.id) 
+    oldState.channel.members.find(({id})=>id===client.user.id) &&
+    !newState.channel.members.find(({id})=>id===client.user.id) 
       ? queue.set(newState.guild.id, undefined)
       : void 0;
 });
