@@ -1,4 +1,5 @@
 const toDoList = [ ];
+const deleted = [ ];
 const logPath = "./todo.log";
 
 if (fs.existsSync(logPath)) {
@@ -41,27 +42,8 @@ async function addToList(m, args) {
   toDoList.push(args[0]);
   logTheList();
   await m.channel.send(
-    `:white_check_mark: This is not supported yet.`
+    `:white_check_mark: Added!`
   );
-}
-
-async function deleteElement(m, args) {
-  let index = parseInt(args[0], 10);
-  if (Number.isNaN(index))
-    return void await m.channel.send(
-      `An invalid argument '${args[0]}'.`
-    );
-  if (index < toDoList.length) {
-    let [spliced] = toDoList.splice(index, 1);
-    logTheList();
-    await m.channel.send(
-      `:white_check_mark: Eliminated: ${spliced}`
-    );
-  } else {
-    await m.channel.send(
-      `Error: out of range.`
-    );
-  }
 }
 
 async function restoreElement(m, args) {
@@ -82,6 +64,26 @@ async function restoreElement(m, args) {
     toDoList.push(deleted.pop());
   }
   await m.channel.send(
-    `:white_check_mark: Rewinded!`
+    `:white_check_mark: Restored!`
   );
+}
+
+async function deleteElement(m, args) {
+  let index = parseInt(args[0], 10);
+  if (Number.isNaN(index))
+    return void await m.channel.send(
+      `An invalid argument '${args[0]}'.`
+    );
+  if (index < toDoList.length) {
+    let [spliced] = toDoList.splice(index, 1);
+    deleted.push(spliced);
+    logTheList();
+    await m.channel.send(
+      `:white_check_mark: Eliminated: ${spliced}`
+    );
+  } else {
+    await m.channel.send(
+      `Error: out of range.`
+    );
+  }
 }
