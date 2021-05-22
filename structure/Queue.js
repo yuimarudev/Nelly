@@ -10,7 +10,7 @@ module.exports = class {
     this.volume = 5;
     this.playing = false;
   }
-  async addAudio(url) {
+  async addMusic(url) {
     const info = await ytdl.getInfo(query);
     this.songs.push(new Song(info));
     if (!this.playing && this.connection) {
