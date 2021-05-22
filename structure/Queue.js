@@ -11,7 +11,7 @@ module.exports = class {
     this.playing = false;
   }
   async addMusic(url) {
-    const info = await ytdl.getInfo(query);
+    const info = await ytdl.getInfo(url);
     this.songs.push(new Song(info));
     console.log("add!");
     if (!this.playing && this.connection) {
