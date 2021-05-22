@@ -1,4 +1,4 @@
-global.discord = require('discord.js');
+global.Discord = require('discord.js');
 global.fs = require('fs');
 global.ytdl = require('ytdl-core');
 const leven = require('levenshtein');
@@ -8,7 +8,7 @@ const SpaceSplit = require('./spliter.js');
 const commandArgs = require('./commands.json');
 const commands = {};
 const prefix = '%';
-const { Client, MessageEmbed, Intents, MessageAttachment } = discord;
+const { Client, MessageEmbed, Intents, MessageAttachment } = Discord;
 const env = dotenv.parse(fs.readFileSync(path.join(__dirname, '.env')));
 global.client = new Client({
   intents: Intents.NON_PRIVILEGED,
