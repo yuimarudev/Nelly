@@ -49,7 +49,7 @@ client.on('ready', () => {
   setInterval(() => {
     client.user.setActivity(client.guilds.cache.size + 'guilds', { type: 'COMPETING' });
     setTimeout(() => {
-      client.user.setActivity('ready At: ' + client.readyAt, { type: 'PLAYING' });
+      client.user.setActivity('ready At: ' + client.readyAt);
     }, 3000);
   }, 6000);
 });
