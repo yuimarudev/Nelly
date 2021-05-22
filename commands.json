@@ -6,23 +6,26 @@
   "commands": {
     "ping": {
       "description": "ping pong",
-      "args": [[]],
+      "args": [ [] ],
       "details": ""
     },
     "todo": {
       "description": "ToDo List",
-      "args": [["subcommand"],["subcommand","data"]],
+      "args": [ ["subcommand"], ["subcommand","data"] ],
       "details": ""
     },
     "join": {
-      "description": "参加します！",
-      "args": [[]],
+      "description": "VCに参加します！",
+      "args": [ [] ],
       "details": "引数は不要です(ง ˙-˙ )ง"
     },
     "help": {
       "description": "使い方わからん！そんなあなたのために！",
-      "args": [["コマンド"],[]],
+      "args": [ [], ["コマンド"] ],
       "details": "第一引数はなくてもコマンドのリストが出てくるよ！"
+    },
+    "play": {
+      "args": [ ["query"] ]
     }
   }
 }
