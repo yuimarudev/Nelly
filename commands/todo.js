@@ -22,6 +22,9 @@ module.exports = async (message, args, client) => {
     case "del":
       await deleteElement(message, args, client);
       break;
+    case "res":
+      await restoreElement(message, args, client);
+      break;
     default:
       await message.channel.send(`:x: 第一引数の値が無効です。`);
       break;
@@ -59,4 +62,26 @@ async function deleteElement(m, args) {
       `Error: out of range.`
     );
   }
+}
+
+async function restoreElement(m, args) {
+  let len = 1;
+  if (0 < args.length) {
+    len = parseInt(args[0], 10);
+    if (Number.isNaN(len) || len < 1)
+      return void await m.channel.send(
+        `An invalid argument '${args[0]}'.`
+      );
+  }
+  if (len < deleted.length) {
+    return void await m.channel.send(
+      `Error: out of range.`
+    );
+  }
+  for(let i = 0; i < len && deleted.length; i++) {
+    toDoList.push(deleted.pop());
+  }
+  await m.channel.send(
+    `:white_check_mark: Rewinded!`
+  );
 }
