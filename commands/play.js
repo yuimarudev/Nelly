@@ -33,9 +33,10 @@ module.exports = async(message, args, client) => {
         if (!matched) {
             // 検索ワードの処理
         } else if (!matched[2]) {
-            let info = await serverQueue.addMusic(matched[0]).catch(e => {
+            let song = await serverQueue.addMusic(matched[0]).catch(e => {
               return message.reply("(そんな動画)ないです。\nエラー:```" + e + "```");
             });
+            await message.reply(":white_check_mark: Added: " + song.title);
         } else {
             // プレイリストのurlだった場合の処理
         }
