@@ -94,9 +94,4 @@ client.on('message', async message => {
   };
 });
 
-client.on('voiceStateUpdate', (oldState, newState) => {
-    if (newState.id !== client.user.id) return;
-    if (!newState.channel) queues.set(newState.guild.id, undefined);
-});
-
 client.login(process.env.token);
