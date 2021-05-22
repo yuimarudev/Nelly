@@ -1,7 +1,9 @@
 {
   "aliases": {
     "h": "help",
-    "j": "join"
+    "j": "join",
+    "p": "play",
+    "dc": "disconnect",
   },
   "commands": {
     "ping": {
@@ -26,6 +28,12 @@
     },
     "play": {
       "args": [ ["query"] ]
+    } ,
+    "loop": {
+      "args": [ [] ]
+    } ,
+    "disconnect": {
+      "args": [ [] ]
     }
   }
 }
