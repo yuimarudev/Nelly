@@ -22,7 +22,11 @@ module.exports = class {
 }
 
 function play(queue) {
-  if (!queue.songs.length) return;
+  if (!queue.songs.length) {
+    queue.playing = false;
+    return;
+  }
+  queue.playing = true;
   const song = queue.songs.shift();
   const stream = ytdl.downloadFromInfo(song._info);
   console.log("play!");
