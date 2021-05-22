@@ -2,6 +2,7 @@ const toDoList = [ ];
 const deleted = [ ];
 const logPath = "./todo.log";
 
+
 if (fs.existsSync(logPath)) {
   const addend = JSON.parse(
     fs.readFileSync(logPath, "utf-8")
@@ -11,6 +12,7 @@ if (fs.existsSync(logPath)) {
 const logTheList = () => {
   fs.writeFileSync(logPath, JSON.stringify(toDoList));
 };
+
 
 module.exports = async (message, args, client) => {
   switch (args.shift()) {
