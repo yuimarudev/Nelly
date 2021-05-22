@@ -22,6 +22,11 @@ module.exports = (message, args, client) => {
       message.channel.send('無効なコマンドです');
     }
   } else {
-    message.channel.send(Object.keys(dict.commands).map(v => '・' + v).join('\n'))
+    message.channel.send({
+      embed: {
+        title: "コマンド一覧",
+        description: Object.keys(dict.commands).map(v => '・' + v).join('\n')
+      }
+    });
   }
 };
