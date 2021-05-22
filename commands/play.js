@@ -26,7 +26,7 @@ module.exports = (message, args, client) => {
         const matched = args[0].match(regex);
         if (matched[1]) {
             // プレイリストのurlだった場合の処理
-        } else if (args[0]) {
+        } else if (matched[0]) {
             // 動画のurlだった場合の処理
         } else {
             // 検索ワードの処理
