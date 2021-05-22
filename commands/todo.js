@@ -34,7 +34,7 @@ module.exports = async (message, args, client) => {
 
 async function showList(m) {
   await m.channel.send(
-    toDoList.map(v => "・" + v).join('\n')
+    toDoList.map(v => "・" + v).join('\n') || "List is empty."
   );
 }
 
