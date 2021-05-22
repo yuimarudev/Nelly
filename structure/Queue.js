@@ -12,12 +12,12 @@ module.exports = class {
   }
   async addMusic(url) {
     const info = await ytdl.getInfo(url);
-    this.songs.push(new Song(info));
-    console.log("add!");
+    const song = new Song(info);
+    this.songs.push(song);
     if (!this.playing && this.connection) {
       play(this);
     }
-    return info;
+    return song;
   }
 }
 
