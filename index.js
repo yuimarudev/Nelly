@@ -21,7 +21,7 @@ global.client = new Client({
     }
   }
 });
-global.queue = new Map();
+global.queues = new Discord.Collection();
 
 for(let key in env) {
   process.env[key] = env[key];
