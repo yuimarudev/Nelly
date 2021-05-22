@@ -27,14 +27,14 @@ module.exports = async(message, args, client) => {
         const { connection, textChannel, voiceChannel } = data;
         const matched = args[0].match(regex);
         const serverQueue = queues.get(message.guild.id);
-        if (matched[1]) {
-            // プレイリストのurlだった場合の処理
-        } else if (matched[0]) {
+        if (!matched) {
+            // 検索ワードの処理
+        } else if (!matched[2]) {
             let info = await serverQueue.addMusic(args[2]).catch(e => {
               return message.reply("(そんな動画)ないです。\nエラー:```" + e + "```");
             });
         } else {
-            // 検索ワードの処理
+            // プレイリストのurlだった場合の処理
         }
     }
 }
