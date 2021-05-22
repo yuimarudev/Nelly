@@ -10,7 +10,7 @@ module.exports = (message, args, client) => {
 						fields: [
 							{
 								name: '詳細',
-								value: dict['details']
+								value: info['details']
 							},
 							{
 								name: '引数',
@@ -23,6 +23,6 @@ module.exports = (message, args, client) => {
 			  )
 			: message.channel.send('無効なコマンドです');
 	} else {
-	    message.channel.send(Object.keys(dict["aliases"]).join('\n'))
+	    message.channel.send('・'+Object.values(dict["aliases"]).join('\n・'))
 	}
 };
