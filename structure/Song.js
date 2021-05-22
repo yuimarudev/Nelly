@@ -6,5 +6,6 @@ module.exports = class {
     this.thumbnail = details.thumbnails[details.thumbnails.length - 1];
     this.duration = details.lengthSeconds;
     this.author = details.author;
+    this._info = data;
   }
 }
