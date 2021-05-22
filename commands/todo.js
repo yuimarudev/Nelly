@@ -19,10 +19,13 @@ module.exports = async (message, args, client) => {
       break;
     case "add":
       await addToList(message, args, client);
+      break;
     case "del":
       await deleteElement(message, args, client);
+      break;
     default:
       await message.channel.send(`:x: 第一引数の値が無効です。`);
+      break;
   }
 }
 
