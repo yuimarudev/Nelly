@@ -63,6 +63,7 @@ async function restoreElement(m, args) {
   for(let i = 0; i < len && deleted.length; i++) {
     toDoList.push(deleted.pop());
   }
+  logTheList();
   await m.channel.send(
     `:white_check_mark: Restored!`
   );
