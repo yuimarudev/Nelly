@@ -3,7 +3,7 @@
     "h": "help",
     "j": "join",
     "p": "play",
-    "dc": "disconnect",
+    "dc": "disconnect"
   },
   "commands": {
     "ping": {
