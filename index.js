@@ -62,7 +62,7 @@ client.on('message', async message => {
   const args = SpaceSplit(message.content.slice(prefix.length));
   let command = args.shift();
   const commandDict = commandArgs.commands;
-  const aliasList = Object.keys(commandArgs.aliases);
+  const aliasList = commandArgs.aliases;
   const curs = (command in commandDict ? command : false) || (aliasList[command] in commandDict ? aliasList[command] : false);
   if (curs) {
     let cursor = commandArgs.commands[curs];
