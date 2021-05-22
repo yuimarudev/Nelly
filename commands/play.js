@@ -30,11 +30,9 @@ module.exports = async(message, args, client) => {
         if (matched[1]) {
             // プレイリストのurlだった場合の処理
         } else if (matched[0]) {
-            const songInfo = await ytdl.getInfo(args[2]).catch(e => {
+            await serverQueue.addMusic(args[2]).catch(e => {
               return message.reply("(そんな動画)ないです。\nエラー:```" + e + "```");
             });
-            const song = new Song(songInfo);
-            serverQueue.songs.push(song);
         } else {
             // 検索ワードの処理
         }
