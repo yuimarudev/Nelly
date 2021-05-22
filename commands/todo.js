@@ -1,5 +1,5 @@
 const toDoList = [ ];
-
+const fs = require("fs");
 const logPath = "./todo.log";
 
 if (fs.existsSync(logPath)) {
