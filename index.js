@@ -36,7 +36,6 @@ process.stdin.on('data', chunk => {
 });
 
 client.on('ready', () => {
-  const readyAt = new Date();
   console.log('Please wait.............');
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
     .filter(x => x.endsWith('.js'))
@@ -50,7 +49,7 @@ client.on('ready', () => {
   setInterval(() => {
     client.user.setActivity(client.guilds.cache.size + 'guilds', { type: 'COMPETING' });
     setTimeout(() => {
-      client.user.setActivity('ready At: ' + readyAt, { type: 'PLAYING' });
+      client.user.setActivity('ready At: ' + client.readyAt, { type: 'PLAYING' });
     }, 3000);
   }, 6000);
 });
