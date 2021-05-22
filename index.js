@@ -8,7 +8,9 @@ const SpaceSplit = require('./spliter.js');
 const commandArgs = require('./commands.json');
 const commands = {};
 const prefix = '%';
-const { Client, MessageEmbed, Intents, MessageAttachment } = Discord;
+["Client", "MessageEmbed", "Intents", "MessageAttachment"]
+  .forEach(v => global[v] = Discord[v]);
+
 const env = dotenv.parse(fs.readFileSync(path.join(__dirname, '.env')));
 global.client = new Client({
   intents: Intents.NON_PRIVILEGED,
@@ -24,6 +26,7 @@ global.queue = new Map();
 for(let key in env) {
   process.env[key] = env[key];
 };
+
 process.stdin.on('data', chunk => {
   chunk = String(chunk);
   if(typeof chunk.match === "function" && chunk.match('sine')) {
@@ -33,6 +36,7 @@ process.stdin.on('data', chunk => {
 });
 
 client.on('ready', () => {
+  const readyAt = new Date();
   console.log('Please wait.............');
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
     .filter(x => x.endsWith('.js'))
@@ -43,6 +47,12 @@ client.on('ready', () => {
     console.log('loaded \'' + command + '\'');
   };
   console.log('ready');
+  setInterval(() => {
+    client.user.setActivity(client.guilds.cache.size + 'guilds', { type: 'COMPETING' });
+    setTimeout(() => {
+      client.user.setActivity('ready At: ' + readyAt, { type: 'Playing' });
+    }, 3000);
+  }, 6000);
 });
 
 client.on('message', async message => {
