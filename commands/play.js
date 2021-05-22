@@ -22,6 +22,7 @@ module.exports = (message, args, client) => {
               setTimeout(() => client.off('voiceStateUpdate',func), 10000);
           }
     } else {
-        const {} = data
+        const { connection, textChannel, voiceChannel } = data;
+        const matched = args[0].match(regex);
     }
 }
