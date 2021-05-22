@@ -1,6 +1,6 @@
 {
   "aliases": {
-    "h": "help"
+    "h": "help",
     "j": "join"
   },
   "commands": {
@@ -13,7 +13,7 @@
       "description": "ToDo List",
       "args": [["subcommand"], ["data"]],
       "details": ""
-    }
+    },
     "join": {
       "description": "参加します！",
       "args": [[]],
