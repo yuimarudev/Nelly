@@ -55,7 +55,7 @@ async function restoreElement(m, args) {
         `An invalid argument '${args[0]}'.`
       );
   }
-  if (len < deleted.length) {
+  if (deleted.length < len) {
     return void await m.channel.send(
       `Error: out of range.`
     );
