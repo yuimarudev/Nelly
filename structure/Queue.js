@@ -1,6 +1,6 @@
 const Song = require('./Song.js');
 
-module.export = class {
+module.exports = class {
   constructor(message, connection=null) {
     this.textChannel = message.channel;
     this.voiceChannel = message.member.voice.channel;
