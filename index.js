@@ -36,14 +36,14 @@ process.stdin.on('data', chunk => {
 });
 
 client.on('ready', () => {
-  console.log('Please wait.............');
+  console.log('ちょいまち');
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
     .filter(x => x.endsWith('.js'))
     .map(x => x.replace(/\.js$/,''));
   for (let command of list) {
     let run = require(path.join(__dirname, 'commands', command));
     commands[command] = run;
-    console.log('loaded \'' + command + '\'');
+    console.log('\'' + command + '\'を読み込んだよ！');
   };
   console.log('ready');
   setInterval(() => {
