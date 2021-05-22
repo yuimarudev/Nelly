@@ -21,5 +21,7 @@ module.exports = (message, args, client) => {
               client.on('voiceStateUpdate',func)
               setTimeout(() => client.off('voiceStateUpdate',func), 10000);
           }
-    } else {}
+    } else {
+        const {} = data
+    }
 }
