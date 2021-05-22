@@ -1,4 +1,4 @@
-const Song = require('../structure/Song.js');
+const Queue = require('../structure/Queue.js');
 
 module.exports = async(message, args, client) => {
     const data = queues.get(message.guild.id);
