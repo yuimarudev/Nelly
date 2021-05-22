@@ -1,9 +1,9 @@
 module.exports = (message, args, client) => {
-    const data = queue.get(message.guild.id);
+    const data = queues.get(message.guild.id);
     if (!data) {
         message.member.voice.channel
           ? message.member.voice.channel.join()
-              .then(conn => queue.set({}))
+              .then(conn => queues.set({}))
               .catch(err => message.channel.send(`おっと、エラーが発生したみたいですね\nエラー内容: ${err}`))
           : () => {
               message.channel.send('ボイスチャンネルに参加してください');
@@ -13,7 +13,7 @@ module.exports = (message, args, client) => {
                       newState.member.id === message.member.id
                   ) message.member.voice.channel.join()
                       .then(conn => {
-                          queue.set(message.guild.id, {});
+                          queues.set(message.guild.id, {});
                           client.emit('message',message);
                       })
                       .catch(err => message.channel.send(`おっと、エラーが発生したみたいですね\nエラー内容: ${err}`))
