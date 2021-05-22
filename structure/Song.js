@@ -1,4 +1,4 @@
-module.export = class {
+module.exports = class {
   constructor(data) {
     let details = songInfo.videoDetails;
     this.title = details.title;
