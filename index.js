@@ -81,7 +81,7 @@ client.on('message', async message => {
   } else {
     let dym = Object.keys(commandDict)
       .reduce((acc, cur) => {
-        let { distance } = new leven(cur, curs);
+        let { distance } = new leven(cur, command);
         return distance < acc[0] ? [distance, cur] : acc;
       }, [3, ""])[1];
      return dym ?
