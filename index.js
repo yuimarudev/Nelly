@@ -1,6 +1,7 @@
-const discord = require('discord.js');
+global.discord = require('discord.js');
+global.fs = require('fs');
+global.ytdl = require('ytdl-core');
 const leven = require('levenshtein');
-const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
 const SpaceSplit = require('./spliter.js');
