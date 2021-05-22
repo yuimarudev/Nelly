@@ -48,7 +48,7 @@ async function deleteElement(m, args) {
     return void await m.channel.send(
       `An invalid argument '${args[0]}'.`
     );
-  if (index < toDoList) {
+  if (index < toDoList.length) {
     let [spliced] = toDoList.splice(index, 1);
     logTheList();
     await m.channel.send(
