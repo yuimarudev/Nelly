@@ -11,7 +11,7 @@
     },
     "todo": {
       "description": "ToDo List",
-      "args": [["subcommand"], ["data"]],
+      "args": [["subcommand"],["subcommand","data"]],
       "details": ""
     },
     "join": {
