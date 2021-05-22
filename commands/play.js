@@ -1,5 +1,6 @@
+const Song = require('../structure/Song.js');
+
 module.exports = async(message, args, client) => {
-    const Song = require('../structure/Song.js');
     const data = queues.get(message.guild.id);
     if (!data) {
         message.member.voice.channel
