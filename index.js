@@ -8,14 +8,14 @@ const SpaceSplit = require('./spliter.js');
 const commandArgs = require('./commands.json');
 const commands = {};
 const prefix = '%';
-["Client", "MessageEmbed", "Intents", "MessageAttachment"]
+["Client", "MessageEmbed", "MessageAttachment"]
   .forEach(v => global[v] = Discord[v]);
 
 const env = dotenv.parse(fs.readFileSync(path.join(__dirname, '.env')));
 global.client = new Client({
-  intents: Intents.NON_PRIVILEGED,
+  intents: Discord.Intents.NON_PRIVILEGED,
   ws: {
-    intents: Intents.NON_PRIVILEGED,
+    intents: Discord.Intents.NON_PRIVILEGED,
     properties: {
         $browser: 'Discord Android'
     }
