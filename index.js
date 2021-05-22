@@ -12,7 +12,13 @@ const prefix = '%';
 ["Client", "MessageEmbed", "MessageAttachment"]
   .forEach(v => global[v] = Discord[v]);
 
-const env = dotenv.parse(fs.readFileSync(path.join(__dirname, '.env')));
+let dotenvPath = path.join(__dirname, '.env');
+if (fs.existSync(dotenvPath)) {
+  const env = dotenv.parse(fs.readFileSync(dotenvPath));
+  for(let key in env) {
+    process.env[key] = env[key];
+  }
+}
 global.client = new Client({
   intents: Discord.Intents.NON_PRIVILEGED,
   ws: {
@@ -24,9 +30,6 @@ global.client = new Client({
 });
 global.queues = new Discord.Collection();
 
-for(let key in env) {
-  process.env[key] = env[key];
-};
 
 
 process.stdin.on('data', chunk => {
