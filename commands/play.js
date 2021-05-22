@@ -30,7 +30,7 @@ module.exports = async(message, args, client) => {
         if (matched[1]) {
             // プレイリストのurlだった場合の処理
         } else if (matched[0]) {
-            await serverQueue.addMusic(args[2]).catch(e => {
+            let info = await serverQueue.addMusic(args[2]).catch(e => {
               return message.reply("(そんな動画)ないです。\nエラー:```" + e + "```");
             });
         } else {
