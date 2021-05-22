@@ -10,8 +10,8 @@
       "details": ""
     },
     "todo": {
-      "description": "Yet.",
-      "args": [[]],
+      "description": "ToDo List",
+      "args": [["subcommand"], ["data"]],
       "details": ""
     }
     "join": {
