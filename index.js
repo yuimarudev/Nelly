@@ -13,7 +13,7 @@ const prefix = '%';
   .forEach(v => global[v] = Discord[v]);
 
 let dotenvPath = path.join(__dirname, '.env');
-if (fs.existSync(dotenvPath)) {
+if (fs.existsSync(dotenvPath)) {
   const env = dotenv.parse(fs.readFileSync(dotenvPath));
   for(let key in env) {
     process.env[key] = env[key];
