@@ -55,8 +55,8 @@ client.on('ready', () => {
 });
 
 client.on('message', async message => {
-  if(message.author.bot) return;
-  if(!message.content.startsWith(prefix) && !message.mentions.users.has(client.user.id))
+  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix) && !message.mentions.users.has(client.user.id))
     return;
   message.content = message.content.replace(new RegExp(`^<@!?${client.user.id}`), prefix);
   const args = SpaceSplit(message.content.slice(prefix.length));
@@ -66,7 +66,7 @@ client.on('message', async message => {
   const curs = (command in commandDict ? command : false) || (aliasList[command] in commandDict ? aliasList[command] : false);
   if (curs) {
     let cursor = commandArgs.commands[curs];
-    if (true || cursor.args.some(x => x.length === args.length)) {
+    if (cursor.args.some(x => x.length === args.length)) {
       let result;
       try {
         result = await commands[curs](message, args, client);
