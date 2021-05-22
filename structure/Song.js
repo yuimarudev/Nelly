@@ -1,6 +1,6 @@
 module.exports = class {
   constructor(data) {
-    let details = songInfo.videoDetails;
+    let details = data.videoDetails;
     this.title = details.title;
     this.url = detail.video_url;
     this.thumbnail = details.thumbnails[details.thumbnails.length - 1];
