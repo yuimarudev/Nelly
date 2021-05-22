@@ -12,5 +12,6 @@ module.exports = class {
   async addAudio(url) {
     const info = await ytdl.getInfo(query);
     this.songs.push(new Song(info));
+    return info;
   }
 }
