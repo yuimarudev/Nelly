@@ -13,6 +13,7 @@ module.exports = class {
   async addMusic(url) {
     const info = await ytdl.getInfo(query);
     this.songs.push(new Song(info));
+    console.log("add!");
     if (!this.playing && this.connection) {
       play(this);
     }
@@ -24,6 +25,7 @@ function play(queue) {
   if (!this.songs.length) return;
   const song = queue.songs.shift();
   const stream = ytdl.downloadFromInfo(song._info);
+  console.log("play!");
   queue.connection.play(stream)
   .on('finish', () => {
     if (queue.loop) queue.songs.push(song);
