@@ -64,7 +64,6 @@ client.on('message', async message => {
   const commandDict = commandArgs.commands;
   const aliasList = Object.keys(commandArgs.aliases);
   const curs = (command in commandDict ? command : false) || (aliasList[command] in commandDict ? aliasList[command] : false);
-  await message.reply(command);
   if (curs) {
     let cursor = commandArgs.commands[curs];
     if (true || cursor.args.some(x => x.length === args.length)) {
