@@ -8,26 +8,28 @@ module.exports = class {
     this.songs = [];
     this.loop = false;
     this.volume = 5;
-    this.playing = false;
+    this.playingSong = null;
+    this.isPlaying = false;
     this.dispatcher = null;
   }
   async addMusic(url, message) {
     const info = await ytdl.getInfo(url);
     const song = new Song(info, message);
     this.songs.push(song);
-    if (!this.playing && this.connection) play(this);
+    if (!this.isPlaying && this.connection) play(this);
     return song;
   }
 }
 
 async function play(queue) {
   if (!queue.songs.length) {
-    queue.playing = false;
+    queue.isPlaying = false;
+    queue.playingSong = null;
     await queue.textChannel.send("Queue Finished...");
     return;
   }
-  queue.playing = true;
-  const song = queue.songs.shift();
+  queue.isPlaying = true;
+  const song = queue.playingSong = queue.songs.shift();
   const stream = ytdl.downloadFromInfo(song._info);
   console.log("play!");
   const sentMsg = await queue.textChannel.send({ embed: {
