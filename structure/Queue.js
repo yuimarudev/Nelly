@@ -41,6 +41,12 @@ async function play(queue) {
     play(queue);
   })
   .on('error', err => {
-    console.error(err);
+    await queue.textChannel.send({ embed: {
+      title: ":x: Exception",
+      description: `${err}`
+    }});
+    if (queue.loop) queue.songs.push(song);
+    sentMsg.delete().catch(console.log);
+    play(queue);
   });
 }
