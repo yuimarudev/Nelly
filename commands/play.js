@@ -1,5 +1,6 @@
 const Queue = require('../structure/Queue.js');
 const ytsr = require('ytsr');
+const ytpl = require('ytpl');
 
 module.exports = async(message, args, client) => {
     const data = queues.get(message.guild.id);
@@ -53,7 +54,7 @@ module.exports = async(message, args, client) => {
             });
             await message.reply(":white_check_mark: Added: " + song.title);
         } else {
-            const ytpl = require('ytpl');
+           let playlist = await ytpl(args[0]);
         }
     }
 }
