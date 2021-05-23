@@ -9,7 +9,8 @@
     "qloop": "loopqueue",
     "s": "skip",
     "np": "nowplay",
-    "rm": "remove"
+    "rm": "remove",
+    "find": "search"
   },
   "commands": {
     "ping": {
@@ -55,6 +56,10 @@
     "remove": {
       "variadic": true,
       "args": [ ["キュー内でのナンバー"], ["〃","〃"], ["〃","〃","〃"]]
+    },
+    "search": {
+      "variadic": false,
+      "args": [ ["検索語句"] ]
     }
   }
 }
