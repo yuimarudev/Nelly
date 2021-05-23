@@ -5,5 +5,5 @@ module.exports = async (message, args) => {
       songs[i] = undefined;
       msg.edit(`${index + 1}曲削除したよ！( ◜௰◝  ）`);
     });
-    songs = songs.filter(obj => obj);
+    queues.set(message.guild.id,{queues.get(message.guild.id), songs: songs.filter(obj => obj)});
 }
