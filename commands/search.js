@@ -43,16 +43,16 @@ module.exports = async(message, args, client) => {
           return void await message.reply(":x: No result...");
           textChannel.send(new MessageEmbed({
              title: 'found',
-             description: `0: ${filtered.map(({title, url}, i) =>
-                  `${i}: [${title}](${url})`
+             description: `${filtered.map(({title, url}, i) =>
+                  `${i + 1}: [${title}](${url})`
              ).join('\n')}`
           })).then(async ({channel}) => {
               const i = await channel.awaitMessages(
-                  ({ author, content }) => author.equals(message.author) && content <= filtered.length,
+                  ({ author, content }) => author.equals(message.author) && 0 < content < filtered.length,
                   { max: 1, time: 3e4 }
               );
               i.size
-               ? serverQueue.addMusic(filtered[i].url, message)
+               ? serverQueue.addMusic(filtered[i-1?i-1:0].url, message)
                : message.channel.send('タイムアウトしました( ◜௰◝  ）');
           })
     }
