@@ -1,5 +1,5 @@
 global.Discord = require('discord.js');
-// global.fs = require('fs');
+const fs = require('fs');
 // global.ytdl = require('ytdl-core');
 // global.regex = /https?:\/\/youtu(?:be\.com|\.be)\/(?:watch\?v=)?(\w{1,})(?:&?[^\?list=]\w+)*(?:(?:&|\?)list=(\w{0,}))?.*/;
 const leven = require('levenshtein');
