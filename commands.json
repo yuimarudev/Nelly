@@ -6,7 +6,8 @@
     "dc": "disconnect",
     "q": "queue",
     "lq": "loopqueue",
-    "qloop": "loopqueue"
+    "qloop": "loopqueue",
+    "s": "skip"
   },
   "commands": {
     "ping": {
@@ -40,6 +41,9 @@
     }, 
     "queue": {
       "args": [ [], ["page"] ]
+    },
+    "skip": {
+      "args": [ [], ["query"] ]
     }
   }
 }
