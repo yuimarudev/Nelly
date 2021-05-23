@@ -5,13 +5,21 @@ module.exports = async message => {
       ":x: There is no queue."
     );
   }
-  const songs = serverQueue.songs.length ?
-    serverQueue.songs
-    .map(s => `・[${s.title}](${s.url})[<@${s.member.id}>]`)
-    .join('\n'):
-    "The queue is empty";
+  const np = serverQueue.playingSong;
+  const nowPlayingText = np ? `**Now playing:** [${np.title}](${np.url})` : "";
+  const songs = serverQueue.songs;
+  const texts = songs.length ? songs.reduce((a, v, i) => {
+    const addtxt = `${i + 1}. [${s.title}](${s.url})`;
+    if (1700 < (a[a.length - 1] + "\n" + addtxt).length) {
+      a.push(addtxt);
+    } else {
+      a[a.length - 1] += "\n" + addtxt;
+    }
+    return a;
+  }, [nowPlayingText]) : ["The queue is empty."];
+  for (let i = 0; i < texts.length; i++)
   await message.channel.send({ embed: {
-    title: "Queue",
-    description: songs
+    title: `Queue (${i + 1)/${texts.length})`,
+    description: texts[i]
   }});
 };
