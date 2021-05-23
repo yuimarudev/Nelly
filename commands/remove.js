@@ -6,7 +6,7 @@ module.exports = async (message, args) => {
         eliminated.push(songs[i]);
         songs[i] = void 0;
     });
-    for (let index; ~(index = song.indexOf(void 0));)
-      song.splice(index, 1);
+    for (let index; ~(index = songs.indexOf(void 0));)
+      songs.splice(index, 1);
     msg.edit(`${args.length}曲削除したよ！( ◜௰◝  ）${eliminated.map(s => s.title).join('\n')}`);
 }
