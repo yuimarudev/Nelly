@@ -1,6 +1,7 @@
 module.exports = async(message) => {
   const serverQueue = queues.get(message.guild.id);
-  const song = serverQueue.songs.first();
+  const song = serverQueue.songs[0];
+  if(!song) return void await message.reply('曲がありません(´ω`)');
   const embed = new MessageEmbed()
   .setTitle(song.title)
   .setAuthor(song.member.tag, song.member.user.avatarURL({size:512, format:'png'}) )
