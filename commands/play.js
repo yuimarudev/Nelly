@@ -55,6 +55,9 @@ module.exports = async(message, args, client) => {
             await message.reply(":white_check_mark: Added: " + song.title);
         } else {
            let playlist = await ytpl(args[0]);
+           for (let v of playlist.items) {
+              await serverQueue.addMusic(v.url, message).catch(_=>0);
+           }
         }
     }
 }
