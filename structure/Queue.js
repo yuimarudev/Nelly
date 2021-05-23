@@ -23,6 +23,7 @@ module.exports = class {
 async function play(queue) {
   if (!queue.songs.length) {
     queue.playing = false;
+    await queue.textChannel.send("Queue Finished...");
     return;
   }
   queue.playing = true;
