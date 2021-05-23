@@ -33,9 +33,9 @@ module.exports = async(message, args, client) => {
         const serverQueue = queues.get(message.guild.id);
         if (!matched) {
             const result = await ytsr(args[0]);
-            if (!result || !result.refinements || !result.refinements.length)
+            if (!result || !result.items || !result.items.length)
             return void await message.reply(":x: No result...");
-            let song = await serverQueue.addMusic(result.refinements[0].url, message).catch(e => {
+            let song = await serverQueue.addMusic(result.items[0].url, message).catch(e => {
               return message.reply("(そんな動画)ないです。\nエラー:```" + e + "```");
             });
             await message.reply(":white_check_mark: Added: " + song.title);
