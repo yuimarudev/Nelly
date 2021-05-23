@@ -8,7 +8,8 @@
     "lq": "loopqueue",
     "qloop": "loopqueue",
     "s": "skip",
-    "np": "nowplay"
+    "np": "nowplay",
+    "rm": "remove"
   },
   "commands": {
     "ping": {
@@ -50,6 +51,9 @@
     },
     "skip": {
       "args": [ [], ["query"] ]
+    },
+    "remove": {
+      "args": [ ["キュー内でのナンバー"], ["〃","〃"], ["〃","〃","〃"]]
     }
   }
 }
