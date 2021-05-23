@@ -6,6 +6,7 @@
     "dc": "disconnect",
     "q": "queue",
     "lq": "loopqueue"
+    "qloop": "loopqueue"
   },
   "commands": {
     "ping": {
