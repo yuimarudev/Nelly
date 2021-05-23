@@ -51,7 +51,7 @@ async function play(queue) {
       description: `${err}`
     }});
     if (queue.loop) queue.songs.push(song);
-    queue.nowPlayingMsg.delete()
+    queue?.nowPlayingMsg.delete()
     .then(
       () => queue.nowPlayingMsg = null,
       () => queue.nowPlayingMsg = null
