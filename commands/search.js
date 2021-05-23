@@ -46,9 +46,9 @@ module.exports = async(message, args, client) => {
              description: `0: ${filtered.map(({title, url}, i) =>
                   `${i}: [${title}](${url})`
              ).join('\n')}`
-          })).then(async ({channel}) =>
+          })).then(async ({channel}) => {
               const i = channel.awaitMessages();
-          )
+          })
     }
 }
 
