@@ -7,13 +7,19 @@
     "q": "queue",
     "lq": "loopqueue",
     "qloop": "loopqueue",
-    "s": "skip"
+    "s": "skip",
+    "np": "nowplay"
   },
   "commands": {
     "ping": {
       "description": "ping pong",
       "args": [ [] ],
       "details": ""
+    },
+    "nowplay": {
+      "description": "今再生してる曲を表示するよ！",
+      "args": [ [] ],
+      "details": "引数は不要です(ง ˙-˙ )ง"
     },
     "todo": {
       "description": "ToDo List",
