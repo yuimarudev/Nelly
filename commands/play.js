@@ -32,7 +32,7 @@ module.exports = async(message, args, client) => {
         const matched = args[0].match(regex);
         const serverQueue = queues.get(message.guild.id);
         if (!matched) {
-            const result = await ytsr(ytsr.getFilter(args[0]).get('Type').get('video').url);
+            const result = await ytsr(ytsr.getFilters(args[0]).get('Type').get('video').url);
             if (!result || !result.items || !result.items.length)
             return void await message.reply(":x: No result...");
             let song = await serverQueue.addMusic(result.items[0].url, message).catch(e => {
