@@ -31,7 +31,13 @@ module.exports = async(message, args, client) => {
         const matched = args[0].match(regex);
         const serverQueue = queues.get(message.guild.id);
         if (!matched) {
-            // 検索ワードの処理
+            const result = await ytsr(args[0]);
+            if (!result || !result.refinements || !result.refinements.length)
+            return void await message.reply(":x: No result...");
+            let song = await serverQueue.addMusic(result.refinements[0].url, message).catch(e => {
+              return message.reply("(そんな動画)ないです。\nエラー:```" + e + "```");
+            });
+            await message.reply(":white_check_mark: Added: " + song.title);
         } else if (!matched[2]) {
             let song = await serverQueue.addMusic(matched[0], message).catch(e => {
               return message.reply("(そんな動画)ないです。\nエラー:```" + e + "```");
