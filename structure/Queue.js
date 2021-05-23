@@ -11,13 +11,11 @@ module.exports = class {
     this.playing = false;
     this.dispatcher = null;
   }
-  async addMusic(url) {
+  async addMusic(url, message) {
     const info = await ytdl.getInfo(url);
-    const song = new Song(info);
+    const song = new Song(info, message);
     this.songs.push(song);
-    if (!this.playing && this.connection) {
-      await play(this);
-    }
+    if (!this.playing && this.connection) play(this);
     return song;
   }
 }
@@ -33,7 +31,7 @@ async function play(queue) {
   console.log("play!");
   const sentMsg = await queue.textChannel.send({ embed: {
     title: "Now Playing",
-    description: `[${song.title}](${song.url})`
+    description: `[${song.title}](${song.url})\nRequested by <@${song.member.id}>`
   }});
   queue.dispatcher = queue.connection.play(stream)
   .on('finish', () => {
