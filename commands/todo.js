@@ -1,3 +1,4 @@
+const fs = require('fs');
 const toDoList = [ ];
 const deleted = [ ];
 const logPath = "./todo.log";
