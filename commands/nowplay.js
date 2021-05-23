@@ -7,7 +7,7 @@ module.exports = async(message) => {
   .setAuthor(song.member.tag, song.member.user.avatarURL({size:512, format:'png'}) )
   .setURL(song.url)
   .setThumbnail(song.thumbnail)
-  .setFooter(song.author.thumbnails.first().url, song.author.name)
+  .setFooter(song.author.thumbnails[0].url, song.author.name)
   .setDescription(serverQueue.dispatcher.streamTime + '/' + song.duration)
   .setColor(0x00ff00);
   message.channel.send([embed]);
