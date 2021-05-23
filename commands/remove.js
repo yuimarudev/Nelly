@@ -1,4 +1,4 @@
-async module.exports = (message, args) => {
+module.exports = async (message, args) => {
     const { textChannel, songs } = queues.get(message.guild.id);
     const msg = await textChannel.send('ちょっと待ってね！(   ◜ω◝ )');
     args.forEach((i, index) => {
