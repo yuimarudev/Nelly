@@ -1,9 +1,12 @@
 module.exports = async (message, args) => {
     let { textChannel, songs } = queues.get(message.guild.id);
     const msg = await textChannel.send('ちょっと待ってね！(   ◜ω◝ )');
-    args.forEach((i, index) => {
-      songs[i] = undefined;
-      msg.edit(`${index + 1}曲削除したよ！( ◜௰◝  ）`);
+    const eliminated = [];
+    args.forEach(i => {
+        eliminated.push(songs[i]);
+        songs[i] = void 0;
     });
-    queues.set(message.guild.id,{queues.get(message.guild.id), songs: songs.filter(obj => obj)});
+    for (let index; ~(index = beasts.indexOf(void 0));)
+      beasts.splice(index, 1);
+    msg.edit(`${args.length}曲削除したよ！( ◜௰◝  ）${eliminated.map(s => s.title).join('\n')}`);
 }
