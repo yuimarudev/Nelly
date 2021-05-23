@@ -1,6 +1,6 @@
 module.exports = async(message) => {
   const serverQueue = queues.get(message.guild.id);
-  const song = serverQueue.songs[0];
+  const song = serverQueue.playingSong;
   if(!song) return void await message.reply('曲がありません(´ω`)');
   const embed = new MessageEmbed()
   .setTitle(song.title)
