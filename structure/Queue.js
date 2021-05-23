@@ -31,14 +31,18 @@ async function play(queue) {
   queue.isPlaying = true;
   const song = queue.playingSong = queue.songs.shift();
   const stream = ytdl.downloadFromInfo(song._info);
-  const sentMsg = await queue.textChannel.send({ embed: {
+  queue.nowPlayingMsg = await queue.textChannel.send({ embed: {
     title: "Now Playing",
     description: `[${song.title}](${song.url})\nRequested by <@${song.member.id}>`
   }});
   queue.dispatcher = queue.connection.play(stream)
   .on('finish', () => {
     if (queue.loop) queue.songs.push(song);
-    sentMsg.delete().catch(console.log);
+    queue.nowPlayingMsg.delete()
+    .then(
+      () => queue.nowPlayingMsg = null,
+      () => queue.nowPlayingMsg = null
+    );
     play(queue);
   })
   .on('error', err => {
@@ -47,7 +51,11 @@ async function play(queue) {
       description: `${err}`
     }});
     if (queue.loop) queue.songs.push(song);
-    sentMsg.delete().catch(console.log);
+    queue.nowPlayingMsg.delete()
+    .then(
+      () => queue.nowPlayingMsg = null,
+      () => queue.nowPlayingMsg = null
+    );
     play(queue);
   });
 }
