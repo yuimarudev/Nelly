@@ -1,5 +1,5 @@
 module.exports = class {
-  constructor(data) {
+  constructor(data, message) {
     let details = data.videoDetails;
     this.title = details.title;
     this.url = details.video_url;
@@ -7,5 +7,6 @@ module.exports = class {
     this.duration = details.lengthSeconds;
     this.author = details.author;
     this._info = data;
+    this.member = message.member;
   }
 }
