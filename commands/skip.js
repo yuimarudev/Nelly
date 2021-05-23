@@ -5,3 +5,4 @@ module.exports = async message => {
     await message.reply(":fast_forward: Skipped!");
   } catch { }
 };
+
