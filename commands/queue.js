@@ -18,7 +18,7 @@ module.exports = async message => {
   }, [nowPlayingText]) : ["The queue is empty."];
   for (let i = 0; i < texts.length; i++)
   await message.channel.send({ embed: {
-    title: `Queue (${i + 1})/${texts.length})`,
+    title: `Queue (${i + 1}/${texts.length})`,
     description: texts[i]
   }});
 };
