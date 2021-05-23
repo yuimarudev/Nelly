@@ -16,13 +16,13 @@ module.exports = class {
     const song = new Song(info);
     this.songs.push(song);
     if (!this.playing && this.connection) {
-      play(this);
+      await play(this);
     }
     return song;
   }
 }
 
-function play(queue) {
+async function play(queue) {
   if (!queue.songs.length) {
     queue.playing = false;
     return;
