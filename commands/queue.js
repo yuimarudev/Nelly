@@ -7,8 +7,7 @@ module.exports = async message => {
   }
   const np = serverQueue.playingSong;
   const nowPlayingText = np ? `**Now playing:** [${np.title}](${np.url})` : "";
-  const songs = serverQueue.songs;
-  const texts = songs.length ? songs.reduce((a, v, i) => {
+  const texts = serverQueue.songs.length ? serverQueue.songs.reduce((a, v, i) => {
     const addtxt = `${i + 1}. [${s.title}](${s.url})`;
     if (1700 < (a[a.length - 1] + "\n" + addtxt).length) {
       a.push(addtxt);
