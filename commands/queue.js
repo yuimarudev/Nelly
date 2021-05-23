@@ -7,7 +7,7 @@ module.exports = async message => {
   }
   const songs = serverQueue.songs.length ?
     serverQueue.songs
-    .map(s => `[${s.title}](${s.url})`)
+    .map(s => `・[${s.title}](${s.url})`)
     .join('\n'):
     "The queue is empty";
   await message.channel.send({ embed: {
