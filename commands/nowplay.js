@@ -3,7 +3,10 @@ module.exports = async(message) => {
   const song = serverQueue.songs.first();
   const embed = new MessageEmbed()
   .setTitle(song.title)
-  .setAuthor(song.author)
+  .setAuthor(song.member.tag, song.member.user.avatarURL({size:512, format:'png'}) )
   .setURL(song.url)
+  .setThumbnail(song.thumbnail)
+  .setFooter(song.author)
+  .setDescription(serverQueue.dispatcher.streamTime + '/' + song.duration)
   message.channel.send([embed]);
 };
