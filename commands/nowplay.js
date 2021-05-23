@@ -4,11 +4,11 @@ module.exports = async(message) => {
   if(!song) return void await message.reply('曲がありません(´ω`)');
   const embed = new MessageEmbed()
   .setTitle(song.title)
-  .setAuthor(song.member.tag, song.member.user.avatarURL({size:512, format:'png'}) )
+  .setAuthor(song.member.user.tag, song.member.user.avatarURL({size:512, format:'png'}) )
   .setURL(song.url)
   .setThumbnail(song.thumbnail.url)
   .setFooter(song.author.name, song.author.thumbnails[0].url)
-  .setDescription(secformat(serverQueue.dispatcher.streamTime) + ' / ' + secformat(song.duration))
+  .setDescription(secformat(serverQueue.dispatcher.streamTime / 1000) + ' / ' + secformat(song.duration))
   .setColor(0x00ff00);
   message.channel.send([embed]);
 };
