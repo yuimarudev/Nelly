@@ -54,10 +54,12 @@ module.exports = async(message, args, client) => {
             });
             await message.reply(":white_check_mark: Added: " + song.title);
         } else {
-           let playlist = await ytpl(args[0]);
+           let playlist = await ytpl(args[0]), addCount = 0;
            for (let v of playlist.items) {
-              await serverQueue.addMusic(v.url, message).catch(_=>0);
+              await serverQueue.addMusic(v.url, message).then(() => addCount++, _=>0);
            }
+           if (1 < addCount) await message.channel.send(`:white_check_mark: Added ${addCount} songs!`);
+           else await message.channel.send(`:white_check_mark: Added ${addCount ? "1" : "no"} song!`);
         }
     }
 }
