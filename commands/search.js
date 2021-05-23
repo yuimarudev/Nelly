@@ -41,7 +41,14 @@ module.exports = async(message, args, client) => {
           );
           if (!result || !filtered.length)
           return void await message.reply(":x: No result...");
-          // こっから本題
+          textChannel.send(MessageEmbed({
+             title: 'found'
+             description: `0: ${filtered.map(({title, url}, i) =>
+                  `${i}: [${title}](${url})`
+             ).join('\n');}`
+          })).then(async ({channel}) =>
+              const i = channel.awaitMessages();
+          )
     }
 }
 
