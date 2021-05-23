@@ -36,22 +36,22 @@ async function play(queue) {
     description: `[${song.title}](${song.url})\nRequested by <@${song.member.id}>`
   }});
   queue.dispatcher = queue.connection.play(stream)
-  .on('finish', () => {
+  .on('finish', async () => {
     if (queue.loop) queue.songs.push(song);
-    queue.nowPlayingMsg.delete()
+    await queue.nowPlayingMsg.delete()
     .then(
       () => queue.nowPlayingMsg = null,
       () => queue.nowPlayingMsg = null
     );
     play(queue);
   })
-  .on('error', err => {
+  .on('error', async err => {
     queue.textChannel.send({ embed: {
       title: ":x: Exception",
       description: `${err}`
     }});
     if (queue.loop) queue.songs.push(song);
-    queue?.nowPlayingMsg.delete()
+    await queue.nowPlayingMsg.delete()
     .then(
       () => queue.nowPlayingMsg = null,
       () => queue.nowPlayingMsg = null
