@@ -11,7 +11,7 @@ module.exports = async(message, args, client) => {
                    client.emit('message', message);
               })
               .catch(err => message.channel.send(`おっと、エラーが発生したみたいですね\nエラー内容: ${err}`))
-          : () => {
+          : (() => {
               message.channel.send('ボイスチャンネルに参加してください');
               const func = function (_, newState) {
                   if (
@@ -26,7 +26,7 @@ module.exports = async(message, args, client) => {
               }
               client.on('voiceStateUpdate',func)
               setTimeout(() => client.off('voiceStateUpdate',func), 10000);
-          }
+          })()
     } else {
       const { connection, textChannel, voiceChannel } = data;
       const serverQueue = queues.get(message.guild.id);
