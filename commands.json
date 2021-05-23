@@ -3,7 +3,9 @@
     "h": "help",
     "j": "join",
     "p": "play",
-    "dc": "disconnect"
+    "dc": "disconnect",
+    "q": "queue",
+    "lq": "loopqueue"
   },
   "commands": {
     "ping": {
@@ -29,11 +31,14 @@
     "play": {
       "args": [ ["query"] ]
     } ,
-    "loop": {
+    "loopqueue": {
       "args": [ [] ]
     } ,
     "disconnect": {
       "args": [ [] ]
+    }, 
+    "queue": {
+      "args": [ [], ["page"] ]
     }
   }
 }
