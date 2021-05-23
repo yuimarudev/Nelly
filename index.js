@@ -71,7 +71,7 @@ client.on('message', async message => {
   const curs = (command in commandDict ? command : false) || (aliasList[command] in commandDict ? aliasList[command] : false);
   if (curs) {
     let cursor = commandArgs.commands[curs];
-    if (cursor.args.some(x => x.length === args.length)) {
+    if (cursor.variadic || cursor.args.some(x => x.length === args.length)) {
       let result;
       try {
         result = await commands[curs](message, args, client);
