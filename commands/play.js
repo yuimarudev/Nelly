@@ -32,10 +32,18 @@ module.exports = async(message, args, client) => {
         const matched = args[0].match(regex);
         const serverQueue = queues.get(message.guild.id);
         if (!matched) {
-            const result = await ytsr.getFilters(args[0]).then(f => ytsr(f.get('Type').get('Video').url));
-            if (!result || !result.items || !result.items.length)
+            const result = await ytsr.getFilters(args[0]).then(f => ytsr(f.get('Type').get('Video').url,{
+                gl: "JP",
+                hl: "ja",
+                limit: 10
+            }));
+            const filtered = result.items.filter(({duration}) => 
+               duration.split(':').length <= 2 &&
+               6 >+ duration.split(':')[0]
+            );
+            if (!result || !filtered.items?.length)
             return void await message.reply(":x: No result...");
-            let song = await serverQueue.addMusic(result.items[0].url, message).catch(e => {
+            let song = await serverQueue.addMusic(filtered[0].url, message).catch(e => {
               return message.reply("(そんな動画)ないです。\nエラー:```" + e + "```");
             });
             await message.reply(":white_check_mark: Added: " + song.title);
@@ -45,7 +53,7 @@ module.exports = async(message, args, client) => {
             });
             await message.reply(":white_check_mark: Added: " + song.title);
         } else {
-            // プレイリストのurlだった場合の処理
+            const ytpl = require('ytpl');
         }
     }
 }
