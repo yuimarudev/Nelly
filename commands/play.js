@@ -12,13 +12,13 @@ module.exports = async(message, args, client) => {
                    client.emit('message', message);
               })
               .catch(err => message.channel.send(`おっと、エラーが発生したみたいですね\nエラー内容: ${err}`))
-          : () => {
+          : (() => {
               message.channel.send('ボイスチャンネルに参加してください');
               const func = function (_, newState) {
                   if (
-                      newState.member.voice.channel &&
+                      newState.channel &&
                       newState.member.id === message.member.id
-                  ) message.member.voice.channel.join()
+                  ) newState.channel.join()
                       .then(conn => {
                           queues.set(message.guild.id, new Queue(message, conn));
                           client.emit('message', message);
@@ -27,7 +27,7 @@ module.exports = async(message, args, client) => {
               }
               client.on('voiceStateUpdate',func)
               setTimeout(() => client.off('voiceStateUpdate',func), 10000);
-          }
+          })();
     } else {
         const { connection, textChannel, voiceChannel } = data;
         const matched = args[0].match(regex);
