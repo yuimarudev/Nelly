@@ -19,7 +19,8 @@ module.exports = async(message, args, client) => {
                       newState.member.id === message.member.id
                   ) message.member.voice.channel.join()
                       .then(conn => {
-                          queues.set(message.guild.id, new Queue(message, conn));
+                          queues.set(message.guild.id, new Queue(message, c
+                                                                 onn));
                           client.emit('message', message);
                       })
                       .catch(err => message.channel.send(`おっと、エラーが発生したみたいですね\nエラー内容: ${err}`))
@@ -47,7 +48,13 @@ module.exports = async(message, args, client) => {
                   `${i}: [${title}](${url})`
              ).join('\n')}`
           })).then(async ({channel}) => {
-              const i = channel.awaitMessages();
+              const i = await channel.awaitMessages(
+                  ({ author, content }) => author.equals(message.author) && content <= filtered.length,
+                  { max: 1, time: 3e4 }
+              );
+              i.size
+               ? serverQueue.addMusic(filtered[i], message)
+               : message.channel.send('タイムアウトしました( ◜௰◝  ）');
           })
     }
 }
