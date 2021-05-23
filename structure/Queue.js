@@ -9,6 +9,7 @@ module.exports = class {
     this.loop = false;
     this.volume = 5;
     this.playing = false;
+    this.dispatcher = null;
   }
   async addMusic(url) {
     const info = await ytdl.getInfo(url);
@@ -30,9 +31,14 @@ function play(queue) {
   const song = queue.songs.shift();
   const stream = ytdl.downloadFromInfo(song._info);
   console.log("play!");
-  queue.connection.play(stream)
+  const sentMsg = await queue.textChannel.send({ embed: {
+    title: "Now Playing",
+    description: `[${song.title}](${song.url})`
+  }});
+  queue.dispatcher = queue.connection.play(stream)
   .on('finish', () => {
     if (queue.loop) queue.songs.push(song);
+    sentMsg.delete().catch(console.log);
     play(queue);
   })
   .on('error', err => {
