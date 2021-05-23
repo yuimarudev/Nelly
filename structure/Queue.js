@@ -1,4 +1,5 @@
 const Song = require('./Song.js');
+const ytdl = require('ytdl-core');
 
 module.exports = class {
   constructor(message, connection=null) {
