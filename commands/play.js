@@ -41,7 +41,7 @@ module.exports = async(message, args, client) => {
                duration.split(':').length <= 2 &&
                6 >+ duration.split(':')[0]
             );
-            if (!result || !filtered.items?.length)
+            if (!result || !filtered.length)
             return void await message.reply(":x: No result...");
             let song = await serverQueue.addMusic(filtered[0].url, message).catch(e => {
               return message.reply("(そんな動画)ないです。\nエラー:```" + e + "```");
