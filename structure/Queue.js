@@ -41,7 +41,7 @@ async function play(queue) {
     play(queue);
   })
   .on('error', err => {
-    await queue.textChannel.send({ embed: {
+    queue.textChannel.send({ embed: {
       title: ":x: Exception",
       description: `${err}`
     }});
