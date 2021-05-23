@@ -31,7 +31,6 @@ async function play(queue) {
   queue.isPlaying = true;
   const song = queue.playingSong = queue.songs.shift();
   const stream = ytdl.downloadFromInfo(song._info);
-  console.log("play!");
   const sentMsg = await queue.textChannel.send({ embed: {
     title: "Now Playing",
     description: `[${song.title}](${song.url})\nRequested by <@${song.member.id}>`
