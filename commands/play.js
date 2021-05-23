@@ -1,4 +1,5 @@
 const Queue = require('../structure/Queue.js');
+const ytsr = require('ytsr');
 
 module.exports = async(message, args, client) => {
     const data = queues.get(message.guild.id);
