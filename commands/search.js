@@ -52,7 +52,7 @@ module.exports = async(message, args, client) => {
                   { max: 1, time: 3e4 }
               );
               i.size
-               ? serverQueue.addMusic(filtered[i], message)
+               ? serverQueue.addMusic(filtered[i].url, message)
                : message.channel.send('タイムアウトしました( ◜௰◝  ）');
           })
     }
