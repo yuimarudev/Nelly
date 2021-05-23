@@ -24,7 +24,7 @@ global.client = new Client({
   ws: {
     intents: Discord.Intents.NON_PRIVILEGED,
     properties: {
-        $browser: 'Discord Android'
+        $browser: 'Nelly Client'
     }
   }
 });
