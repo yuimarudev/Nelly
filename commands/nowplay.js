@@ -7,8 +7,17 @@ module.exports = async(message) => {
   .setAuthor(song.member.tag, song.member.user.avatarURL({size:512, format:'png'}) )
   .setURL(song.url)
   .setThumbnail(song.thumbnail.url)
-  .setFooter(song.author.thumbnails[0].url, song.author.name)
-  .setDescription(serverQueue.dispatcher.streamTime + '/' + song.duration)
+  .setFooter(song.author.name, song.author.thumbnails[0].url)
+  .setDescription(secformat(serverQueue.dispatcher.streamTime) + ' / ' + secformat(song.duration))
   .setColor(0x00ff00);
   message.channel.send([embed]);
 };
+
+function secformat(number) {
+  var dt = new Date(number * 1000).toISOString();
+  var fm = dt
+    .replace(/T/, "")
+    .replace(/\..+/, "")
+    .replace(/\d\d\d\d-\d\d-\d\d/, "");
+  return fm;
+}
