@@ -25,7 +25,7 @@ module.exports = async(message, args, client) => {
                       })
                       .catch(err => message.channel.send(`おっと、エラーが発生したみたいですね\nエラー内容: ${err}`))
               }
-              client.once('voiceStateUpdate',func)
+              client.on('voiceStateUpdate',func)
               setTimeout(() => client.off('voiceStateUpdate',func), 10000);
           })();
     } else {
