@@ -51,6 +51,7 @@ module.exports = async(message, args, client) => {
                 ({ author, content }) => author.equals(message.author) && 0 < content && content < filtered.length,
                 { max: 1, time: 3e4 }
             );
+            console.log(filtered.map(({title, url}) => [title, url]));
             if (i.size) serverQueue.addMusic(filtered[i-1<0?0:i-1].url, message);
             else message.channel.send('タイムアウトしました( ◜௰◝  ）');
         });
