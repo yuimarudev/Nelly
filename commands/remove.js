@@ -1,8 +1,8 @@
 module.exports = async (message, args) => {
     let { voiceChannel, textChannel, songs } = queues.get(message.guild.id);
     if (songs.length < args.length)
-        return void await message.reply(":x: 引数の数が多すぎます。");
-    const msg = await message.channel.send('ちょっと待ってね！(   ◜ω◝ )');
+        return void await message.reply(Messages.ArgumentLengthOver);
+    const msg = await message.channel.send(Messages.PleaseWait);
     const eliminated = [];
     [...new Set(args)].forEach(i => {
         --i;
