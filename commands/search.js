@@ -52,7 +52,7 @@ module.exports = async(message, args, client) => {
                 { max: 1, time: 3e4 }
             );
             // console.log(filtered.map(({title, url}) => [title, url]));
-            if (i.size) serverQueue.addMusic(filtered[i].url, message);
+            if (i.size) serverQueue.addMusic(filtered[i.content].url, message);
             else message.channel.send('タイムアウトしました( ◜௰◝  ）');
         });
     }
