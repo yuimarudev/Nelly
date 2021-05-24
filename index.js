@@ -92,4 +92,19 @@ client.on('message', async message => {
   };
 });
 
+client.on('voiceStateUpdate', (old, new) => {
+  if (new.id !== client.user.id) return;
+  if (!old.channel && new.channel) {
+    // join
+    console.log("join!");
+    new.setSuppressed(false);
+  } else if (!new.channel) {
+    // leave
+    queues.delete(new.guild.id);
+  } else {
+    // move
+    new.setSuppressed(false);
+  }
+});
+
 client.login(process.env.token);
