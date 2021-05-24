@@ -1,5 +1,6 @@
 const Song = require('./Song.js');
 const ytdl = require('ytdl-core');
+const history = [];
 
 module.exports = class {
   constructor(message, connection=null) {
@@ -66,7 +67,11 @@ async function play(queue) {
     );
     if (!queue.songs.length && queue.autoplay) {
       try {
-        const url = "https://youtu.be/" + song._info.related_videos[0].id;
+        const id = song._info.related_videos
+          .filter(({id})=>!history.includes(id))[0];
+        const url = "https://youtu.be/" + id;
+        history.push(id);
+        history.length = 5;
         await queue.addMusic(url, { member: queue.textChannel.guild.me });
       } catch { }
     }
