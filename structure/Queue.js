@@ -27,10 +27,10 @@ async function play(queue) {
   if (!queue.songs.length) {
     if (queue.autoplay) {
       try {
-        const url = song._info.related_videos[0].url;
+        const url = "https://youtu.be/" + song._info.related_videos[0].id;
         queue.addMusic(url, { member: queue.textChannel.guild.me });
+        return;
       } catch { }
-      return;
     }
     queue.isPlaying = false;
     queue.playingSong = null;
