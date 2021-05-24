@@ -12,7 +12,7 @@ module.exports = class {
     this.playingSong = null;
     this.isPlaying = false;
     this.dispatcher = null;
-    this.autoplay = false;
+    this.autoplay = true;
   }
   async addMusic(url, message) {
     const info = await ytdl.getInfo(url);
