@@ -34,15 +34,16 @@ async function play(queue) {
   queue.isPlaying = true;
   const song = queue.playingSong = queue.songs.shift();
   const stream = ytdl.downloadFromInfo(song._info);
-  queue.nowPlayingMsg = await queue.textChannel.send({ embed: {
-    title: "Now Playing",
-    description: `[${song.title}](${song.url})`,
-    thumbnail: { url: song.thumbnail.url },
-    footer: {
-      text: `Requested by ${song.member.displayName}`,
-      icon_url: song.member.user.displayAvatarURL()
-    }
-  }});
+  queue.nowPlayingMsg = await queue.textChannel.send(
+    new MessageEmbed()
+    .setTitle("Now Playing")
+    .setDescription(`[${song.title}](${song.url})`)
+    .setThumbnail(song.thumbnail.url)
+    .setFooter(
+      `Requested by ${song.member.displayName}`,
+      song.member.user.displayAvatarURL()
+    )
+  );
   queue.dispatcher = queue.connection.play(stream)
   .once('finish', next)
   .once('error', async err => {
