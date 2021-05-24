@@ -43,20 +43,15 @@ async function play(queue) {
     }
   }});
   queue.dispatcher = queue.connection.play(stream)
-  .once('finish', async () => {
-    if (queue.loop) queue.songs.push(song);
-    await queue.nowPlayingMsg.delete()
-    .then(
-      () => queue.nowPlayingMsg = null,
-      () => queue.nowPlayingMsg = null
-    );
-    play(queue);
-  })
+  .once('finish', next())
   .once('error', async err => {
     queue.textChannel.send({ embed: {
       title: ":x: Exception",
       description: `${err}`
     }});
+    await next();
+  });
+  async function next() {
     if (queue.loop) queue.songs.push(song);
     await queue.nowPlayingMsg.delete()
     .then(
@@ -64,5 +59,5 @@ async function play(queue) {
       () => queue.nowPlayingMsg = null
     );
     play(queue);
-  });
+  }
 }
