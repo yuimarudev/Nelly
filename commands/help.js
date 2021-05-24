@@ -21,7 +21,7 @@ module.exports = (message, args, client) => {
   } else {
     message.channel.send(
       new MessageEmbed()
-      .setTitle("コマンド一覧")
+      .setTitle(Messages.CommandList)
       .setDescription(
         Object.keys(dict.commands)
         .sort()
