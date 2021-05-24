@@ -25,6 +25,13 @@ module.exports = class {
 
 async function play(queue) {
   if (!queue.songs.length) {
+    if (queue.autoplay) {
+      try {
+        const url = song._info.related_videos[0].url;
+        queue.addMusic(url, { member: queue.textChannel.guild.me });
+      } catch { }
+      return;
+    }
     queue.isPlaying = false;
     queue.playingSong = null;
     queue.dispatcher = null;
