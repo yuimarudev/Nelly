@@ -7,16 +7,16 @@ module.exports = (message, args, client) => {
         new MessageEmbed()
         .setTitle(args[0])
         .setDescription(info.description)
-        .addField('詳細', dict.details)
+        .addField(Messages.Details, dict.details)
         .addField(
-          '引数',
+          Messages.Arguments,
           `%${args[0]} ${info.args.map(
             content => '<' + content.join('│') + '>'
           ).join(' ')}`
         )
       );
     } else {
-      message.channel.send('無効なコマンドです');
+      message.channel.send(Messages.InvalidCommandMessage);
     }
   } else {
     message.channel.send(
