@@ -26,6 +26,7 @@ async function play(queue) {
   if (!queue.songs.length) {
     queue.isPlaying = false;
     queue.playingSong = null;
+    queue.dispatcher = null;
     await queue.textChannel.send("Queue Finished...");
     return;
   }
@@ -42,7 +43,7 @@ async function play(queue) {
     }
   }});
   queue.dispatcher = queue.connection.play(stream)
-  .on('finish', async () => {
+  .once('finish', async () => {
     if (queue.loop) queue.songs.push(song);
     await queue.nowPlayingMsg.delete()
     .then(
@@ -51,7 +52,7 @@ async function play(queue) {
     );
     play(queue);
   })
-  .on('error', async err => {
+  .once('error', async err => {
     queue.textChannel.send({ embed: {
       title: ":x: Exception",
       description: `${err}`
