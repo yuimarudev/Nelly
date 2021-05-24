@@ -12,6 +12,7 @@ module.exports = class {
     this.playingSong = null;
     this.isPlaying = false;
     this.dispatcher = null;
+    this.autoplay = false;
   }
   async addMusic(url, message) {
     const info = await ytdl.getInfo(url);
@@ -52,7 +53,8 @@ async function play(queue) {
     await next();
   });
   async function next() {
-    if (queue.loop) queue.songs.push(song);
+    if (song.loop) queue.songs.unshift(song);
+    else if (queue.loop) queue.songs.push(song);
     await queue.nowPlayingMsg.delete()
     .then(
       () => queue.nowPlayingMsg = null,
