@@ -98,11 +98,11 @@ client.on('voiceStateUpdate', (old, now) => {
     // join
     console.log("join!");
     now.setSuppressed(false);
-  } else if (!now.channel) {
+  } else if (old.channel && !now.channel) {
     // leave
     console.log("leave!");
     queues.delete(now.guild.id);
-  } else {
+  } else if (old.channel.id !== now.channel.id) {
     // move
     console.log("move!");
     now.setSuppressed(false);
