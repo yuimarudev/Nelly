@@ -1,4 +1,5 @@
 global.Discord = require('discord.js');
+global.Messages = require('./lang/ja_jp.json');
 const fs = require('fs');
 const leven = require('levenshtein');
 const path = require('path');
