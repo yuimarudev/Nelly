@@ -1,15 +1,20 @@
 module.exports = async (message, args) => {
-    let { textChannel, songs } = queues.get(message.guild.id);
+    let { voiceChannel, textChannel, songs } = queues.get(message.guild.id);
     if (songs.length < args.length)
         return void await message.reply(":x: 引数の数が多すぎます。");
     const msg = await message.channel.send('ちょっと待ってね！(   ◜ω◝ )');
     const eliminated = [];
     [...new Set(args)].forEach(i => {
         i -= 1;
-        eliminated.push(songs[i]);
-        songs[i] = void 0;
+        if (
+           !voiceChannel.members.has(songs[i].member.id) ||
+           songs[i].member.id === message.member.id
+        ) {
+            eliminated.push(songs[i]);
+            songs[i] = void 0;
+        }
     });
     for (let index; ~(index = songs.indexOf(void 0));)
         songs.splice(index, 1);
-    msg.edit(`Removed ${args.length} songs! ( ◜௰◝  ）${eliminated.map(s => '\n・' + s.title)}`);
+    msg.edit(`Removed ${eliminated.length} songs! ( ◜௰◝  ）${eliminated.map(s => '\n・' + s.title)}`);
 }
