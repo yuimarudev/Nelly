@@ -5,7 +5,7 @@ module.exports = async (message, args) => {
     const msg = await message.channel.send('ちょっと待ってね！(   ◜ω◝ )');
     const eliminated = [];
     [...new Set(args)].forEach(i => {
-        i = +i-1;
+        i -= 1;
         eliminated.push(songs[i]);
         songs[i] = void 0;
     });
