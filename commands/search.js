@@ -10,9 +10,9 @@ module.exports = async(message, args, client) => {
                 queues.set(message.guild.id, new Queue(message, conn));
                 client.emit('message', message);
             })
-            .catch(err => message.channel.send(`おっと、エラーが発生したみたいですね\nエラー内容: ${err}`));
+            .catch(err => message.channel.send(`${Messages.AccidentMessage}\nエラー内容: ${err}`));
         } else {
-            message.channel.send('ボイスチャンネルに参加してください');
+            message.channel.send(Messages.PleaseJoinVoiceChannelMessage);
             const func = function (_, newState) {
                 if (
                     newState.member.voice.channel &&
@@ -22,7 +22,7 @@ module.exports = async(message, args, client) => {
                     queues.set(message.guild.id, new Queue(message, conn));
                     client.emit('message', message);
                 })
-                .catch(err => message.channel.send(`おっと、エラーが発生したみたいですね\nエラー内容: ${err}`))
+                .catch(err => message.channel.send(`${Messages.AccidentMessage}\nエラー内容: ${err}`))
             }
             client.on('voiceStateUpdate',func)
             setTimeout(() => client.off('voiceStateUpdate',func), 10000);
@@ -37,7 +37,7 @@ module.exports = async(message, args, client) => {
         }));
         const filtered = result.items.filter(({duration}) => duration.split(':').length <= 2 && 6 >+ duration.split(':')[0]);
         if (!result || !filtered.length)
-        return void await message.reply(":x: No result...");
+        return void await message.reply(Messages.NoSearchResult);
         textChannel.send(new MessageEmbed({
             title: 'found',
             description: filtered.map(({title, url}, i) =>`${i + 1}: [${title}](${url})`).join('\n')
@@ -52,7 +52,7 @@ module.exports = async(message, args, client) => {
                 serverQueue.addMusic(songInfo.url, message);
                 await message.reply("Added: " + songInfo.title);
             } else {
-                message.channel.send('タイムアウトしました( ◜௰◝  ）');
+                message.channel.send(Messages.TimedOut);
             }
         });
     }
