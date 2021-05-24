@@ -29,25 +29,23 @@ global.client = new Client({
 });
 global.queues = new Discord.Collection();
 
-
-
 process.stdin.on('data', chunk => {
   chunk = String(chunk);
   if(typeof chunk.match === "function" && chunk.match('sine')) {
-    console.log('グハッ！');
+    console.log(Messages.KilledMessage);
     process.exit();
   };
 });
 
 client.on('ready', () => {
-  console.log('ちょいまち');
+  console.log(Messages.PleaseWait);
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
     .filter(x => x.endsWith('.js'))
     .map(x => x.replace(/\.js$/,''));
   for (let command of list) {
     let run = require(path.join(__dirname, 'commands', command));
     commands[command] = run;
-    console.log('\'' + command + '\'を読み込んだよ！');
+    console.log('\'' + command + '\'' + Messages.LoadedMessage);
   };
   console.log('ready');
   setInterval(() => {
@@ -75,11 +73,11 @@ client.on('message', async message => {
       try {
         result = await commands[curs](message, args, client);
       } catch(ex) {
-        result = ':x: おっと、なにかが上手くいかなかったみたいですね\nエラー内容: ```js\n' + ex.message + '\n```';
+        result = Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```';
       };
       if (result) return message.channel.send(result);
     } else {
-      return message.reply(':x: 引数が間違っています。引数は`' + prefix + 'help ' + command + '`で確認してください。');
+      return message.reply(Messages.InvalidArgMessage.replace('%c', command));
     };
   } else {
     let dym = Object.keys(commandDict)
@@ -88,7 +86,7 @@ client.on('message', async message => {
         return distance < acc[0] ? [distance, cur] : acc;
       }, [3, ""])[1];
      return dym ?
-     message.reply(':thinking: コマンドを間違えているようです。\nもしかして: ' + dym) :
+     message.reply(Messages.SimilarMessage + dym) :
      void 0;
   };
 });
