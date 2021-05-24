@@ -49,7 +49,7 @@ module.exports = async(message, args, client) => {
         })).then(async ({channel}) => {
             const i = await channel.awaitMessages(
                 ({ author, content }) => author.equals(message.author) && 0 < content && content < filtered.length,
-                { max: 1, i time: 3e4 }
+                { max: 1, time: 3e4 }
             );
             if (i.size) serverQueue.addMusic(filtered[i-1<0?0:i-1].url, message);
             else message.channel.send('タイムアウトしました( ◜௰◝  ）');
