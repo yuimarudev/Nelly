@@ -5,5 +5,4 @@ module.exports = message => {
   if (!cnct) return;
   cnct.disconnect();
   message.react('👋').catch(console.log);
-  queues.delete(message.guild.id);
 };
