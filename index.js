@@ -92,18 +92,18 @@ client.on('message', async message => {
   };
 });
 
-client.on('voiceStateUpdate', (old, new) => {
-  if (new.id !== client.user.id) return;
-  if (!old.channel && new.channel) {
+client.on('voiceStateUpdate', (old, now) => {
+  if (now.id !== client.user.id) return;
+  if (!old.channel && now.channel) {
     // join
     console.log("join!");
-    new.setSuppressed(false);
-  } else if (!new.channel) {
+    now.setSuppressed(false);
+  } else if (!now.channel) {
     // leave
-    queues.delete(new.guild.id);
+    queues.delete(now.guild.id);
   } else {
     // move
-    new.setSuppressed(false);
+    now.setSuppressed(false);
   }
 });
 
