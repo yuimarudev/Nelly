@@ -58,6 +58,7 @@ module.exports = async(message, args, client) => {
 }
 
 function delay(ms) {
-  if (typeof ms !== "number" || ms < 1) ms = 1000;
-  return new Promise(r => setTimeout(r, ms));
+  return (typeof ms !== "number" || ms < 1) ?
+  Promise.resolve(void 0) :
+  new Promise(r => setTimeout(r, ms));
 }
