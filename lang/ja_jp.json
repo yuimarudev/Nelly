@@ -1,0 +1,26 @@
+{
+  "KilledMessage": "グハッ！",
+  "PleaseWait": "ちょっと待ってね！(   ◜ω◝ )",
+  "LoadedMessage": "を読み込んだよ！",
+  "SomethingWentWrong": ":x: おっと、何かがうまくいかなかったみたいですね。",
+  "AccidentMessage": "おっと、問題が発生したみたいですね。"
+  "InvalidArgMessage": ":x: 引数が間違っています。引数は`%help {command}`で確認してください。",
+  "SimilarMessage": ":thinking: コマンドを間違えているようです。\nもしかして: ",
+  "InvalidCommandMessage": "無効なコマンドです",
+  "Arguments": "引数",
+  "Details": "詳細",
+  "CommandList": "コマンド一覧",
+  "PleaseJoinVoiceChannelMessage": "ボイスチャンネルに参加してください(  ˙༥˙  )",
+  "NoQueue": ":x: There is no queue.",
+  "NoMusicPlaying": ":x: No music is playing.",
+  "MusicLoop": ":repeat_one: Music Loop ",
+  "QueueLoop": ":repeat: Queue Loop ",
+  "NoMusic": "曲がありません(´ω`)",
+  "NoVideoResult": "(そんな動画)ないです。",
+  "MusicAdded": ":white_check_mark: **Added:** ",
+  "ArgumentLengthOver": ":x: 引数の数が多すぎます。",
+  "NoSearchResult": ":x: No result...",
+  "TimedOut": "タイムアウトしました( ◜௰◝  ）",
+  "SkipRequest": "Skip request ",
+  "Skipped": ":fast_forward: Skipped!"
+}
