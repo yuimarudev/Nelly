@@ -7,6 +7,7 @@ module.exports = class {
     this.duration = details.lengthSeconds;
     this.author = details.author;
     this.member = message.member;
+    this.loop = false;
     this._info = data;
   }
 }
