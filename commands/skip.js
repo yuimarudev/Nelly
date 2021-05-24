@@ -1,3 +1,5 @@
+let skipReqCount = 0;
+
 module.exports = async message => {
   const queue = queues.get(message.guild.id);
   if (!queue)
@@ -11,8 +13,18 @@ module.exports = async message => {
     if (next) next.loop = true;
   }
   if (!now.member.user.bot && queue.voiceChannel.members.has(now.member.id)) {
-    if (now.member.id !== message.member.id)
-      return void await message.reply(":x: You don't have permission to skip.");
+    if (now.member.id !== message.member.id) {
+      const limen = Math.ceil(queue.voiceChannel.members.size / 2);
+      if (++skipReqCount >= limen) {
+        skipReqCount = 0;
+        try {
+          queue.dispatcher.emit('finish');
+          await message.reply(":fast_forward: Skipped!");
+        } catch { }
+        return;
+      }
+      return void await message.reply("Skip request (${skipReqCount}/${limen})");
+    }
   }
   try {
     queue.dispatcher.emit('finish');
