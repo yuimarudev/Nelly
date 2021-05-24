@@ -10,6 +10,10 @@ module.exports = async message => {
     now.loop = false;
     if (next) next.loop = true;
   }
+  if (queue.voiceChannel.members.has(now.member.id)) {
+    if (now.member.id !== message.member.id)
+      return void await message.reply(":x: You don't have permission to skip.");
+  }
   try {
     queue.dispatcher.emit('finish');
     await message.reply(":fast_forward: Skipped!");
