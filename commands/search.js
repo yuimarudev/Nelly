@@ -48,7 +48,7 @@ module.exports = async(message, args, client) => {
              ).join('\n')}`
           })).then(async ({channel}) => {
               const i = await channel.awaitMessages(
-                  ({ author, content }) => author.equals(message.author) && 0 < content < filtered.length,
+                  ({ author, content }) => author.equals(message.author) && 0 < content && content < filtered.length,
                   { max: 1, time: 3e4 }
               );
               i.size
