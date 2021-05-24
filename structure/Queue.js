@@ -37,7 +37,7 @@ async function play(queue) {
     description: `[${song.title}](${song.url})>`,
     thumbnail: song.thumbnail.url,
     footer: {
-      text: `Requested by <@${song.member.id}>`,
+      text: `Requested by {song.member.displayName}`,
       icon_url: song.member.user.displayAvatarURL()
     }
   }});
