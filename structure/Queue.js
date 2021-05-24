@@ -36,7 +36,7 @@ async function play(queue) {
   queue.nowPlayingMsg = await queue.textChannel.send({ embed: {
     title: "Now Playing",
     description: `[${song.title}](${song.url})`,
-    thumbnail: song.thumbnail.url,
+    thumbnail: { url: song.thumbnail.url },
     footer: {
       text: `Requested by ${song.member.displayName}`,
       icon_url: song.member.user.displayAvatarURL()
