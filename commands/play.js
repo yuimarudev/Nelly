@@ -48,12 +48,12 @@ module.exports = async(message, args, client) => {
             let song = await serverQueue.addMusic(filtered[0].url, message).catch(e => {
               return message.reply("(そんな動画)ないです。\nエラー:```" + e + "```");
             });
-            await message.reply(":white_check_mark: Added: " + song.title);
+            await message.reply(":white_check_mark: **Added:** " + song.title);
         } else if (!matched[2]) {
             let song = await serverQueue.addMusic(matched[0], message).catch(e => {
               return message.reply("(そんな動画)ないです。\nエラー:```" + e + "```");
             });
-            await message.reply(":white_check_mark: Added: " + song.title);
+            await message.reply(":white_check_mark: **Added:** " + song.title);
         } else {
            let playlist = await ytpl(args[0]), addCount = 0;
            for (let v of playlist.items) {
