@@ -97,6 +97,7 @@ client.on('voiceStateUpdate', (old, now) => {
   if (!old.channel && now.channel) {
     // join
     console.log("join!");
+    if (now.channel.type === "stage")
     now.setSuppressed(false);
   } else if (old.channel && !now.channel) {
     // leave
@@ -105,6 +106,7 @@ client.on('voiceStateUpdate', (old, now) => {
   } else if (old.channel.id !== now.channel.id) {
     // move
     console.log("move!");
+    if (now.channel.type === "stage")
     now.setSuppressed(false);
   }
 });
