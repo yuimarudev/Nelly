@@ -100,9 +100,11 @@ client.on('voiceStateUpdate', (old, now) => {
     now.setSuppressed(false);
   } else if (!now.channel) {
     // leave
+    console.log("leave!");
     queues.delete(now.guild.id);
   } else {
     // move
+    console.log("move!");
     now.setSuppressed(false);
   }
 });
