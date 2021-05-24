@@ -2,7 +2,7 @@ module.exports = async message => {
   const serverQueue = queues.get(message.guild.id);
   if (!serverQueue) {
     return void await message.reply(
-      ":x: There is no queue."
+      Messages.NoQueue
     );
   }
   const np = serverQueue.playingSong;
