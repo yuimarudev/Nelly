@@ -43,7 +43,7 @@ async function play(queue) {
     }
   }});
   queue.dispatcher = queue.connection.play(stream)
-  .once('finish', next())
+  .once('finish', next)
   .once('error', async err => {
     queue.textChannel.send({ embed: {
       title: ":x: Exception",
