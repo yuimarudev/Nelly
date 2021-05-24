@@ -13,6 +13,7 @@ module.exports = class {
     this.isPlaying = false;
     this.dispatcher = null;
     this.autoplay = true;
+    this.skipReqs = new Set();
   }
   async addMusic(url, message) {
     const info = await ytdl.getInfo(url);
@@ -32,6 +33,7 @@ async function play(queue) {
     return;
   }
   queue.isPlaying = true;
+  queue.skipReqs.clear();
   const song = queue.playingSong = queue.songs.shift();
   const stream = ytdl.downloadFromInfo(song._info);
   queue.nowPlayingMsg = await queue.textChannel.send(
