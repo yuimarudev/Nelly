@@ -24,6 +24,7 @@ module.exports = (message, args, client) => {
       .setTitle("コマンド一覧")
       .setDescription(
         Object.keys(dict.commands)
+        .sort()
         .map(v => '・' + v)
         .join('\n')
       )
