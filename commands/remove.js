@@ -5,7 +5,7 @@ module.exports = async (message, args) => {
     const msg = await message.channel.send('ちょっと待ってね！(   ◜ω◝ )');
     const eliminated = [];
     [...new Set(args)].forEach(i => {
-        i -= 1;
+        --i;
         if (
            !voiceChannel.members.has(songs[i].member.id) ||
            songs[i].member.id === message.member.id
