@@ -25,13 +25,6 @@ module.exports = class {
 
 async function play(queue) {
   if (!queue.songs.length) {
-    if (queue.autoplay) {
-      try {
-        const url = "https://youtu.be/" + song._info.related_videos[0].id;
-        queue.addMusic(url, { member: queue.textChannel.guild.me });
-        return;
-      } catch { }
-    }
     queue.isPlaying = false;
     queue.playingSong = null;
     queue.dispatcher = null;
@@ -67,6 +60,12 @@ async function play(queue) {
       () => queue.nowPlayingMsg = null,
       () => queue.nowPlayingMsg = null
     );
+    if (!queue.songs.length && queue.autoplay) {
+      try {
+        const url = "https://youtu.be/" + song._info.related_videos[0].id;
+        await queue.addMusic(url, { member: queue.textChannel.guild.me });
+      } catch { }
+    }
     play(queue);
   }
 }
