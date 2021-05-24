@@ -14,7 +14,7 @@ module.exports = async(message, args, client) => {
             })
             .catch(err => message.channel.send(`おっと、エラーが発生したみたいですね\nエラー内容: ${err}`))
         } else {
-            message.channel.send('ボイスチャンネルに参加してください');
+            message.channel.send(Messages.PleaseJoinVoiceChannelMessage);
             const func = function (_, newState) {
                 if (
                     newState.channel &&
@@ -24,7 +24,7 @@ module.exports = async(message, args, client) => {
                     queues.set(message.guild.id, new Queue(message, conn));
                     client.emit('message', message);
                 })
-                .catch(err => message.channel.send(`おっと、エラーが発生したみたいですね\nエラー内容: ${err}`))
+                .catch(err => message.channel.send(`${Messages.SomethingWentWrong}\nエラー内容: ${err}`))
             }
             client.on('voiceStateUpdate',func)
             setTimeout(() => client.off('voiceStateUpdate',func), 10000);
@@ -44,16 +44,16 @@ module.exports = async(message, args, client) => {
                +duration.split(':')[0] < 31
             );
             if (!result || !filtered.length)
-            return void await message.reply(":x: No result...");
+            return void await message.reply(Messages.NoVideoResult);
             let song = await serverQueue.addMusic(filtered[0].url, message).catch(e => {
-              return message.reply("(そんな動画)ないです。\nエラー:```" + e + "```");
+              return message.reply(Messages.NoVideoResult + "\nError:```" + e + "```");
             });
-            await message.reply(":white_check_mark: **Added:** " + song.title);
+            await message.reply(Messages.MusicAdded + song.title);
         } else if (!matched[2]) {
             let song = await serverQueue.addMusic(matched[0], message).catch(e => {
-              return message.reply("(そんな動画)ないです。\nエラー:```" + e + "```");
+              return message.reply(Messages.NoVideoResult + "\nError:```" + e + "```");
             });
-            await message.reply(":white_check_mark: **Added:** " + song.title);
+            await message.reply(Messages.MusicAdded + song.title);
         } else {
             let playlist = await ytpl(args[0]), addCount = 0;
             for (let v of playlist.items) {
@@ -61,7 +61,7 @@ module.exports = async(message, args, client) => {
                 await delay(1500);
             }
             await message.channel.send(
-                ":white_check_mark: Added " + (1 < addCount ? `${addCount} songs!` : `${addCount ? 1 : "no"} song!`)
+                Messages.MusicAdded + (1 < addCount ? `${addCount} songs!` : `${addCount ? 1 : "no"} song!`)
             );
         }
     }
