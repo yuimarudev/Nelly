@@ -35,17 +35,12 @@ module.exports = async(message, args, client) => {
             hl: "ja",
             limit: 10
         }));
-        const filtered = result.items.filter(({duration}) => 
-            duration.split(':').length <= 2 &&
-            6 >+ duration.split(':')[0]
-        );
+        const filtered = result.items.filter(({duration}) => duration.split(':').length <= 2 && 6 >+ duration.split(':')[0]);
         if (!result || !filtered.length)
         return void await message.reply(":x: No result...");
         textChannel.send(new MessageEmbed({
             title: 'found',
-            description: `${filtered.map(({title, url}, i) =>
-                `${i + 1}: [${title}](${url})`
-            ).join('\n')}`
+            description: filtered.map(({title, url}, i) =>`${i + 1}: [${title}](${url})`).join('\n')
         })).then(async ({channel}) => {
             const i = await channel.awaitMessages(
                 ({ author, content }) => author.equals(message.author) && 0 < content && content <= filtered.length,
