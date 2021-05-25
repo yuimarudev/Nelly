@@ -2,8 +2,8 @@ const Queue = require('../structure/Queue.js');
 const ytsr = require('ytsr');
 
 module.exports = async(message, args, client) => {
-    const data = queues.get(message.guild.id);
-    if (!data) {
+    const serverQueue = queues.get(message.guild.id);
+    if (!serverQueue) {
         if (message.member.voice.channel) {
             message.member.voice.channel.join()
             .then(conn => {
@@ -28,8 +28,7 @@ module.exports = async(message, args, client) => {
             setTimeout(() => client.off('voiceStateUpdate',func), 10000);
         }
     } else {
-        const { connection, textChannel, voiceChannel } = data;
-        const serverQueue = queues.get(message.guild.id);
+        const { connection, textChannel, voiceChannel } = serverQueue;
         const result = await ytsr.getFilters(args[0]).then(f => ytsr(f.get('Type').get('Video').url,{
             gl: "JP",
             hl: "ja",
@@ -44,13 +43,12 @@ module.exports = async(message, args, client) => {
             .setDescription(filtered.map(({title, url}, i) =>`${i + 1}: [${title}](${url})`).join('\n'))
         )
         .then(async ({channel}) => {
-            const i = await channel.awaitMessages(
-                ({ author, content }) => author.equals(message.author) && 0 < content && content <= filtered.length,
+            const messages = await channel.awaitMessages(
+                ({ author, content }) => author.equals(message.author) && !Number.isNaN(+content) && 0 < content && content <= filtered.length,
                 { max: 1, time: 3e4 }
             );
-            // console.log(filtered.map(({title, url}) => [title, url]));
-            if (i.size) {
-                const songInfo = filtered[i.first().content - 1];
+            if (messages.size) {
+                const songInfo = filtered[messages.first().content - 1];
                 serverQueue.addMusic(songInfo.url, message);
                 await message.reply("Added: " + songInfo.title);
             } else {
