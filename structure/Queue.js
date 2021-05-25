@@ -36,7 +36,15 @@ async function play(queue) {
   queue.isPlaying = true;
   queue.skipReqs.clear();
   const song = queue.playingSong = queue.songs.shift();
-  const stream = ytdl.downloadFromInfo(song._info);
+  const stream = ytdl.downloadFromInfo(song._info)
+  .once('error', async err => {
+    queue.textChannel.send(
+      new MessageEmbed()
+      .setTitle(":x: Exception")
+      .setDescription(`${err}`)
+    );
+    await next();
+  });
   queue.nowPlayingMsg = await queue.textChannel.send(
     new MessageEmbed()
     .setTitle("Now Playing")
@@ -48,15 +56,7 @@ async function play(queue) {
     )
   );
   queue.dispatcher = queue.connection.play(stream)
-  .once('finish', next)
-  .once('error', async err => {
-    queue.textChannel.send(
-      new MessageEmbed()
-      .setTitle(":x: Exception")
-      .setDescription(`${err}`)
-    );
-    await next();
-  });
+  .once('finish', next);
   async function next() {
     if (song.loop) queue.songs.unshift(song);
     else if (queue.loop) queue.songs.push(song);
@@ -77,7 +77,15 @@ async function play(queue) {
         history.unshift(id);
         history.length = 5;
         await queue.addMusic(url, { member: queue.textChannel.guild.me });
-      } catch { }
+        play(queue);
+        return;
+      } catch(err) {
+        queue.textChannel.send(
+          new MessageEmbed()
+          .setTitle(":x: Exception")
+          .setDescription(`${err}`)
+        );
+      }
     }
     play(queue);
   }
