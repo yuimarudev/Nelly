@@ -66,7 +66,7 @@ client.on('message', async message => {
     return;
   message.content = message.content.replace(new RegExp(`^<@!?${client.user.id}`), prefix);
   if (message.content.startsWith(prefix + "eval")) {
-    commands.eval(message, message.content.replece(prefix + "eval", ""), client);
+    commands.eval(message, message.content.replace(prefix + "eval", ""), client);
     return;
   }
   const args = SpaceSplit(message.content.slice(prefix.length));
