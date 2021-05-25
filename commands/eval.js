@@ -1,8 +1,11 @@
+const vm = require('vm');
+let that = this;
 module.exports = async (message, [code], client) => {
     if (!client.application.owner.members.has(message.user.id)) return;
     let result;
     try {
-      result = eval(code);
+      let Script = new vm.Script(code);
+      result = Script.runIntContext(Context);
     } catch (e) {
       result = e;
     }
@@ -11,3 +14,11 @@ module.exports = async (message, [code], client) => {
     else result = "```js\n" + require('util').inspect(result) + "```";
     await message.channel.send(result);
 }
+
+function Context(...args){
+  return vm.createContext({
+    ...global,
+    ...that,
+    ...args
+  });
+};
