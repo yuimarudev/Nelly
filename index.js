@@ -12,7 +12,7 @@ const SpaceSplit = require('./spliter.js');
 const commandArgs = require('./commands.js');
 const commands = {};
 const prefix = '%';
-["Client", "MessageEmbed", "MessageAttachment"]
+["MessageEmbed", "MessageAttachment"]
   .forEach(v => global[v] = Discord[v]);
 
 let dotenvPath = path.join(__dirname, '.env');
@@ -22,7 +22,7 @@ if (fs.existsSync(dotenvPath)) {
     process.env[key] = env[key];
   }
 }
-global.client = new Client({
+const client = new Discord.Client({
   intents: Discord.Intents.NON_PRIVILEGED,
   ws: {
     intents: Discord.Intents.NON_PRIVILEGED,
