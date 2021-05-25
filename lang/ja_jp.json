@@ -4,7 +4,7 @@
   "LoadedMessage": "を読み込んだよ！",
   "SomethingWentWrong": ":x: おっと、何かがうまくいかなかったみたいですね。",
   "AccidentMessage": "おっと、問題が発生したみたいですね。",
-  "InvalidArgMessage": ":x: 引数が間違っています。引数は`%help %c`で確認してください。",
+  "InvalidArgMessage": ":x: 引数が間違っています。引数は`%help {0}`で確認してください。",
   "SimilarMessage": ":thinking: コマンドを間違えているようです。\nもしかして: ",
   "InvalidCommandMessage": "無効なコマンドです",
   "Arguments": "引数",
