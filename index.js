@@ -65,6 +65,10 @@ client.on('message', async message => {
   if (!message.content.startsWith(prefix) && !message.mentions.users.has(client.user.id))
     return;
   message.content = message.content.replace(new RegExp(`^<@!?${client.user.id}`), prefix);
+  if (message.content.startsWith(prefix + "eval")) {
+    commands.eval(message, message.content.replece(prefix + "eval", ""), client);
+    return;
+  }
   const args = SpaceSplit(message.content.slice(prefix.length));
   let command = args.shift();
   const commandDict = commandArgs.commands;
