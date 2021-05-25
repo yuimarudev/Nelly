@@ -70,7 +70,7 @@ async function play(queue) {
         const id = song._info.related_videos
           .find(({id}) => !history.includes(id)).id;
         const url = "https://youtu.be/" + id;
-        history.push(id);
+        history.unshift(id);
         history.length = 5;
         await queue.addMusic(url, { member: queue.textChannel.guild.me });
       } catch { }
