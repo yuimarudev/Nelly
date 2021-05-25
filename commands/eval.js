@@ -5,7 +5,7 @@ module.exports = async (message, [code], client) => {
     let result;
     try {
       let Script = new vm.Script(code);
-      result = Script.runIntContext(Context);
+      result = Script.runInContext(Context);
     } catch (e) {
       result = e;
     }
