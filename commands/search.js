@@ -28,6 +28,9 @@ module.exports = async(message, args, client) => {
             setTimeout(() => client.off('voiceStateUpdate',func), 10000);
         }
     } else {
+        if (message.member.voice.channel.id != serverQueue.voiceChannel.id) {
+            return void await message.reply(Messages.PleaseJoinVoiceChannelMessage + `\nVC: \`${serverQueue.voiceChannel.name}\``
+        }
         const { connection, textChannel, voiceChannel } = serverQueue;
         const result = await ytsr.getFilters(args[0]).then(f => ytsr(f.get('Type').get('Video').url,{
             gl: "JP",
