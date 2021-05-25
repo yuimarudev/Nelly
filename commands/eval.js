@@ -1,7 +1,7 @@
 const vm = require('vm');
 let that = this;
 module.exports = async (message, [code], client) => {
-    if (!(await client.application.fetch()).owner.members.has(message.user.id)) return;
+    if (!(await client.application.fetch()).owner.members.has(message.author.id)) return;
     let result;
     try {
       let Script = new vm.Script(code);
