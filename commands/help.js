@@ -1,5 +1,5 @@
 module.exports = (message, args, client) => {
-  const dict = require('../commands.json');
+  const dict = require('../commands.js');
   if (args.length) {
     const info = dict.commands[args[0]];
     if (info) {
