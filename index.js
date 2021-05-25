@@ -1,5 +1,9 @@
 global.Discord = require('discord.js');
 global.Messages = require('./lang/ja_jp.json');
+global.stringFormat = (...r) =>
+r.reduce((a, c, i) => a.replace(
+  new RegExp(`\\{${i}\\}`, "g"), c
+), r.shift());
 const fs = require('fs');
 const leven = require('levenshtein');
 const path = require('path');
