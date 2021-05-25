@@ -9,6 +9,7 @@ module.exports = async (message, code, client) => {
     } catch (e) {
       result = e;
     }
+    while (Symbol.toStringTag in result) delete result[Symbol.toStringTag];
     if (Object.prototype.toString.call(result) === "[object Error]")
     result = Error.prototype.toString.call(result);
     else result = "```js\n" + require('util').inspect(result) + "```";
