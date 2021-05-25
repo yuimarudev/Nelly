@@ -42,7 +42,7 @@ module.exports = async(message, args, client) => {
         return void await message.reply(Messages.NoSearchResult);
         textChannel.send(
             new MessageEmbed()
-            .setTitle(found)
+            .setTitle("Found")
             .setDescription(filtered.map(({title, url}, i) =>`${i + 1}: [${title}](${url})`).join('\n'))
         )
         .then(async ({channel}) => {
