@@ -10,7 +10,8 @@
     "s": "skip",
     "np": "nowplay",
     "rm": "remove",
-    "find": "search"
+    "find": "search",
+    "auto": "autoplay"
   },
   "commands": {
     "ping": {
@@ -61,6 +62,9 @@
       "args": [ ["検索語句"], ["〃", "フラグ"] ]
     },
     "loop": {
+      "args": [ [] ]
+    },
+    "autoplay": {
       "args": [ [] ]
     }
   }
