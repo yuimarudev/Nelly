@@ -1,5 +1,4 @@
 const vm = require('vm');
-
 let that = this;
 module.exports = async (message, code, client) => {
     if (!(await client.application.fetch()).owner.members.has(message.author.id)) return;
