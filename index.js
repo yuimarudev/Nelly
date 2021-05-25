@@ -9,7 +9,7 @@ const leven = require('levenshtein');
 const path = require('path');
 const dotenv = require('dotenv');
 const SpaceSplit = require('./spliter.js');
-const commandArgs = require('./commands.json');
+const commandArgs = require('./commands.js');
 const commands = {};
 const prefix = '%';
 ["Client", "MessageEmbed", "MessageAttachment"]
