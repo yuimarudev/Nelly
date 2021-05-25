@@ -35,14 +35,32 @@ module.exports = {
       args: [ [], [ 'コマンド' ] ],
       details: '第一引数はなくてもコマンドのリストが出てくるよ！'
     },
-    play: { args: [ [ 'query' ] ] },
-    loopqueue: { args: [ [] ] },
-    disconnect: { args: [ [] ] },
-    queue: { args: [ [], [ 'page' ] ] },
-    skip: { args: [ [], [ 'query' ] ] },
-    remove: { variadic: true, args: [ [ 'キュー内でのナンバー', '〃...' ] ] },
-    search: { args: [ [ '検索語句' ], [ '〃', 'フラグ' ] ] },
-    loop: { args: [ [] ] },
-    autoplay: { args: [ [] ] }
+    play: {
+      args: [ [ 'query' ] ]
+    },
+    loopqueue: {
+      args: [ [] ]
+    },
+    disconnect: {
+      args: [ [] ]
+    },
+    queue: {
+      args: [ [], [ 'page' ] ]
+    },
+    skip: { args: [ [], [ 'query' ] ]
+    },
+    remove: {
+      variadic: true,
+      args: [ [ 'キュー内でのナンバー', '〃...' ] ]
+    },
+    search: {
+      args: [ [ '検索語句' ], [ '〃', 'フラグ' ] ]
+    },
+    loop: {
+      args: [ [] ]
+    },
+    autoplay: {
+      args: [ [] ]
+    }
   }
 }
