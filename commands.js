@@ -61,6 +61,9 @@ module.exports = {
     },
     autoplay: {
       args: [ [] ]
+    },
+    eval: {
+      args: [ ["code"] ]
     }
   }
 }
