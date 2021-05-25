@@ -13,7 +13,7 @@ module.exports = class {
     this.playingSong = null;
     this.isPlaying = false;
     this.dispatcher = null;
-    this.autoplay = true;
+    this.autoplay = false;
     this.skipReqs = new Set();
   }
   async addMusic(url, message) {
