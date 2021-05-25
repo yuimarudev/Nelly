@@ -15,6 +15,7 @@
   "NoMusicPlaying": ":x: No music is playing.",
   "MusicLoop": ":repeat_one: Music Loop ",
   "QueueLoop": ":repeat: Queue Loop ",
+  "AutoPlay": "Auto Play ",
   "NoMusic": "There is no music. (´ω`)",
   "NoVideoResult": "Video not found",
   "MusicAdded": ":white_check_mark: **Added:** ",
