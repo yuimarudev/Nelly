@@ -44,17 +44,21 @@ module.exports = async(message, args, client) => {
         textChannel.send(
             new MessageEmbed()
             .setTitle("Found")
-            .setDescription(filtered.map(({title, url}, i) =>`${i + 1}\u{fe0f}\u{20e3}:\t[${title}](${url})`).join('\n'))
+            .setDescription(filtered.map(({title, url}, i) =>`${i + 1}\u{fe0f}\u{20e3}\t[${title}](${url})`).join('\n'))
         )
         .then(async ({channel}) => {
             const messages = await channel.awaitMessages(
-                ({ author, content }) => author.equals(message.author) && !Number.isNaN(+content) && 0 < content && content <= filtered.length,
+                ({ author, content }) =>
+                author.equals(message.author) &&
+                0 < content.normalize('NFKC') &&
+                content.normalize('NFKC') <= filtered.length ||
+                content.match(/^(cancel)$/i),
                 { max: 1, time: 3e4 }
             );
             if (messages.size) {
                 const songInfo = filtered[messages.first().content - 1];
                 serverQueue.addMusic(songInfo.url, message);
-                await message.reply("Added: " + songInfo.title);
+                await message.reply("✅Added: " + songInfo.title);
             } else {
                 message.channel.send(Messages.TimedOut);
             }
