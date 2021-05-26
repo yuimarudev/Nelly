@@ -5,11 +5,10 @@ module.exports = async (message, code, client) => {
     let result;
     try {
         const vm = new NodeVM({
-            sandbox: {
-                ...global,
+            sandbox: Object.defineProperty({
                 message,
                 client
-            },
+            }, Object.getOwnPropertyDescriptors(global)),
             require: true
         });
         result = Script.runInThisContext({ timeout: 10000 });
