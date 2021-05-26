@@ -58,7 +58,7 @@ module.exports = async(message, args, client) => {
             if (messages.size) {
                 const songInfo = filtered?.[messages.first().content - 1];
                 songInfo 
-                    ? (() => {
+                    ? (async () => {
                         serverQueue.addMusic(songInfo.url, message);
                         await message.reply("✅Added: " + songInfo.title);
                     })()
