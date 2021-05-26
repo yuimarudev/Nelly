@@ -23,10 +23,10 @@ module.exports = async (message, code, client) => {
     await message.channel.send(result);
 }
 
-async function resolvePromise(promise) {
+function resolvePromise(promise) {
   const timeout = 10000;
   const timeoutMessage = `Script execution timed out after ${timeout}ms`;
-  return await Promise.race([
+  return Promise.race([
     promise,
     new Promise(
       (_, rej) => setTimeout(() => rej(new Error(timeoutMessage)), timeout)
