@@ -44,7 +44,7 @@ module.exports = async(message, args, client) => {
         textChannel.send(
             new MessageEmbed()
             .setTitle("Found")
-            .setDescription(filtered.map(({title, url}, i) =>`${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})`).join('\n'))
+            .setDescription(filtered.map(({title, url, duration}, i) =>`${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})[${duration}]`).join('\n'))
         )
         .then(async ({channel}) => {
             const messages = await channel.awaitMessages(
@@ -52,7 +52,7 @@ module.exports = async(message, args, client) => {
                 author.equals(message.author) &&
                 0 < content.normalize('NFKC') &&
                 content.normalize('NFKC') <= filtered.length ||
-                content.match(/^(cancel)$/i),
+                content.normalize('NFKC').match(/^(cancel|キャンセル)$/i),
                 { max: 1, time: 3e4 }
             );
             if (messages.size) {
@@ -60,7 +60,7 @@ module.exports = async(message, args, client) => {
                 songInfo 
                     ? (async () => {
                         serverQueue.addMusic(songInfo.url, message);
-                        await message.reply("✅Added: " + songInfo.title);
+                        await message.reply(Messages.MusicAdded + songInfo.title);
                     })()
                     : message.channel.send('キャンセルしました( ◜௰◝  ）');
             } else {
