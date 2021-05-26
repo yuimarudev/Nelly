@@ -5,9 +5,9 @@ module.exports = async (message, code, client) => {
     let result;
     try {
         const sandbox = { };
-        for (const key in global) {
-            if ("global"] !== key) sandbox[key] = global[key];
-        }
+        for (const key in global)
+        if ("global" !== key)
+        sandbox[key] = global[key];
         Object.assign(sandbox, {
             message,
             client
