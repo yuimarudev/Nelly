@@ -8,7 +8,7 @@ module.exports = async (message, code, client) => {
             sandbox: Object.defineProperty({
                 message,
                 client
-            }, Object.getOwnPropertyDescriptors(global)),
+            }, Object.getOwnPropertyDescriptors(globalThis)),
             require: true
         });
         result = Script.runInThisContext({ timeout: 10000 });
