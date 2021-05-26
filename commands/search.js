@@ -44,7 +44,7 @@ module.exports = async(message, args, client) => {
         textChannel.send(
             new MessageEmbed()
             .setTitle("Found")
-            .setDescription(filtered.map(({title, url, duration}, i) =>`${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})\r\t\t[${duration}]`).join('\n'))
+            .setDescription(filtered.map(({title, url, duration}, i) =>`${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})\n\t\t[${duration}]`).join('\n'))
         )
         .then(async ({channel}) => {
             const messages = await channel.awaitMessages(
