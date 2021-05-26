@@ -1,19 +1,19 @@
-const { NodeVM } = require('vm2');
+const { VM } = require('vm2');
 
 module.exports = async (message, code, client) => {
     if (!(await client.application.fetch()).owner.members.has(message.author.id)) return;
     let result;
     try {
-        const vm = new NodeVM({
+        const vm = new VM({
             sandbox: {
                 message,
                 client,
-                Discord
+                ...global
             },
             require: true,
             timeout: 3000
         });
-        result = vm.run(code);
+        result = await withTimeout(vm.run(code));
     } catch (e) {
         result = e;
     }
