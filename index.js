@@ -85,7 +85,7 @@ client.on('message', async message => {
       };
       if (result) return message.channel.send(result);
     } else {
-      return message.reply(stringFormat(Messages.InvalidArgMessage, command));
+      return message.reply(stringFormat(Messages.InvalidArgMessage, curs));
     };
   } else {
     let dym = Object.keys(commandDict)
