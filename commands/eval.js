@@ -21,6 +21,7 @@ module.exports = async (message, code, client) => {
     } catch (e) {
         result = e;
     }
+    if (result === void 0) return;
     if (Object.prototype.toString.call(result) === "[object Error]")
     await message.channel.send(Error.prototype.toString.call(result));
     else await message.channel.send(
