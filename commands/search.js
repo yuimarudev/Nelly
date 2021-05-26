@@ -44,7 +44,7 @@ module.exports = async(message, args, client) => {
         textChannel.send(
             new MessageEmbed()
             .setTitle("Found")
-            .setDescription(filtered.map(({title, url}, i) =>`${i + 1}\u{fe0f}\u{20e3}\t[${title}](${url})`).join('\n'))
+            .setDescription(filtered.map(({title, url}, i) =>`${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})`).join('\n'))
         )
         .then(async ({channel}) => {
             const messages = await channel.awaitMessages(
@@ -56,9 +56,13 @@ module.exports = async(message, args, client) => {
                 { max: 1, time: 3e4 }
             );
             if (messages.size) {
-                const songInfo = filtered[messages.first().content - 1];
-                serverQueue.addMusic(songInfo.url, message);
-                await message.reply("✅Added: " + songInfo.title);
+                const songInfo = filtered?.[messages.first().content - 1];
+                songInfo 
+                    ? (() => {
+                        serverQueue.addMusic(songInfo.url, message);
+                        await message.reply("✅Added: " + songInfo.title);
+                    })()
+                    : message.channel.send('キャンセルしました( ◜௰◝  ）');
             } else {
                 message.channel.send(Messages.TimedOut);
             }
