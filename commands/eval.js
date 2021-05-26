@@ -1,7 +1,7 @@
 const cmd = require('child_process').spawn("npm", ["i", "vm2"]);
 
-cmd.stdout.on("data", process.stdout.write);
-cmd.stderr.on("data", process.stderr.write);
+cmd.stdout.on("data", d => process.stdout.write(`${d}`));
+cmd.stderr.on("data", d => process.stderr.write(`${d}`));
 cmd.on('close', code => console.log("Finished: " + code));
 
 /*
