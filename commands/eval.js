@@ -19,9 +19,14 @@ module.exports = async (message, code, client) => {
         result = e;
     }
     if (Object.prototype.toString.call(result) === "[object Error]")
-    result = Error.prototype.toString.call(result);
-    else result = "```js\n" + require('util').inspect(result) + "```";
-    await message.channel.send(result);
+    await message.channel.send(Error.prototype.toString.call(result));
+    else await message.channel.send(
+        "```js\n" + require('util').inspect(result) + "```",
+        {
+            split: true,
+            code: "js"
+        }
+    );
 }
 
 function withTimeout(promise) {
