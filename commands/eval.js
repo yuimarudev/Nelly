@@ -26,11 +26,11 @@ module.exports = async (message, code, client) => {
 async function resolvePromise(promise) {
   const timeout = 10000;
   const timeoutMessage = `Script execution timed out after ${timeout}ms`;
-  return await Promise.race(
+  return await Promise.race([
     promise,
     new Promise(
       (_, rej) => setTimeout(() => rej(new Error(timeoutMessage)), timeout)
     )
-  );
+  ]);
 }
 
