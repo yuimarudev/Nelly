@@ -5,13 +5,15 @@ module.exports = async (message, code, client) => {
     let result;
     try {
         const vm = new NodeVM({
-            sandbox: Object.defineProperties({
+            sandbox: {
                 message,
-                client
-            }, Object.getOwnPropertyDescriptors(globalThis)),
-            require: true
+                client,
+                Discord
+            },
+            require: true,
+            timeout: 3000
         });
-        result = Script.runInThisContext({ timeout: 10000 });
+        result = await resolvePromise(vm.run(code));
     } catch (e) {
         result = e;
     }
@@ -21,4 +23,14 @@ module.exports = async (message, code, client) => {
     await message.channel.send(result);
 }
 
+async function resolvePromise(promise) {
+  const timeout = 10000;
+  const timeoutMessage = `Script execution timed out after ${timeout}ms`;
+  return await Promise.race(
+    promise,
+    new Promise(
+      (_, rej) => setTimeout(() => rej(new Error(timeoutMessage)), timeout)
+    )
+  );
+}
 
