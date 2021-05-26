@@ -1,18 +1,10 @@
-/*
-const cmd = require('child_process').spawn("npm", ["i", "vm2"]);
-
-cmd.stdout.on("data", d => process.stdout.write(`${d}`));
-cmd.stderr.on("data", d => process.stderr.write(`${d}`));
-cmd.on('close', code => console.log("Finished: " + code));
-
-*/
 const { NodeVM } = require('vm2');
 
 module.exports = async (message, code, client) => {
     if (!(await client.application.fetch()).owner.members.has(message.author.id)) return;
     let result;
     try {
-        const vm = new VM({
+        const vm = new NodeVM({
             sandbox: {
                 ...global,
                 message,
