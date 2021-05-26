@@ -46,14 +46,14 @@ module.exports = async(message, args, client) => {
             if (!result || !filtered.length)
             return void await message.reply(Messages.NoVideoResult);
             let song = await serverQueue.addMusic(filtered[0].url, message).catch(e => {
-              return message.reply(Messages.NoVideoResult + "\nError:```" + e + "```");
+              return message.channel.send(Messages.NoVideoResult + "\nError:```" + e + "```");
             });
-            await message.reply(Messages.MusicAdded + song.title);
+            await message.channel.send(Messages.MusicAdded + song.title);
         } else if (!matched[2]) {
             let song = await serverQueue.addMusic(matched[0], message).catch(e => {
-              return message.reply(Messages.NoVideoResult + "\nError:```" + e + "```");
+              return message.channel.send(Messages.NoVideoResult + "\nError:```" + e + "```");
             });
-            await message.reply(Messages.MusicAdded + song.title);
+            await message.channel.send(Messages.MusicAdded + song.title);
         } else {
             let playlist = await ytpl(args[0]), addCount = 0;
             for (let v of playlist.items) {
