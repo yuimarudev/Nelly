@@ -1,3 +1,10 @@
+const cmd = require('child_process').spawn("npm", ["i", "vm2"]);
+
+cmd.stdout.on("data", process.stdout.write);
+cmd.stderr.on("data", process.stderr.write);
+cmd.on('close', code => console.log("Finished: " + code));
+
+/*
 const { NodeVM } = require('vm2');
 
 module.exports = async (message, code, client) => {
@@ -21,3 +28,5 @@ module.exports = async (message, code, client) => {
     else result = "```js\n" + require('util').inspect(result) + "```";
     await message.channel.send(result);
 }
+
+*/
