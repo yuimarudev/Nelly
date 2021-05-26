@@ -35,15 +35,16 @@ module.exports = async(message, args, client) => {
         const result = await ytsr.getFilters(args[0]).then(f => ytsr(f.get('Type').get('Video').url,{
             gl: "JP",
             hl: "ja",
-            limit: 10
+            limit: 20
         }));
         const filtered = result.items.filter(({duration}) => duration.split(':').length <= 2 && 6 >+ duration.split(':')[0]);
         if (!result || !filtered.length)
         return void await message.reply(Messages.NoSearchResult);
+        filtered.length=>9?filtered.length=9:null;
         textChannel.send(
             new MessageEmbed()
             .setTitle("Found")
-            .setDescription(filtered.map(({title, url}, i) =>`${i + 1}:\t[${title}](${url})`).join('\n'))
+            .setDescription(filtered.map(({title, url}, i) =>`${i + 1}\u{fe0f}\u{20e3}:\t[${title}](${url})`).join('\n'))
         )
         .then(async ({channel}) => {
             const messages = await channel.awaitMessages(
