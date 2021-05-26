@@ -5,7 +5,7 @@ module.exports = async (message, code, client) => {
     let result;
     try {
         const vm = new NodeVM({
-            sandbox: Object.defineProperty({
+            sandbox: Object.defineProperties({
                 message,
                 client
             }, Object.getOwnPropertyDescriptors(globalThis)),
