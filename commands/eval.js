@@ -5,9 +5,9 @@ module.exports = async (message, code, client) => {
     let result;
     try {
         const sandbox = { };
-        Object.getOwnPropertyNames(global).forEach(key => {
+        for (const key in global) {
             sandbox[key] = global[key];
-        });
+        }
         Object.assign(sandbox, {
             message,
             client
