@@ -21,7 +21,7 @@ module.exports = async (message, code, client) => {
     if (Object.prototype.toString.call(result) === "[object Error]")
     await message.channel.send(Error.prototype.toString.call(result));
     else await message.channel.send(
-        "```js\n" + require('util').inspect(result) + "```",
+        require('util').inspect(result),
         {
             split: true,
             code: "js"
