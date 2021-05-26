@@ -4,13 +4,16 @@ module.exports = async (message, code, client) => {
     if (!(await client.application.fetch()).owner.members.has(message.author.id)) return;
     let result;
     try {
+        const sandbox = { };
+        Object.getOwnPropertyNames(global).forEach(key => {
+            sandbox[key] = global[key];
+        });
+        Object.assign(sandbox, {
+            message,
+            client
+        });
         const vm = new VM({
-            sandbox: {
-                message,
-                client,
-                Discord,
-                require
-            },
+            sandbox,
             require: true,
             timeout: 3000
         });
@@ -22,10 +25,7 @@ module.exports = async (message, code, client) => {
     await message.channel.send(Error.prototype.toString.call(result));
     else await message.channel.send(
         require('util').inspect(result),
-        {
-            split: true,
-            code: "js"
-        }
+        { split: true, code: "js" }
     );
 }
 
