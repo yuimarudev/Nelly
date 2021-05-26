@@ -8,7 +8,8 @@ module.exports = async (message, code, client) => {
             sandbox: {
                 message,
                 client,
-                ...global
+                Discord,
+                require
             },
             require: true,
             timeout: 3000
