@@ -13,7 +13,7 @@ module.exports = async (message, code, client) => {
             require: true,
             timeout: 3000
         });
-        result = await resolvePromise(vm.run(code));
+        result = vm.run(code);
     } catch (e) {
         result = e;
     }
@@ -23,7 +23,7 @@ module.exports = async (message, code, client) => {
     await message.channel.send(result);
 }
 
-function resolvePromise(promise) {
+function withTimeout(promise) {
   const timeout = 10000;
   const timeoutMessage = `Script execution timed out after ${timeout}ms`;
   return Promise.race([
