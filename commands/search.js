@@ -40,7 +40,7 @@ module.exports = async(message, args, client) => {
         const filtered = result.items.filter(({duration}) => duration.split(':').length <= 2 && 6 >+ duration.split(':')[0]);
         if (!result || !filtered.length)
         return void await message.reply(Messages.NoSearchResult);
-        filtered.length=>9?filtered.length=9:null;
+        filtered.length>=9?filtered.length=9:null;
         textChannel.send(
             new MessageEmbed()
             .setTitle("Found")
