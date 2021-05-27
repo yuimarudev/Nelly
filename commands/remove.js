@@ -13,8 +13,7 @@ module.exports = async (message, args) => {
             eliminated.push(songs[i]);
             songs[i] = void 0;
         }
-    });
-    for (let index; ~(index = songs.indexOf(void 0));)
-        songs.splice(index, 1);
+    }
+    songs.forEach((v, i) => v === void 0 ? songs.splice(i, 1) : 0);
     msg.edit(`Removed ${eliminated.length} songs! ( ◜௰◝  ）${eliminated.map(s => '\n・' + s.title)}`);
 }
