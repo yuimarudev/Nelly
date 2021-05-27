@@ -131,8 +131,8 @@ client.on("interaction", interaction => {
 
 client.ws.on("INTERACTION_CREATE", async interaction => {
   if (interaction.type !== 3) retrun;
-  interaction.guild = client.guild.cache.get(interaction.guild_id);
-  interaction.channel = client.guild.cache.get(interaction.channel_id);
+  interaction.guild = client.guilds.cache.get(interaction.guild_id);
+  interaction.channel = client.channels.cache.get(interaction.channel_id);
   if (interaction.member) {
     interaction.member = await interaction.guild.members.fetch(interaction.member.user.id);
     interaction.user = await client.users.fetch(interaction.member.user.id);
