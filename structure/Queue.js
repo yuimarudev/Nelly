@@ -68,7 +68,7 @@ async function play(queue) {
     if (!queue.songs.length && queue.autoplay) {
       try {
         const id = song._info.related_videos
-          .find(({id, duration}) => !queue.autoPlayHistory.includes(id) && duration < 900).id;
+          .find(({id, length_seconds}) => !queue.autoPlayHistory.includes(id) && length_seconds < 900).id;
         const url = "https://youtu.be/" + id;
         queue.autoPlayHistory.unshift(id);
         queue.autoPlayHistory.length = 5;
