@@ -4,7 +4,7 @@ module.exports = async (message, args) => {
         return void await message.reply(Messages.ArgumentLengthOver);
     const msg = await message.channel.send(Messages.PleaseWait);
     const eliminated = [];
-    for (const i of new Set(args.filter(v => !Number.isNaN(+v)))) {
+    for (let i of new Set(args.filter(v => !Number.isNaN(+v)))) {
         --i;
         if (
            !voiceChannel.members.has(songs[i].member.id) ||
