@@ -123,10 +123,23 @@ client.on('voiceStateUpdate', (old, now) => {
 });
 
 client.on("interaction", interaction => {
-  if (interaction.isCommand()) interaction.reply("Catch!");
+  if (interaction.isCommand()) {
+    // Slash Commands
+    interaction.reply("Catch!");
+  }
 });
 
-client.ws.on("INTERACTION_CREATE", rawInteraction => {
+client.ws.on("INTERACTION_CREATE", async interaction => {
+  if (interaction.type !== 3) retrun;
+  interaction.guild = client.guild.cache.get(interaction.guild_id);
+  interaction.channel = client.guild.cache.get(interaction.channel_id);
+  if (interaction.member) {
+    interaction.member = await interaction.guild.members.fetch(interaction.member.user.id);
+    interaction.user = await client.users.fetch(interaction.member.user.id);
+  } else if (interaction.user) {
+    interaction.user = await client.users.fetch(interaction.user.id);
+  }
+  // Message Components
   console.log("Catch a interaction!");
 });
 
