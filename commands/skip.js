@@ -16,7 +16,10 @@ module.exports = async message => {
     queue.voiceChannel.members.has(now.member.id) &&
     now.member.id !== message.member.id
   ) {
-    const limen = Math.ceil(queue.voiceChannel.members.size / 2);
+    if (skipReqs.has(message.member.id)) {
+      return void await message.reply(":x: You're voted!");
+    }
+    const limen = Math.ceil(queue.voiceChannel.members.filter(m => !m.user.bot).size / 2);
     skipReqs.add(message.member.id);
     if (skipReqs.size >= limen) {
       skipReqs.clear();
@@ -26,7 +29,7 @@ module.exports = async message => {
       } catch { }
       return;
     }
-    return void await message.reply(`${Messages.SkipRequest} (${skipReqs.size}/${limen})`);
+    return void await message.channel.send(`${Messages.SkipRequest} (${skipReqs.size}/${limen})`);
   }
   try {
     skipTo(queue, 1);
