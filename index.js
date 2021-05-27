@@ -131,7 +131,7 @@ client.on("interaction", interaction => {
 
 client.ws.on("INTERACTION_CREATE", async interaction => {
   const data = interaction.data;
-  interaction = new CommandInteraction(client, interaction);
+  interaction = new Discord.CommandInteraction(client, interaction);
   // Message Components
   interaction.reply("hi!");
   console.log("Catch a interaction!");
