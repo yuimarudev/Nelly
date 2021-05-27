@@ -41,7 +41,7 @@ module.exports = async(message, args, client) => {
         if (!result || !filtered.length)
         return void await message.reply(Messages.NoSearchResult);
         filtered.length>=9?filtered.length=9:null;
-        textChannel.send(
+        message.channel.send(
             new MessageEmbed()
             .setTitle("Found")
             .setDescription(filtered.map(({title, url, duration}, i) =>`${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})\n\t\t[${duration}]`).join('\n'))
