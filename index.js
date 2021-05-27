@@ -124,6 +124,9 @@ client.on('voiceStateUpdate', (old, now) => {
 
 client.on("interaction", interaction => {
   if (interaction.isCommand()) interaction.reply("Catch!");
+});
+
+client.ws.on("INTERACTION_CREATE", rawInteraction => {
   console.log("Catch a interaction!");
 });
 
