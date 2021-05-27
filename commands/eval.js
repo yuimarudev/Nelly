@@ -10,7 +10,8 @@ module.exports = async (message, code, client) => {
         sandbox[key] = global[key];
         Object.assign(sandbox, {
             message,
-            client
+            client,
+            require
         });
         const vm = new VM({
             sandbox,
