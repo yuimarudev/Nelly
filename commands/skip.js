@@ -11,24 +11,31 @@ module.exports = async message => {
     now.loop = false;
     if (next) next.loop = true;
   }
-  if (!now.member.user.bot && queue.voiceChannel.members.has(now.member.id)) {
-    if (now.member.id !== message.member.id) {
-      const limen = Math.ceil(queue.voiceChannel.members.size / 2);
-      skipReqs.add(message.member.id);
-      if (skipReqs.size >= limen) {
-        skipReqs.clear();
-        try {
-          queue.dispatcher.emit('finish');
-          await message.reply(Messages.Skipped);
-        } catch { }
-        return;
-      }
-      return void await message.reply(`${Messages.SkipRequest} (${skipReqs.size}/${limen})`);
+  if (
+    !now.member.user.bot &&
+    queue.voiceChannel.members.has(now.member.id) &&
+    now.member.id !== message.member.id
+  ) {
+    const limen = Math.ceil(queue.voiceChannel.members.size / 2);
+    skipReqs.add(message.member.id);
+    if (skipReqs.size >= limen) {
+      skipReqs.clear();
+      try {
+        skipTo(queue, 1);
+        await message.reply(Messages.Skipped);
+      } catch { }
+      return;
     }
+    return void await message.reply(`${Messages.SkipRequest} (${skipReqs.size}/${limen})`);
   }
   try {
-    queue.dispatcher.emit('finish');
+    skipTo(queue, 1);
     await message.reply(Messages.Skipped);
   } catch { }
 };
 
+function skipTo({songs, dispatcher}, index) {
+  if (typeof index !== "number" || index < 1) return songs;
+  if (1 < index) songs.push(sings.splice(0, index - 1));
+  dispatcher.destroy();
+}
