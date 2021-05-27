@@ -15,7 +15,7 @@ module.exports = async (message, code, client) => {
         const vm = new VM({
             sandbox,
             require: true,
-            timeout: 3000
+            timeout: 1000
         });
         result = await withTimeout(vm.run(code));
     } catch (e) {
