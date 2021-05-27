@@ -1,4 +1,5 @@
 {
+  "PleaseWait": "ちょっと待ってね！(   ◜ω◝ )",
   "SomethingWentWrong": ":x: おっと、何かがうまくいかなかったみたいですね。",
   "AccidentMessage": "おっと、問題が発生したみたいですね。",
   "InvalidArgMessage": ":x: 引数が間違っています。引数は`%help {0}`で確認してください。",
