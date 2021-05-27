@@ -32,7 +32,7 @@ module.exports = async(message, args, client) => {
             return void await message.reply(Messages.PleaseJoinVoiceChannelMessage + `\nVC: \`${serverQueue.voiceChannel.name}\``)
         }
         const { connection, textChannel, voiceChannel } = serverQueue;
-        const result = await ytsr.getFilters(args[0]).then(f => ytsr(f.get('Type').get('Video').url,{
+        const result = await ytsr.getFilters(args[0]).then(f => ytsr(f.get('Type').get(args?.[1] || 'Video').url,{
             gl: "JP",
             hl: "ja",
             limit: 20
