@@ -122,4 +122,9 @@ client.on('voiceStateUpdate', (old, now) => {
   }
 });
 
+client.on("interaction", interaction => {
+  if (interaction.isCommand()) interaction.reply("Catch!");
+  console.log("Catch a interaction!");
+});
+
 client.login(process.env.token);
