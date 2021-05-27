@@ -92,7 +92,7 @@ client.on('message', async message => {
       return message.reply(stringFormat(Messages.InvalidArgMessage, curs));
     };
   } else {
-    let dym = Object.keys(commandDict).concat(Object.keys(commandDict))
+    let dym = Object.keys(commandDict).concat(Object.keys(aliasDict).filter(alias => 2 < alias.length))
       .reduce((acc, cur) => {
         let { distance } = new leven(cur, command);
         return distance < acc[0] ? [distance, cur] : acc;
