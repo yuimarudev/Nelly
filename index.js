@@ -76,8 +76,8 @@ client.on('message', async message => {
   const args = SpaceSplit(message.content.slice(prefix.length));
   let command = args.shift();
   const commandDict = commandArgs.commands;
-  const aliasList = commandArgs.aliases;
-  const curs = (command in commandDict ? command : false) || (aliasList[command] in commandDict ? aliasList[command] : false);
+  const aliasDict = commandArgs.aliases;
+  const curs = (command in commandDict) ? command : (aliasDict[command] in commandDict ? aliasDict[command] : false);
   if (curs) {
     let cursor = commandArgs.commands[curs];
     if (cursor.variadic || cursor.args.some(x => x.length === args.length)) {
@@ -92,7 +92,7 @@ client.on('message', async message => {
       return message.reply(stringFormat(Messages.InvalidArgMessage, curs));
     };
   } else {
-    let dym = Object.keys(commandDict)
+    let dym = Object.keys(commandDict).concat(Object.keys(commandDict))
       .reduce((acc, cur) => {
         let { distance } = new leven(cur, command);
         return distance < acc[0] ? [distance, cur] : acc;
