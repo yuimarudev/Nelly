@@ -131,10 +131,22 @@ client.on("interaction", interaction => {
 
 client.ws.on("INTERACTION_CREATE", async interaction => {
   const data = interaction.data;
-  interaction = new Discord.CommandInteraction(client, interaction);
+  interaction = new ButtonsInteraction(client, interaction);
   // Message Components
   interaction.reply("hi!");
   console.log("Catch a interaction!");
 });
 
 client.login(process.env.token);
+
+class ButtonsInteraction extends Discord.CommandInteraction {
+  constructor(client, data) {
+    super(client, data);
+    delete this.commandID;
+    delete this.commandName;
+    delete this.options;
+    this.customID = data.data.custom_id;
+    this.componentType = data.data.component_type;
+  }
+  get command() { return null; }
+}
