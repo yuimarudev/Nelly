@@ -36,20 +36,20 @@ global.queues = new Discord.Collection();
 process.stdin.on('data', chunk => {
   chunk = String(chunk);
   if(typeof chunk.match === "function" && chunk.match('sine')) {
-    console.log(Messages.KilledMessage);
+    console.log("グハッ！");
     process.exit();
   };
 });
 
 client.on('ready', () => {
-  console.log(Messages.PleaseWait);
+  console.log("ちょっと待ってね！(   ◜ω◝ )");
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
     .filter(x => x.endsWith('.js'))
     .map(x => x.replace(/\.js$/,''));
   for (let command of list) {
     let run = require(path.join(__dirname, 'commands', command));
     commands[command] = run;
-    console.log('\'' + command + '\'' + Messages.LoadedMessage);
+    console.log('\'' + command + '\'' + "を読み込んだよ！");
   };
   console.log('ready');
   setInterval(() => {
