@@ -110,7 +110,7 @@ Discord.Message.prototype._patch = function(data) {
       : null;
   };
 
-function wrapButtonsByActionRow(buttons) {
+function wrapButtonsByActionRows(buttons) {
   const rows = [];
   const rest = buttons.reduce((acc, cur) => {
     acc.push(cur);
@@ -136,16 +136,16 @@ Discord.APIMessage.transformOptions = function(content, options, extra = {}, isW
     } else if (options instanceof MessageAttachment) {
       return { content, files: [options], ...extra };
     } else if (options instanceof MessageButton) {
-      return { content, components: [{ type: 1, components: [options] }], ...extra };
+      return { content, components: wrapButtonsByActionRows([options]), ...extra };
     }
 
     if (Array.isArray(options)) {
       const [embeds, files, buttons] = this.partitionMessageAdditions(options);
-      return isWebhook ? { content, embeds, files, components: [{ type: 1, components: buttons }], ...extra } : { content, embed: embeds[0], files, components: [{ type: 1, components: buttons }], ...extra };
+      return isWebhook ? { content, embeds, files, wrapButtonsByActionRows(buttons), ...extra } : { content, embed: embeds[0], files, components: [{ type: 1, components: buttons }], ...extra };
     } else if (Array.isArray(content)) {
       const [embeds, files, buttons] = this.partitionMessageAdditions(content);
       if (embeds.length || files.length || buttons.length) {
-        return isWebhook ? { embeds, files, components: [{ type: 1, components: buttons }], ...extra } : { embed: embeds[0], files, components: [{ type: 1, components: buttons }], ...extra };
+        return isWebhook ? { embeds, files, components: wrapButtonsByActionRows(buttons), ...extra } : { embed: embeds[0], files, components: [{ type: 1, components: buttons }], ...extra };
       }
     }
 
