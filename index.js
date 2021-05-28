@@ -148,11 +148,11 @@ class MessageComponentInteraction extends Discord.Interaction {
     this.message = this.channel.messages.add(data.message);
     this.customID = data.data.custom_id;
     this.componentType = data.data.component_type;
-    this.isMessageComponent = true;
+    Object.defineProperty(this, "isMessageComponent", {value: true});
   }
 }
 
-for (const key of Reflect.ownKeys(Discord.CommandInteraction.prototype).filter(key => key !=== "constructor")) {
+for (const key of Reflect.ownKeys(Discord.CommandInteraction.prototype).filter(key => key !== "command" && key !== "constructor")) {
   Object.defineProperty(
     MessageComponentInteraction.prototype,
     key,
