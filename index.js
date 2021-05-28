@@ -133,32 +133,3 @@ client.on("interaction", interaction => {
 });
 
 client.login(process.env.token);
-
-client.ws.on("INTERACTION_CREATE", async interaction => {
-  if (interaction.type === 3)
-  client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
-});
-
-class MessageComponentInteraction extends Discord.Interaction {
-  constructor(client, data) {
-    super(client, data);
-    this.deferred = false;
-    this.replied = false;
-    this.webhook = new Discord.WebhookClient(this.applicationID, this.token, this.client.options);
-    this.message = this.channel.messages.add(data.message);
-    this.customID = data.data.custom_id;
-    this.componentType = data.data.component_type;
-    Object.defineProperty(this, "isMessageComponent", {value: true});
-  }
-}
-
-for (const key of Reflect.ownKeys(Discord.CommandInteraction.prototype).filter(key => key !== "command" && key !== "constructor")) {
-  Object.defineProperty(
-    MessageComponentInteraction.prototype,
-    key,
-    Object.getOwnPropertyDescriptor(
-      Discord.CommandInteraction.prototype,
-      key
-    )
-  );
-}
