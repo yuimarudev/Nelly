@@ -15,11 +15,16 @@ const {
   Util
 } = Discord;
 const MessageButton = require('./structure/MessageButton');
+const ButtonClickCollector = require('./structure/ButtonClickCollector');
 const Embed = MessageEmbed;
 const { MessageTypes } = Discord.Constants;
 
 
-module.exports = MessageButton;
+module.exports = { MessageButton, ButtonClickCollector };
+
+Discord.Message.prototype.createButtonClickCollector(filter, options = {}) {
+  return new ButtonClickCollector(this, filter, options);
+}
 
 Discord.Message.prototype._patch = function(data) {
     this.id = data.id;
