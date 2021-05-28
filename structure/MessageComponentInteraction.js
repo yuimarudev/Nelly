@@ -1,4 +1,4 @@
-module.exports = class MCI extends Discord.Interaction {
+module.exports = class extends Discord.Interaction {
   constructor(client, data) {
     super(client, data);
     this.deferred = false;
@@ -13,4 +13,4 @@ module.exports = class MCI extends Discord.Interaction {
 }
 
 for (const key of ["defer", "deleteReply", "editReply", "fetchReply", "followUp", "reply"])
-MCI.prototype[key] = Discord.CommandInteraction.prototype[key];
+module.exports.prototype[key] = Discord.CommandInteraction.prototype[key];
