@@ -1,38 +1,47 @@
 const { resolveString } = Discord.Util;
 
 module.exports = class MessageButton {
-    style = 1;
-    label = "button";
+    #_style = 1;
+    #_label = "button";
+    #_url;
+    #_custom_id = "test";
+    get style { return this.#_style; }
+    get label { return this.#_label; }
+    get url { return this.#_url; }
+    get id { return this.#_custom_id; }
     setStyle(style) {
-        this.style = style;
+        if (typeof style === "number" && 0 < style && style < 5)
+            this.#_style = style;
         return this;
     }
     setLabel(label) {
-        this.label = resolveString(label);
+        const str = resolveString(label);
+        if (str) this.#_label = str;
         return this;
     }
     setDisabled(boolean = true) {
-        this.disabled = Boolean(boolean);
+        this.disabled = boolean;
         return this;
     }
     setURL(url) {
-        this.url = this.style === 5 ? resolveString(url) : null;
+        this.#_style = 5;
+        this.#_url = resolveString(url);
         return this;
     }
-
     setID(id) {
-        this.custom_id = this.style === 5 ? null : resolveString(id);
+        this.#_custom_id = resolveString(id);
+        if (4 < this.#_style) this.#_style = 1;
         return this;
     }
 
     toJSON() {
         return {
             type: 2,
-            style: this.style,
-            label: this.label,
-            disabled: this.disabled,
-            url: this.url,
-            custom_id: this.custom_id
+            style: this.#_style,
+            label: this.#_label,
+            disabled: Boolean(this.disabled),
+            url: this.#_url,
+            custom_id: this.#_custom_id
         }
     }
 }
