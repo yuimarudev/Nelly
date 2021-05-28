@@ -130,7 +130,9 @@ client.on("interaction", async interaction => {
     interaction.reply("Catch!");
   } else if (true || interaction.isMessageComponent) {
     // from Buttons
+    console.log("546");
     if (interaction.customID == "delete_the_message") {
+      console.log("547");
       await interaction.reply("Delete!");
       interaction.message.delete();
       setTimeout(() => interaction.deleteReply(), 3500);
