@@ -14,7 +14,7 @@ module.exports = class extends Discord.Interaction {
   static addHandler(client) {
     client.ws.on("INTERACTION_CREATE", interaction => {
       if (interaction.type === 3) {
-        interaction = new MessageComponentInteraction(client, interaction);
+        interaction = new this(client, interaction);
         client.emit('interaction', interaction);
       }
     });
