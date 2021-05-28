@@ -75,6 +75,14 @@ client.on('message', async message => {
     }
     return;
   }
+  if (message.content == prefix + "button") {
+    const btn = new Discord.MessageButton()
+    .setStyle('red') //default: blurple
+    .setLabel('Delete!') //default: NO_LABEL_PROVIDED
+    .setID('delete_the_message');
+    message.reply("Button behavior test", btn).catch(console.log);
+    return;
+  }
   const args = SpaceSplit(message.content.slice(prefix.length));
   let command = args.shift();
   const commandDict = commandArgs.commands;
@@ -130,16 +138,12 @@ client.on("interaction", interaction => {
     interaction.reply("Catch!");
   } else if (interaction.isMessageComponent) {
     // from Buttons
-    if (interaction.customID == "click_to_function_01") {
-      interaction.message.edit("Thank you!");
+    if (interaction.customID == "delete_the_message") {
+      await interaction.reply("Delete!");
+      interaction.message.delete();
+      setTimeout(() => interaction.deleteReply(), 3500);
       return;
     }
-    interaction.defer();
-    const btn = new Discord.MessageButton()
-    .setStyle('green') //default: blurple
-    .setLabel('Click me!') //default: NO_LABEL_PROVIDED
-    .setID('click_to_function_01');
-    setTimeout(() => interaction.editReply("Button Test", btn), 5000);
   }
 });
 
