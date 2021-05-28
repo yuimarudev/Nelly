@@ -1,3 +1,4 @@
+
 module.exports = async message => {
     const queue = queues.get(message.guild.id);
     if (!queue)
