@@ -17,7 +17,7 @@ const prefix = '%';
   .forEach(v => global[v] = Discord[v]);
 
 const extClasses = require('./ModifyDjs.js');
-Object.assgin(
+Object.assign(
   global.MessageButton,
   extClasses
 );
