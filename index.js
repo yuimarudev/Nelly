@@ -71,7 +71,7 @@ client.on('message', async message => {
     try {
         await commands.eval(message, message.content.replace(prefix + "eval", ""), client);
     } catch(ex) {
-        await message.reply(Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```');
+        await message.channel.send(Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```');
     }
     return;
   }
