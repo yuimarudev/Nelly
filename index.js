@@ -156,5 +156,5 @@ Reflect.ownKeys(Discord.CommandInteraction.prototype)
 .forEach(v => {
   if (v !== "constructor")
   MessageComponentInteraction.prototype[v] =
-  CommandInteraction.prototype[v];
+  Discord.CommandInteraction.prototype[v];
 });
