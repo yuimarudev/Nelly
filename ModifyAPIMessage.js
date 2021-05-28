@@ -1,5 +1,48 @@
 const { DataResolver, Util, MessageFlags, MessageAttachment, MessageEmbed} = Discord;
 
+Discord.APIMessage.transformOptions = function(content, options, extra = {}, isWebhook = false) {
+    if (!options && typeof content === 'object' && !Array.isArray(content)) {
+      options = content;
+      content = undefined;
+    }
+
+    if (!options) {
+      options = {};
+    } else if (options instanceof MessageEmbed) {
+      return isWebhook ? { content, embeds: [options], ...extra } : { content, embed: options, ...extra };
+    } else if (options instanceof MessageAttachment) {
+      return { content, files: [options], ...extra };
+    }
+
+    if (Array.isArray(options)) {
+      const [embeds, files] = this.partitionMessageAdditions(options);
+      return isWebhook ? { content, embeds, files, ...extra } : { content, embed: embeds[0], files, ...extra };
+    } else if (Array.isArray(content)) {
+      const [embeds, files] = this.partitionMessageAdditions(content);
+      if (embeds.length || files.length) {
+        return isWebhook ? { embeds, files, ...extra } : { embed: embeds[0], files, ...extra };
+      }
+    }
+
+    return { content, ...options, ...extra };
+  }
+
+
+Discord.APIMessage.partitionMessageAdditions = function(items) {
+    const embeds = [];
+    const files = [];
+    for (const item of items) {
+      if (item instanceof MessageEmbed) {
+        embeds.push(item);
+      } else if (item instanceof MessageAttachment) {
+        files.push(item);
+      }
+    }
+
+    return [embeds, files];
+  }
+
+
 Discord.APIMessage.prototype.resolveData = function() {
     if (this.data) return this;
 
