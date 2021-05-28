@@ -130,19 +130,17 @@ client.on("interaction", interaction => {
     interaction.reply("Catch!");
   } else if (interaction.isMessageComponent) {
     // from Buttons
+    if (interaction.customID == "click_to_function_01") {
+      interaction.message.edit("Thank you!");
+      return;
+    }
+    interaction.defer();
     const btn = new Discord.MessageButton()
-    .setStyle('red') //default: blurple
-    .setLabel('The Button!') //default: NO_LABEL_PROVIDED
-    .setID('click_to_function') //note: if you use the style "url" you must provide url using .setURL('https://example.com')
-    .setDisabled();
-    interaction.channel.send("text", btn);
-    interaction.reply("ok!", btn);
-    const btn2 = new Discord.MessageButton()
     .setStyle('green') //default: blurple
-    .setLabel('The Button 2!') //default: NO_LABEL_PROVIDED
-    .setID('click_to_function') //note: if you use the style "url" you must provide url using .setURL('https://example.com')
+    .setLabel('Click me!') //default: NO_LABEL_PROVIDED
+    .setID('click_to_function_01') //note: if you use the style "url" you must provide url using .setURL('https://example.com')
     .setDisabled();
-    setTimeout(() => interaction.editReply("edited", btn2), 5000);
+    setTimeout(() => interaction.editReply("Button Test", btn), 5000);
   }
 });
 
