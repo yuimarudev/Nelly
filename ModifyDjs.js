@@ -110,6 +110,19 @@ Discord.Message.prototype._patch = function(data) {
       : null;
   };
 
+function wrapButtonsByActionRow(buttons) {
+  const rows = [];
+  const rest = buttons.reduce((acc, cur) => {
+    acc.push(cur);
+    if (4 < acc.length) {
+      rows.push(acc); return [ ];
+    }
+    return acc;
+  }, []);
+  if (rest.length) rows.push(rest);
+  return rows.slice(0, 5).map(v => ({ type: 1, components: v }));
+}
+
 Discord.APIMessage.transformOptions = function(content, options, extra = {}, isWebhook = false) {
     if (!options && typeof content === 'object' && !Array.isArray(content)) {
       options = content;
