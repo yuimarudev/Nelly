@@ -136,19 +136,25 @@ client.login(process.env.token);
 
 client.ws.on("INTERACTION_CREATE", async interaction => {
   if (interaction.type === 3)
-  client.emit('interaction', new ButtonsInteraction(client, interaction)); 
+  client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
 });
 
-class ButtonsInteraction extends Discord.CommandInteraction {
+class MessageComponentInteraction extends Discord.Interaction {
   constructor(client, data) {
     super(client, data);
-    delete this.commandID;
-    delete this.commandName;
-    delete this.options;
+    this.deferred = false;
+    this.replied = false;
+    this.webhook = new WebhookClient(this.applicationID, this.token, this.client.options);
     this.message = this.channel.messages.add(data.message);
     this.customID = data.data.custom_id;
     this.componentType = data.data.component_type;
     this.isMessageComponent = true;
   }
-  get command() { return null; }
 }
+
+Reflect.ownKeys(Discord.CommandInteraction.prototype)
+.forEach(v => {
+  if (v !== "constructor")
+  MessageComponentInteraction.prototype[v] =
+  CommandInteraction.prototype[v];
+});
