@@ -141,30 +141,12 @@ client.on("interaction", async interaction => {
   }
 });
 
-const MessageComponentInteraction = class MCI extends Discord.Interaction {
-  constructor(client, data) {
-    super(client, data);
-    this.deferred = false;
-    this.replied = false;
-    console.log("12");
-    this.webhook = new WebhookClient(this.applicationID, this.token, this.client.options);
-    this.message = this.channel.messages.add(data.message);
-    console.log("25");
-    this.customID = data.data.custom_id;
-    this.componentType = data.data.component_type;
-    console.log("33");
-    // this._data = data;
-    this.isMessageComponent = true;
-  }
-} // require('./structure/MessageComponentInteraction.js');
+const MessageComponentInteraction = require('./structure/MessageComponentInteraction.js');
 
 client.ws.on("INTERACTION_CREATE", interaction => {
   if (interaction.type === 3) {
-    console.log("catch");
     interaction = new MessageComponentInteraction(client, interaction);
-    console.log("constructor");
     client.emit('interaction', interaction);
-    console.log("emit");
   }
 });
 
