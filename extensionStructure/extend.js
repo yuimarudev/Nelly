@@ -10,7 +10,7 @@ module.exports = client => {
     if (interaction.type === 3)
     client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
   });
-  Structures.extend("APIMessage", () => APIMessage);
+  // Structures.extend("APIMessage", () => APIMessage);
   Structures.extend("Message", () => Message);
   Structures.extend("TextChannel", () => TextChannel);
   Structures.extend("DMChannel", () => DMChannel);
