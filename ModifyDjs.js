@@ -22,7 +22,7 @@ const { MessageTypes } = Discord.Constants;
 
 module.exports = { MessageButton, ButtonClickCollector };
 
-Discord.Message.prototype.createButtonClickCollector(filter, options = {}) {
+Discord.Message.prototype.createButtonClickCollector = function(filter, options = {}) {
   return new ButtonClickCollector(this, filter, options);
 }
 
