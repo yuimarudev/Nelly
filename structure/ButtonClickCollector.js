@@ -35,7 +35,7 @@ module.exports = class ButtonClickCollector extends Collector {
   }
 
   #_buttonInteractionHandler(itr) {
-     console.log("hai");
+     console.log("hai: " + itr.isMessageComponent);
     if (itr.isMessageComponent) this.handleCollect(itr);
   }
 
