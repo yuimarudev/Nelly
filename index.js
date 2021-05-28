@@ -134,6 +134,18 @@ client.on("interaction", async interaction => {
       await interaction.reply("Deleted!", { ephemeral: true });
       interaction.message.delete();
       return;
+    } else if (interaction.customID == "remove_the_buttons") {
+      await interaction.reply("Removed!", { ephemeral: true });
+      client.api.channels[interaction.channel.id]
+      .messages[interaction.message.id].patch({
+        data: {
+          components: [{
+            type: 1,
+            components: []
+          }]
+        }
+      });
+      return;
     }
   }
 });
