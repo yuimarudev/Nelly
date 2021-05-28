@@ -3,7 +3,16 @@ const TextChannel = require('./TextChannel');
 const DMChannel = require('./DMChannel');
 const { APIMessageMain: APIMessage, sendAPICallback } = require('./APIMessage');
 const WebhookClient = require('./WebhookClient');
-const { Structures } = require('discord.js');
+const { Structures } = Discord;
+const InteractionResponseTypes = {
+  1: 'PONG',
+  4: 'CHANNEL_MESSAGE_WITH_SOURCE',
+  5: 'DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE',
+  PONG: 1,
+  CHANNEL_MESSAGE_WITH_SOURCE: 4,
+  DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE: 5
+};
+const { MessageFlags } = Discord;
 
 module.exports = client => {
   client.ws.on("INTERACTION_CREATE", async interaction => {
