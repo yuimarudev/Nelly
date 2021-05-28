@@ -145,6 +145,7 @@ class ButtonsInteraction extends Discord.CommandInteraction {
     delete this.commandID;
     delete this.commandName;
     delete this.options;
+    this.message = this.channel.messages.add(data.message);
     this.customID = data.data.custom_id;
     this.componentType = data.data.component_type;
   }
