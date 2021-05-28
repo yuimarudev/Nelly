@@ -1,4 +1,6 @@
 const { DataResolver, Util, MessageFlags, MessageAttachment, MessageEmbed} = Discord;
+const MessageButton = require('./structure/MessageButton');
+module.exports = MessageButton;
 
 Discord.APIMessage.transformOptions = function(content, options, extra = {}, isWebhook = false) {
     if (!options && typeof content === 'object' && !Array.isArray(content)) {
@@ -12,15 +14,17 @@ Discord.APIMessage.transformOptions = function(content, options, extra = {}, isW
       return isWebhook ? { content, embeds: [options], ...extra } : { content, embed: options, ...extra };
     } else if (options instanceof MessageAttachment) {
       return { content, files: [options], ...extra };
+    } else if (options instanceof MessageButton) {
+      return { content, components: [{ type: 1, components: [options] }], ...extra };
     }
 
     if (Array.isArray(options)) {
-      const [embeds, files] = this.partitionMessageAdditions(options);
-      return isWebhook ? { content, embeds, files, ...extra } : { content, embed: embeds[0], files, ...extra };
+      const [embeds, files, buttons] = this.partitionMessageAdditions(options);
+      return isWebhook ? { content, embeds, files, components: [{ type: 1, components: buttons }], ...extra } : { content, embed: embeds[0], files, components: [{ type: 1, components: buttons }], ...extra };
     } else if (Array.isArray(content)) {
-      const [embeds, files] = this.partitionMessageAdditions(content);
-      if (embeds.length || files.length) {
-        return isWebhook ? { embeds, files, ...extra } : { embed: embeds[0], files, ...extra };
+      const [embeds, files, buttons] = this.partitionMessageAdditions(content);
+      if (embeds.length || files.length || buttons.length) {
+        return isWebhook ? { embeds, files, components: [{ type: 1, components: buttons }], ...extra } : { embed: embeds[0], files, components: [{ type: 1, components: buttons }], ...extra };
       }
     }
 
@@ -31,15 +35,18 @@ Discord.APIMessage.transformOptions = function(content, options, extra = {}, isW
 Discord.APIMessage.partitionMessageAdditions = function(items) {
     const embeds = [];
     const files = [];
+    const buttons = [];
     for (const item of items) {
       if (item instanceof MessageEmbed) {
         embeds.push(item);
       } else if (item instanceof MessageAttachment) {
         files.push(item);
+      } else if (item instanceof MessageButton) {
+        buttons.push(item);
       }
     }
 
-    return [embeds, files];
+    return [embeds, files, buttons];
   }
 
 
