@@ -127,14 +127,12 @@ client.on("interaction", interaction => {
     // Slash Commands
     interaction.reply("Catch!");
   }
+  interaction.reply("ok!");
+  console.log("Catch: " + interaction.type);
 });
 
 client.ws.on("INTERACTION_CREATE", async interaction => {
-  const data = interaction.data;
-  interaction = new ButtonsInteraction(client, interaction);
-  // Message Components
-  interaction.reply("hi!");
-  console.log("Catch a interaction!");
+  client.emit('interaction', new ButtonsInteraction(client, interaction)); 
 });
 
 client.login(process.env.token);
