@@ -144,7 +144,11 @@ client.on("interaction", async interaction => {
 const MessageComponentInteraction = require('./structure/MessageComponentInteraction');
 
 client.ws.on("INTERACTION_CREATE", interaction => {
-  if (interaction.type === 3) client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
+  if (interaction.type === 3) {
+    console.log("catch");
+    client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
+    console.log("emit");
+  }
 });
 
 client.login(process.env.token);
