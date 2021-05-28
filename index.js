@@ -139,10 +139,7 @@ client.on("interaction", async interaction => {
       client.api.channels[interaction.channel.id]
       .messages[interaction.message.id].patch({
         data: {
-          components: [{
-            type: 1,
-            components: []
-          }]
+          components: [ ]
         }
       });
       return;
