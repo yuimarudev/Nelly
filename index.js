@@ -142,7 +142,7 @@ client.on("interaction", interaction => {
     .setLabel('The Button 2!') //default: NO_LABEL_PROVIDED
     .setID('click_to_function') //note: if you use the style "url" you must provide url using .setURL('https://example.com')
     .setDisabled();
-    setTimeout(() => interaction.editReply(btn2), 5000);
+    setTimeout(() => interaction.editReply("edited", btn2), 5000);
   }
 });
 
