@@ -158,7 +158,9 @@ const MessageComponentInteraction = class MCI extends Discord.Interaction {
 client.ws.on("INTERACTION_CREATE", interaction => {
   if (interaction.type === 3) {
     console.log("catch");
-    client.emit('interaction', new MessageComponentInteraction(client, interaction));
+    interaction = new MessageComponentInteraction(client, interaction);
+    console.log("constructor");
+    client.emit('interaction', interaction);
     console.log("emit");
   }
 });
