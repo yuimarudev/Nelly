@@ -5,10 +5,10 @@ module.exports = class MessageButton {
     #_label = "button";
     #_url;
     #_custom_id = "test";
-    get style { return this.#_style; }
-    get label { return this.#_label; }
-    get url { return this.#_url; }
-    get id { return this.#_custom_id; }
+    get style() { return this.#_style; }
+    get label() { return this.#_label; }
+    get url() { return this.#_url; }
+    get id() { return this.#_custom_id; }
     setStyle(style) {
         if (typeof style === "number" && 0 < style && style < 5)
             this.#_style = style;
