@@ -126,16 +126,18 @@ client.on("interaction", interaction => {
   if (interaction.isCommand()) {
     // Slash Commands
     interaction.reply("Catch!");
+  } else if (interaction.isMessageComponent) {
+   // from Buttons
+    interaction.reply("ok!");
   }
-  interaction.reply("ok!");
-  console.log("Catch: " + interaction.type);
-});
-
-client.ws.on("INTERACTION_CREATE", async interaction => {
-  client.emit('interaction', new ButtonsInteraction(client, interaction)); 
 });
 
 client.login(process.env.token);
+
+client.ws.on("INTERACTION_CREATE", async interaction => {
+  if (interaction.type === 3)
+  client.emit('interaction', new ButtonsInteraction(client, interaction)); 
+});
 
 class ButtonsInteraction extends Discord.CommandInteraction {
   constructor(client, data) {
@@ -146,6 +148,7 @@ class ButtonsInteraction extends Discord.CommandInteraction {
     this.message = this.channel.messages.add(data.message);
     this.customID = data.data.custom_id;
     this.componentType = data.data.component_type;
+    this.isMessageComponent = true;
   }
   get command() { return null; }
 }
