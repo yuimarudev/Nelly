@@ -16,7 +16,16 @@ const prefix = '%';
 ["MessageEmbed", "MessageAttachment"]
   .forEach(v => global[v] = Discord[v]);
 
-global.MessageButton = Discord.MessageButton = require('./ModifyDjs.js');
+const extClasses = require('./ModifyDjs.js');
+Object.assgin(
+  global.MessageButton,
+  extClasses
+);
+Object.assign(
+  Discord.MessageButton,
+  extClasses
+);
+
 let dotenvPath = path.join(__dirname, '.env');
 if (fs.existsSync(dotenvPath)) {
   const env = dotenv.parse(fs.readFileSync(dotenvPath));
