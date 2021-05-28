@@ -31,15 +31,7 @@ const client = new Discord.Client({
     }
   }
 });
-require("child_process").exec("npm i discord-buttons", (error, stdout, stderr) => {
-  if (error) {
-    console.error(`exec error: ${error}`);
-    return;
-  }
-  console.log(`stdout: ${stdout}`);
-  console.error(`stderr: ${stderr}`);
-});
-// const { MessageButton } = require('discord-buttons')(client);
+const { MessageButton } = require('discord-buttons')(client);
 global.queues = new Discord.Collection();
 
 process.stdin.on('data', chunk => {
