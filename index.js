@@ -75,14 +75,6 @@ client.on('message', async message => {
     }
     return;
   }
-  if (message.content == prefix + "button") {
-    const btn = new Discord.MessageButton()
-    .setStyle('red') //default: blurple
-    .setLabel('Delete!') //default: NO_LABEL_PROVIDED
-    .setID('delete_the_message');
-    message.channel.send("Button behavior test", btn).catch(console.log);
-    return;
-  }
   const args = SpaceSplit(message.content.slice(prefix.length));
   let command = args.shift();
   const commandDict = commandArgs.commands;
@@ -136,7 +128,7 @@ client.on("interaction", async interaction => {
   if (interaction.isCommand()) {
     // Slash Commands
     interaction.reply("Catch!");
-  } else if (interaction.isMessageComponent) {
+  } else if (true || interaction.isMessageComponent) {
     // from Buttons
     if (interaction.customID == "delete_the_message") {
       await interaction.reply("Delete!");
