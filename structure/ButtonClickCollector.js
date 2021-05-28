@@ -39,10 +39,10 @@ module.exports = class ButtonClickCollector extends Collector {
     if (itr.isMessageComponent) this.handleCollect(itr);
   }
 
-  collect(button, user) {
+  collect(button) {
     if (button.message.id !== this.message.id) return null;
-    if (this.filter(button, user)) {
-      this.emit('create', button, user);
+    if (this.filter(button)) {
+      this.emit('create', button);
     }
     return ButtonClickCollector.key(button);
   }
