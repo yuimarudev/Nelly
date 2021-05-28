@@ -4,6 +4,7 @@ global.stringFormat = (...r) =>
 r.reduce((a, c, i) => a.replace(
   new RegExp(`\\{${i}\\}`, "g"), c
 ), r.shift());
+const MessageComponentInteraction = require('./structure/MessageComponentInteraction.js');
 const fs = require('fs');
 const leven = require('levenshtein');
 const path = require('path');
@@ -124,15 +125,12 @@ client.on('voiceStateUpdate', (old, now) => {
 });
 
 client.on("interaction", async interaction => {
-  console.log("waaaay!");
   if (typeof interaction.isCommand == "function" && interaction.isCommand()) {
     // Slash Commands
     interaction.reply("Catch!");
   } else if (false && interaction.isMessageComponent) {
     // from Buttons
-    console.log("546");
     if (interaction.customID == "delete_the_message") {
-      console.log("547");
       await interaction.reply("Delete!");
       interaction.message.delete();
       setTimeout(() => interaction.deleteReply(), 3500);
@@ -140,8 +138,6 @@ client.on("interaction", async interaction => {
     }
   }
 });
-
-const MessageComponentInteraction = require('./structure/MessageComponentInteraction.js');
 
 client.ws.on("INTERACTION_CREATE", interaction => {
   if (interaction.type === 3) {
