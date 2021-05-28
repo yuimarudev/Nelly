@@ -16,6 +16,7 @@ const prefix = '%';
 ["MessageEmbed", "MessageAttachment"]
   .forEach(v => global[v] = Discord[v]);
 
+require('./ModifyAPIMessage.js');
 let dotenvPath = path.join(__dirname, '.env');
 if (fs.existsSync(dotenvPath)) {
   const env = dotenv.parse(fs.readFileSync(dotenvPath));
