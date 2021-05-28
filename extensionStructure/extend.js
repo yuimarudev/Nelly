@@ -5,15 +5,16 @@ const { APIMessageMain: APIMessage, sendAPICallback } = require('./APIMessage');
 const WebhookClient = require('./WebhookClient');
 const Structures = require('discord.js');
 
-Structures.extend("APIMessage", () => APIMessage);
-Structures.extend("Message", () => Message);
-Structures.extend("TextChannel", () => TextChannel);
-Structures.extend("DMChannel", () => DMChannel);
-
-module.exports = client => client.ws.on("INTERACTION_CREATE", async interaction => {
-  if (interaction.type === 3)
-  client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
-});
+module.exports = client => {
+  client.ws.on("INTERACTION_CREATE", async interaction => {
+    if (interaction.type === 3)
+    client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
+  });
+  Structures.extend("APIMessage", () => APIMessage);
+  Structures.extend("Message", () => Message);
+  Structures.extend("TextChannel", () => TextChannel);
+  Structures.extend("DMChannel", () => DMChannel);
+}
 
 class MessageComponentInteraction extends Discord.Interaction {
   constructor(client, data) {
