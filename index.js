@@ -132,7 +132,7 @@ client.on('voiceStateUpdate', (old, now) => {
   }
 });
 
-client.on("interaction", interaction => {
+client.on("interaction", async interaction => {
   if (interaction.isCommand()) {
     // Slash Commands
     interaction.reply("Catch!");
