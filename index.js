@@ -17,14 +17,8 @@ const prefix = '%';
   .forEach(v => global[v] = Discord[v]);
 
 const extClasses = require('./ModifyDjs.js');
-Object.assign(
-  global.MessageButton,
-  extClasses
-);
-Object.assign(
-  Discord.MessageButton,
-  extClasses
-);
+Object.assign(global, extClasses);
+Object.assign(Discord, extClasses);
 
 let dotenvPath = path.join(__dirname, '.env');
 if (fs.existsSync(dotenvPath)) {
