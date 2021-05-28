@@ -141,7 +141,7 @@ client.on("interaction", async interaction => {
   }
 });
 
-const MessageComponentInteraction = /* class MCI extends Discord.Interaction {
+const MessageComponentInteraction = class MCI extends Discord.Interaction {
   constructor(client, data) {
     super(client, data);
     this.deferred = false;
@@ -153,13 +153,12 @@ const MessageComponentInteraction = /* class MCI extends Discord.Interaction {
     this._data = data;
     this.isMessageComponent = true;
   }
-} */ require('./structure/MessageComponentInteraction.js');
+} // require('./structure/MessageComponentInteraction.js');
 
 client.ws.on("INTERACTION_CREATE", interaction => {
   if (interaction.type === 3) {
     console.log("catch");
-    client.emit('interaction', /* new MessageComponentInteraction(client, */ interaction // )
-    ); 
+    client.emit('interaction', new MessageComponentInteraction(client, interaction));
     console.log("emit");
   }
 });
