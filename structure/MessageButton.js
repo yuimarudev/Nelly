@@ -11,7 +11,7 @@ module.exports = class MessageButton {
         throw new Error("Invalid button: A button must has a custom_id or a url.");
         this.setStyle(style)
         .setLabel(label);
-        .[url ? "setURL" : "setID"](custom_id ?? url)
+        this[url ? "setURL" : "setID"](custom_id ?? url)
         this.disabled = disabled;
     }
     get style() { return this.#_style; }
