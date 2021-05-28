@@ -32,7 +32,6 @@ const client = new Discord.Client({
   }
 });
 
-require("./extend.js")(client);
 global.queues = new Discord.Collection();
 
 process.stdin.on('data', chunk => {
