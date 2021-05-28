@@ -152,7 +152,7 @@ class MessageComponentInteraction extends Discord.Interaction {
   }
 }
 
-for (const key of Reflect.ownKeys(Discord.CommandInteraction.prototype)) {
+for (const key of Reflect.ownKeys(Discord.CommandInteraction.prototype).filter(key => key !=== "constructor")) {
   Object.defineProperty(
     MessageComponentInteraction.prototype,
     key,
