@@ -1,10 +1,11 @@
 const Message = require('./Message');
 const TextChannel = require('./TextChannel');
 const DMChannel = require('./DMChannel');
-const { sendAPICallback } = require('./APIMessage');
+const { APIMessageMain: APIMessage, sendAPICallback } = require('./APIMessage');
 const WebhookClient = require('./WebhookClient');
 const Message = require('./Message');
 
+Structures.extend("APIMessage", () => APIMessage);
 Structures.extend("Message", () => Message);
 Structures.extend("TextChannel", () => TextChannel);
 Structures.extend("DMChannel", () => DMChannel);
@@ -19,7 +20,7 @@ class MessageComponentInteraction extends Discord.Interaction {
     super(client, data);
     this.deferred = false;
     this.replied = false;
-    this.webhook = new Discord.WebhookClient(this.applicationID, this.token, this.client.options);
+    this.webhook = new WebhookClient(this.applicationID, this.token, this.client.options);
     this.message = this.channel.messages.add(data.message);
     this.customID = data.data.custom_id;
     this.componentType = data.data.component_type;
