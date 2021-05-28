@@ -141,11 +141,11 @@ Discord.APIMessage.transformOptions = function(content, options, extra = {}, isW
 
     if (Array.isArray(options)) {
       const [embeds, files, buttons] = this.partitionMessageAdditions(options);
-      return isWebhook ? { content, embeds, files, wrapButtonsByActionRows(buttons), ...extra } : { content, embed: embeds[0], files, components: [{ type: 1, components: buttons }], ...extra };
+      return isWebhook ? { content, embeds, files, components: wrapButtonsByActionRows(buttons), ...extra } : { content, embed: embeds[0], files, components: components: wrapButtonsByActionRows(buttons), ...extra };
     } else if (Array.isArray(content)) {
       const [embeds, files, buttons] = this.partitionMessageAdditions(content);
       if (embeds.length || files.length || buttons.length) {
-        return isWebhook ? { embeds, files, components: wrapButtonsByActionRows(buttons), ...extra } : { embed: embeds[0], files, components: [{ type: 1, components: buttons }], ...extra };
+        return isWebhook ? { embeds, files, components: wrapButtonsByActionRows(buttons), ...extra } : { embed: embeds[0], files, components: components: wrapButtonsByActionRows(buttons), ...extra };
       }
     }
 
