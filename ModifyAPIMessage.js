@@ -1,3 +1,5 @@
+const { DataResolver, Util, MessageFlags, MessageAttachment, MessageEmbed} = Discord;
+
 Discord.APIMessage.prototype.resolveData = function() {
     if (this.data) return this;
 
