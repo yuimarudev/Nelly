@@ -1,4 +1,5 @@
 const Message = require('./Message');
+const MessageButton = require('./MessageButton');
 const TextChannel = require('./TextChannel');
 const DMChannel = require('./DMChannel');
 const { APIMessageMain: APIMessage, sendAPICallback } = require('./APIMessage');
@@ -19,10 +20,10 @@ module.exports = client => {
     if (interaction.type === 3)
     client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
   });
-  // Structures.extend("APIMessage", () => APIMessage);
   Structures.extend("Message", () => Message);
   Structures.extend("TextChannel", () => TextChannel);
   Structures.extend("DMChannel", () => DMChannel);
+  return MessageButton;
 }
 
 class MessageComponentInteraction extends Discord.Interaction {
