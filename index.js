@@ -16,7 +16,7 @@ const prefix = '%';
 ["MessageEmbed", "MessageAttachment"]
   .forEach(v => global[v] = Discord[v]);
 
-global.MessageButton = Discord.MessageButton = require('./ModifyAPIMessage.js');
+// global.MessageButton = Discord.MessageButton = require('./ModifyAPIMessage.js');
 let dotenvPath = path.join(__dirname, '.env');
 if (fs.existsSync(dotenvPath)) {
   const env = dotenv.parse(fs.readFileSync(dotenvPath));
