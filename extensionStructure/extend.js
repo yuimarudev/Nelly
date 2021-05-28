@@ -10,7 +10,7 @@ Structures.extend("Message", () => Message);
 Structures.extend("TextChannel", () => TextChannel);
 Structures.extend("DMChannel", () => DMChannel);
 
-client.ws.on("INTERACTION_CREATE", async interaction => {
+module.exports = client => client.ws.on("INTERACTION_CREATE", async interaction => {
   if (interaction.type === 3)
   client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
 });
