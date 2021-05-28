@@ -40,5 +40,5 @@ module.exports = async message => {
 function skipTo({songs, dispatcher}, index) {
   if (typeof index !== "number" || index < 1) return songs;
   if (1 < index) songs.push(sings.splice(0, index - 1));
-  dispatcher.emit("finish");
+  dispatcher.destroy();
 }
