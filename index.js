@@ -135,7 +135,7 @@ client.on("interaction", interaction => {
     .setLabel('The Button!') //default: NO_LABEL_PROVIDED
     .setID('click_to_function') //note: if you use the style "url" you must provide url using .setURL('https://example.com')
     .setDisabled();
-    interaction.channel.send("text", button);
+    interaction.channel.send("text", btn);
     interaction.reply("ok!");
   }
 });
