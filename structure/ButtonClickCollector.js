@@ -35,12 +35,13 @@ module.exports = class ButtonClickCollector extends Collector {
   }
 
   #_buttonInteractionHandler(itr) {
-     console.log("hai: " + itr.isMessageComponent);
     if (itr.isMessageComponent) this.handleCollect(itr);
   }
 
   collect(button) {
+    console.log("yeay!");
     if (button.message.id !== this.message.id) return null;
+    console.log("yeay!");
     if (this.filter(button)) {
       this.emit('create', button);
     }
