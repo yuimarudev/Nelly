@@ -1,10 +1,7 @@
-const Message = require('./Message');
-Discord.MessageButton = require('./MessageButton');
-const TextChannel = require('./TextChannel');
-const DMChannel = require('./DMChannel');
-const { APIMessageMain: APIMessage, sendAPICallback } = require('./APIMessage');
-const WebhookClient = require('./WebhookClient');
-const { Structures } = Discord;
+module.exports = client => client.ws.on("INTERACTION_CREATE", interaction => {
+  if (interaction.type === 3) client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
+});
+
 const InteractionResponseTypes = {
   1: 'PONG',
   4: 'CHANNEL_MESSAGE_WITH_SOURCE',
@@ -13,17 +10,8 @@ const InteractionResponseTypes = {
   CHANNEL_MESSAGE_WITH_SOURCE: 4,
   DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE: 5
 };
-const { MessageFlags } = Discord;
 
-module.exports = client => {
-  client.ws.on("INTERACTION_CREATE", async interaction => {
-    if (interaction.type === 3)
-    client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
-  });
-  Structures.extend("Message", () => Message);
-  Structures.extend("TextChannel", () => TextChannel);
-  Structures.extend("DMChannel", () => DMChannel);
-}
+const { APIMessage, MessageFlags } = Discord;
 
 class MessageComponentInteraction extends Discord.Interaction {
   constructor(client, data) {
@@ -34,6 +22,7 @@ class MessageComponentInteraction extends Discord.Interaction {
     this.message = this.channel.messages.add(data.message);
     this.customID = data.data.custom_id;
     this.componentType = data.data.component_type;
+    this._data = data;
     Object.defineProperty(this, "isMessageComponent", {value: true});
   }
 
