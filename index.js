@@ -214,7 +214,8 @@ Discord.APIMessage.prototype.resolveData = function() {
       }
     }
 
-    Object.assign(this.data, {
+    this.data = {
+      components: this.options.components
       content,
       tts,
       nonce,
