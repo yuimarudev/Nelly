@@ -129,7 +129,13 @@ client.on("interaction", interaction => {
     // Slash Commands
     interaction.reply("Catch!");
   } else if (interaction.isMessageComponent) {
-   // from Buttons
+    // from Buttons
+    const btn = new Discord.MessageButton()
+    .setStyle('red') //default: blurple
+    .setLabel('The Button!') //default: NO_LABEL_PROVIDED
+    .setID('click_to_function') //note: if you use the style "url" you must provide url using .setURL('https://example.com')
+    .setDisabled();
+    interaction.channel.send("text", button);
     interaction.reply("ok!");
   }
 });
