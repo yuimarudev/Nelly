@@ -131,6 +131,7 @@ client.on("interaction", async interaction => {
   } else if (interaction.isMessageComponent) {
     // from Buttons
     if (interaction.customID == "delete_the_message") {
+      await interaction.reply("Deleted!", { ephemeral: true });
       interaction.message.delete();
       return;
     }
