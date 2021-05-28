@@ -146,11 +146,14 @@ const MessageComponentInteraction = class MCI extends Discord.Interaction {
     super(client, data);
     this.deferred = false;
     this.replied = false;
+    console.log("12");
     this.webhook = new WebhookClient(this.applicationID, this.token, this.client.options);
     this.message = this.channel.messages.add(data.message);
+    console.log("25");
     this.customID = data.data.custom_id;
     this.componentType = data.data.component_type;
-    this._data = data;
+    console.log("33");
+    // this._data = data;
     this.isMessageComponent = true;
   }
 } // require('./structure/MessageComponentInteraction.js');
