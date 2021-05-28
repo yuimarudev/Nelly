@@ -3,7 +3,6 @@ const TextChannel = require('./TextChannel');
 const DMChannel = require('./DMChannel');
 const { APIMessageMain: APIMessage, sendAPICallback } = require('./APIMessage');
 const WebhookClient = require('./WebhookClient');
-const Message = require('./Message');
 
 Structures.extend("APIMessage", () => APIMessage);
 Structures.extend("Message", () => Message);
