@@ -1,5 +1,24 @@
-const { DataResolver, Util, MessageFlags, MessageAttachment, MessageEmbed} = Discord;
+const {
+  APIMessage,
+  Base,
+  ClientApplication,
+  Collection,
+  DataResolver,
+  MessageFlags,
+  MessageAttachment,
+  MessageEmbed,
+  MessageMentions: Mentions,
+  Permissions,
+  ReactionCollector,
+  ReactionManager,
+  SnowflakeUtil,
+  Util
+} = Discord;
 const MessageButton = require('./structure/MessageButton');
+const Embed = MessageEmbed;
+const { MessageTypes } = Discord.Constants;
+
+
 module.exports = MessageButton;
 
 Discord.Message.prototype._patch = function(data) {
