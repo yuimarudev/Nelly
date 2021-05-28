@@ -128,7 +128,7 @@ client.on("interaction", async interaction => {
   if (interaction.isCommand()) {
     // Slash Commands
     interaction.reply("Catch!");
-  } else if (true || interaction.isMessageComponent) {
+  } else if (false && interaction.isMessageComponent) {
     // from Buttons
     console.log("546");
     if (interaction.customID == "delete_the_message") {
@@ -146,7 +146,8 @@ const MessageComponentInteraction = require('./structure/MessageComponentInterac
 client.ws.on("INTERACTION_CREATE", interaction => {
   if (interaction.type === 3) {
     console.log("catch");
-    client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
+    client.emit('interaction', /* new MessageComponentInteraction(client, */ interaction // )
+    ); 
     console.log("emit");
   }
 });
