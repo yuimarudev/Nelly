@@ -4,14 +4,14 @@ module.exports = class MessageButton {
     #_style = 1;
     #_label = "button";
     #_url;
-    #_custom_id = "test";
-    constructor({type, style, label="", custom_id=null, disabled=false, url=null} = {}) {
+    #_custom_id = "the_button_has_just_been_clicked";
+    constructor({type=2, style, label, custom_id=null, disabled=false, url=null} = {}) {
         if (type !== 2) throw Error("Invalid Type: This is not button type.");
-        if (custom_id === null && url === null || custom_id !== null && url !== null)
+        if (custom_id !== null && url !== null)
         throw new Error("Invalid button: A button must has a custom_id or a url.");
-        this.setStyle(style)
-        .setLabel(label);
-        this[url ? "setURL" : "setID"](custom_id ?? url)
+        this.setStyle(style).setLabel(label);
+        if (custom_id) this.setID(custom_id);
+        if (url) this.setURL(url);
         this.disabled = disabled;
     }
     get style() { return this.#_style; }
@@ -34,11 +34,11 @@ module.exports = class MessageButton {
     }
     setURL(url) {
         this.#_style = 5;
-        this.#_url = resolveString(url);
+        this.#_url = resolveString(url) || "https://example.com";
         return this;
     }
     setID(id) {
-        this.#_custom_id = resolveString(id);
+        this.#_custom_id = resolveString(id) || this.#_custom_id;
         if (4 < this.#_style) this.#_style = 1;
         return this;
     }
