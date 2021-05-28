@@ -125,10 +125,10 @@ client.on('voiceStateUpdate', (old, now) => {
 });
 
 client.on("interaction", async interaction => {
-  if (typeof interaction.isCommand == "function" && interaction.isCommand()) {
+  if (interaction.isCommand()) {
     // Slash Commands
     interaction.reply("Catch!");
-  } else if (false && interaction.isMessageComponent) {
+  } else if (interaction.isMessageComponent) {
     // from Buttons
     if (interaction.customID == "delete_the_message") {
       await interaction.reply("Delete!");
