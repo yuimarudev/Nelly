@@ -3,7 +3,7 @@ const TextChannel = require('./TextChannel');
 const DMChannel = require('./DMChannel');
 const { APIMessageMain: APIMessage, sendAPICallback } = require('./APIMessage');
 const WebhookClient = require('./WebhookClient');
-const Structures = require('discord.js');
+const { Structures } = require('discord.js');
 
 module.exports = client => {
   client.ws.on("INTERACTION_CREATE", async interaction => {
