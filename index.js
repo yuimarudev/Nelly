@@ -136,7 +136,13 @@ client.on("interaction", interaction => {
     .setID('click_to_function') //note: if you use the style "url" you must provide url using .setURL('https://example.com')
     .setDisabled();
     interaction.channel.send("text", btn);
-    interaction.reply("ok!");
+    interaction.reply("ok!", btn);
+    const btn2 = new Discord.MessageButton()
+    .setStyle('green') //default: blurple
+    .setLabel('The Button 2!') //default: NO_LABEL_PROVIDED
+    .setID('click_to_function') //note: if you use the style "url" you must provide url using .setURL('https://example.com')
+    .setDisabled();
+    setTimeout(() => interaction.editReply(btn2), 5000);
   }
 });
 
