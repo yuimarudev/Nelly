@@ -138,8 +138,7 @@ client.on("interaction", interaction => {
     const btn = new Discord.MessageButton()
     .setStyle('green') //default: blurple
     .setLabel('Click me!') //default: NO_LABEL_PROVIDED
-    .setID('click_to_function_01') //note: if you use the style "url" you must provide url using .setURL('https://example.com')
-    .setDisabled();
+    .setID('click_to_function_01');
     setTimeout(() => interaction.editReply("Button Test", btn), 5000);
   }
 });
