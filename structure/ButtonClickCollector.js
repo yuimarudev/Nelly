@@ -12,7 +12,6 @@ module.exports = class ButtonClickCollector extends Collector {
     this._handleGuildDeletion = this._handleGuildDeletion.bind(this);
     this._handleMessageDeletion = this._handleMessageDeletion.bind(this);
 
-    const handler
     this.client.incrementMaxListeners();
     this.client.on('interaction', this.#_buttonInteractionHandler);
     this.client.on(Events.MESSAGE_DELETE, this._handleMessageDeletion);
@@ -26,10 +25,17 @@ module.exports = class ButtonClickCollector extends Collector {
       this.client.removeListener(Events.GUILD_DELETE, this._handleGuildDeletion);
       this.client.decrementMaxListeners();
     });
+
+    this.on('collect', button => {
+      this.total++;
+      if (this.users.has(button.user.id))
+      this.users.get(button.user.id).count++;
+      this.users.set(button.user.id, {user: button.user, count: 1});
+    });
   }
 
   #_buttonInteractionHandler(itr) {
-    if (itr.isMessageComponent) this.handleCollect(itr.button, itr.user);
+    if (itr.isMessageComponent) this.handleCollect(itr);
   }
 
   collect(button, user) {
