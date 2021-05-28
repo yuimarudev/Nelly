@@ -5,6 +5,15 @@ module.exports = class MessageButton {
     #_label = "button";
     #_url;
     #_custom_id = "test";
+    constructor({type, style, label="", custom_id=null, disabled=false, url=null} = {}) {
+        if (type !=== 2) throw Error("Invalid Type: This is not button type.");
+        if (custom_id === null && url === null || custom_id !== null && url !== null)
+        throw new Error("Invalid button: A button must has a custom_id or a url.");
+        this.setStyle(style)
+        .setLabel(label);
+        .[url ? "setURL" : "setID"](custom_id ?? url)
+        this.disabled = disabled;
+    }
     get style() { return this.#_style; }
     get label() { return this.#_label; }
     get url() { return this.#_url; }
