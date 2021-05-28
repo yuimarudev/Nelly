@@ -1,7 +1,3 @@
-module.exports = client => client.ws.on("INTERACTION_CREATE", interaction => {
-  if (interaction.type === 3) client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
-});
-
 const InteractionResponseTypes = {
   1: 'PONG',
   4: 'CHANNEL_MESSAGE_WITH_SOURCE',
@@ -13,7 +9,7 @@ const InteractionResponseTypes = {
 
 const { APIMessage, MessageFlags } = Discord;
 
-class MessageComponentInteraction extends Discord.Interaction {
+module.exports = class extends Discord.Interaction {
   constructor(client, data) {
     super(client, data);
     this.deferred = false;
@@ -23,7 +19,7 @@ class MessageComponentInteraction extends Discord.Interaction {
     this.customID = data.data.custom_id;
     this.componentType = data.data.component_type;
     this._data = data;
-    Object.defineProperty(this, "isMessageComponent", {value: true});
+    this.isMessageComponent = true;
   }
 
   async defer({ ephemeral } = {}) {
