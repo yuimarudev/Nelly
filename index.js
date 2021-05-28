@@ -131,18 +131,9 @@ client.on("interaction", async interaction => {
   } else if (interaction.isMessageComponent) {
     // from Buttons
     if (interaction.customID == "delete_the_message") {
-      await interaction.reply("Delete!");
       interaction.message.delete();
-      setTimeout(() => interaction.deleteReply(), 3500);
       return;
     }
-  }
-});
-
-client.ws.on("INTERACTION_CREATE", interaction => {
-  if (interaction.type === 3) {
-    interaction = new MessageComponentInteraction(client, interaction);
-    client.emit('interaction', interaction);
   }
 });
 
