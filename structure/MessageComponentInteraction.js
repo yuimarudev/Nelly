@@ -4,11 +4,12 @@ module.exports = class extends Discord.Interaction {
     this.deferred = false;
     this.replied = false;
     this.webhook = new Discord.WebhookClient(this.applicationID, this.token, this.client.options);
+    
     this.message = this.channel.messages.add(data.message);
     this.customID = data.data.custom_id;
     this.componentType = data.data.component_type;
     this._data = data;
-    this.isMessageComponent = true;
+    Object.defineProperty(this, "isMessageComponent", {value: true});
   }
 }
 
