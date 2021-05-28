@@ -1,4 +1,4 @@
-const { resolveStyle } = require('../Util');
+const { resolveStyle } = require('./Util');
 const { resolveString } = require('discord.js').Util;
 
 class MessageButton {
