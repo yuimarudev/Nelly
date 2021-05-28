@@ -124,6 +124,7 @@ client.on('voiceStateUpdate', (old, now) => {
 });
 
 client.on("interaction", async interaction => {
+  console.log("waaaay!");
   if (interaction.isCommand()) {
     // Slash Commands
     interaction.reply("Catch!");
@@ -143,7 +144,6 @@ client.on("interaction", async interaction => {
 const MessageComponentInteraction = require('./structure/MessageComponentInteraction');
 
 client.ws.on("INTERACTION_CREATE", interaction => {
-  console.log(interaction);
   if (interaction.type === 3) client.emit('interaction', new MessageComponentInteraction(client, interaction)); 
 });
 
