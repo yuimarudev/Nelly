@@ -228,6 +228,6 @@ Discord.APIMessage.prototype.resolveData = function() {
       flags,
       message_reference,
       attachments: this.options.attachments,
-    });
+    };
     return this;
   }
