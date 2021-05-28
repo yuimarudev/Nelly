@@ -71,7 +71,7 @@ client.on('message', async message => {
     try {
         await commands.eval(message, message.content.replace(prefix + "eval", ""), client);
     } catch(ex) {
-        await message.channel.send(Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```');
+        await message.reply(Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```');
     }
     return;
   }
@@ -80,7 +80,7 @@ client.on('message', async message => {
     .setStyle('red') //default: blurple
     .setLabel('Delete!') //default: NO_LABEL_PROVIDED
     .setID('delete_the_message');
-    message.reply("Button behavior test", btn).catch(console.log);
+    message.channel.send("Button behavior test", btn).catch(console.log);
     return;
   }
   const args = SpaceSplit(message.content.slice(prefix.length));
