@@ -31,7 +31,6 @@ module.exports = async(message, args, client) => {
         if (message.member.voice.channel.id != serverQueue.voiceChannel.id) {
             return void await message.reply(Messages.PleaseJoinVoiceChannelMessage + `\nVC: \`${serverQueue.voiceChannel.name}\``)
         }
-        const { connection, textChannel, voiceChannel } = serverQueue;
         const result = await ytsr.getFilters(args[0]).then(f => ytsr(f.get('Type').get('Video').url,{
             gl: "JP",
             hl: "ja",
@@ -70,8 +69,3 @@ module.exports = async(message, args, client) => {
     }
 }
 
-function delay(ms) {
-  return (typeof ms !== "number" || ms < 1) ?
-  Promise.resolve(void 0) :
-  new Promise(r => setTimeout(r, ms));
-}
