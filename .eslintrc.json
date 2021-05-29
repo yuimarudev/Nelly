@@ -8,6 +8,13 @@
   "parserOptions": {
     "ecmaVersion": 2021
   },
+  "global": {
+    "Discord": false,
+    "MessageEmbed": false,
+    "Messages": false,
+      
+    "queues": true,
+  },
   "rules": {
     "node/no-unsupported-features": "error",
     "node/exports-style": "error",
