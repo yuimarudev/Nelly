@@ -1,1 +1,12 @@
-
+{
+  "extends": ["eslint:recommended", "plugin:node/recommended"],
+  "plugins": ["node"],
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "node/no-unsupported-features": ["error", {"version": 14}],
+    "semi": ["warn", "always"]
+  }
+}
