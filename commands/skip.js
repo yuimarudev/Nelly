@@ -26,7 +26,9 @@ module.exports = async message => {
       try {
         skipTo(queue, 1);
         await message.reply(Messages.Skipped);
-      } catch { }
+      } catch {
+        void 0;
+      }
       return;
     }
     return void await message.channel.send(`${Messages.SkipRequest} (${skipReqs.size}/${limen})`);
@@ -34,11 +36,13 @@ module.exports = async message => {
   try {
     skipTo(queue, 1);
     await message.reply(Messages.Skipped);
-  } catch { }
+  } catch {
+    void 0;
+  }
 };
 
 function skipTo({songs, dispatcher}, index) {
   if (typeof index !== "number" || index < 1) return songs;
-  if (1 < index) songs.push(sings.splice(0, index - 1));
+  if (1 < index) songs.push(songs.splice(0, index - 1));
   dispatcher.destroy();
 }
