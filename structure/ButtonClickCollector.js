@@ -13,13 +13,15 @@ module.exports = class ButtonClickCollector extends Collector {
     this._handleMessageDeletion = this._handleMessageDeletion.bind(this);
 
     this.client.incrementMaxListeners();
-    this.client.on('interaction', this.#_buttonInteractionHandler); // eslint-disable-line
+    // eslint-disable-next-line
+    this.client.on('interaction', this.#_buttonInteractionHandler);
     this.client.on(Events.MESSAGE_DELETE, this._handleMessageDeletion);
     this.client.on(Events.CHANNEL_DELETE, this._handleChannelDeletion);
     this.client.on(Events.GUILD_DELETE, this._handleGuildDeletion);
 
     this.once('end', () => {
-      this.client.removeListener('interaction', this.#_buttonInteractionHandler); // eslint-disable-line
+      // eslint-disable-next-line
+      this.client.removeListener('interaction', this.#_buttonInteractionHandler);
       this.client.removeListener(Events.MESSAGE_DELETE, this._handleMessageDeletion);
       this.client.removeListener(Events.CHANNEL_DELETE, this._handleChannelDeletion);
       this.client.removeListener(Events.GUILD_DELETE, this._handleGuildDeletion);
@@ -33,8 +35,9 @@ module.exports = class ButtonClickCollector extends Collector {
       this.users.set(button.user.id, {user: button.user, count: 1});
     });
   }
-
-  #_buttonInteractionHandler(itr) { // eslint-disable-line
+  
+  // eslint-disable-next-line
+  #_buttonInteractionHandler(itr) {
     if (itr.isMessageComponent) this.handleCollect(itr);
   }
 
