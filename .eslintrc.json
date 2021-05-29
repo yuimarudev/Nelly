@@ -12,6 +12,8 @@
     "Discord": false,
     "MessageEmbed": false,
     "Messages": false,
+    "stringFormat": false,
+    "MessageAttachment": false,
     "queues": true
   },
   "rules": {
