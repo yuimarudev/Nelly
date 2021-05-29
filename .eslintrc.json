@@ -8,7 +8,7 @@
   "parserOptions": {
     "ecmaVersion": 2021
   },
-  "global": {
+  "globals": {
     "Discord": false,
     "MessageEmbed": false,
     "Messages": false,
