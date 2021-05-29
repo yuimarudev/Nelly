@@ -15,7 +15,7 @@
   "QueueLoop": ":repeat: キュー ループ ",
   "AutoPlay": "オートプレイ ",
   "NoMusic": "曲がありません(´ω`)",
-  "NoVideoResult": "(そんな動画)ないです。",
+  "NoVideoResult": "見つかりませんでした(´・ω・)",
   "MusicAdded": ":white_check_mark: **Added:** ",
   "ArgumentLengthOver": ":x: 引数の数が多すぎます。",
   "NoSearchResult": ":x: リザルトがありません...",
