@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/Sueqkjs/Nelly.git"
   },
+  "engines": {
+    "node": "14.x"
+  },
   "author": "Sueqkjs",
   "license": "CC0-1.0",
   "bugs": {
