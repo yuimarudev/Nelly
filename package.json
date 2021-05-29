@@ -28,11 +28,11 @@
     "vm2": "^3.9.3",
     "ytdl-core": "^4.8.0",
     "ytpl": "^2.2.1",
-    "ytsr": "^3.5.0"
+    "ytsr": "^3.5.0",
+    "eslint": "^7.27.0",
+    "eslint-plugin-node": "^11.1.0"
   },
   "devDependencies": {
-    "eslint": "^7.27.0",
-    "eslint-plugin-node": "^11.1.0",
     "express": "^4.17.1"
   }
 }
