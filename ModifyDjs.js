@@ -1,15 +1,10 @@
 const {
-  APIMessage,
-  Base,
   ClientApplication,
   Collection,
-  DataResolver,
   MessageFlags,
   MessageAttachment,
   MessageEmbed,
   MessageMentions: Mentions,
-  Permissions,
-  ReactionCollector,
   ReactionManager,
   SnowflakeUtil,
   Util
