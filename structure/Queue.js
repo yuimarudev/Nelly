@@ -45,7 +45,7 @@ async function play(queue) {
     );
     await next();
   });
-  queue.autoPlayHistory.unshift(song.videoDetails?.videoId);
+  queue.autoPlayHistory.unshift(song._info.videoDetails.videoId);
   queue.autoPlayHistory.length = 10;
   queue.nowPlayingMsg = await queue.textChannel.send(
     new MessageEmbed()
