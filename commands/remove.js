@@ -1,5 +1,5 @@
 module.exports = async (message, args) => {
-    let { voiceChannel, textChannel, songs } = queues.get(message.guild.id);
+    let { voiceChannel, songs } = queues.get(message.guild.id);
     if (songs.length < args.length)
         return void await message.reply(Messages.ArgumentLengthOver);
     const msg = await message.channel.send(Messages.PleaseWait);
