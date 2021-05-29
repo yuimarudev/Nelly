@@ -12,8 +12,7 @@
     "Discord": false,
     "MessageEmbed": false,
     "Messages": false,
-      
-    "queues": true,
+    "queues": true
   },
   "rules": {
     "node/no-unsupported-features": "error",
