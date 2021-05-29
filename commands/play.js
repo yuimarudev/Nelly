@@ -1,7 +1,7 @@
 const Queue = require('../structure/Queue.js');
 const ytsr = require('ytsr');
 const ytpl = require('ytpl');
-const regex = /https?:\/\/youtu(?:be\.com|\.be)\/(?:watch\?v=)?(\w{1,})(?:&?[^\?list=]\w+)*(?:(?:&|\?)list=(\w{0,}))?.*/;
+const regex = /https?:\/\/youtu(?:be\.com|\.be)\/(?:watch\?v=)?(\w{1,})(?:&?[^\?list=]\w+)*(?:(?:&|?)list=(\w{0,}))?.*/;
 
 module.exports = async(message, args, client) => {
     const data = queues.get(message.guild.id);
@@ -30,7 +30,6 @@ module.exports = async(message, args, client) => {
             setTimeout(() => client.off('voiceStateUpdate',func), 10000);
         }
     } else {
-        const { connection, textChannel, voiceChannel } = data;
         const matched = args[0].match(regex);
         const serverQueue = queues.get(message.guild.id);
         if (!matched) {
@@ -57,7 +56,7 @@ module.exports = async(message, args, client) => {
         } else {
             let playlist = await ytpl(args[0]), addCount = 0;
             for (let v of playlist.items) {
-                await serverQueue.addMusic(v.url, message).then(() => addCount++, _=>0);
+                await serverQueue.addMusic(v.url, message).then(() => addCount++, () => 0);
                 await delay(1500);
             }
             await message.channel.send(
