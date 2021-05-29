@@ -1,4 +1,4 @@
-module.exports = (message, args, client) => {
+module.exports = (message, args) => {
   const dict = require('../commands.js');
   if (args.length) {
     const info = dict.commands[args[0]];
