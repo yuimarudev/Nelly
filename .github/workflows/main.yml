@@ -31,11 +31,12 @@ jobs:
           ./node_modules/.bin/eslint ./commands/*.js ./structure/*.js ./*.js --fix
       - name: push
         run: |
-          git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
-          git config --global user.name "${GITHUB_ACTOR}"
-          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          if (git diff --shortstat | grep '[0-9]'); then \
-            git add .; \
-            git commit -m "fix"; \
-            git push origin HEAD:${GITHUB_REF}; \
+          git add -N .
+          if ! git diff --exit-code --quiet
+          then
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git add .
+            git commit -m "Update"
+            git push
           fi
