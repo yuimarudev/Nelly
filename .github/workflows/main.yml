@@ -28,7 +28,7 @@ jobs:
           npm install --save-dev
       - name: lint
         run: |
-          eslint ./**/*.js /*.js --fix
+          ./node_module/.bin/eslint ./**/*.js /*.js --fix
       - name: push
         run: |
           git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
