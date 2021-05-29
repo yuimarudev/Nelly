@@ -43,7 +43,7 @@ process.stdin.on('data', chunk => {
   chunk = String(chunk);
   if(typeof chunk.match === "function" && chunk.match('sine')) {
     console.log("グハッ！");
-    process.exit(-1);
+    process.exit(-1); // eslint-disable-line
   };
 });
 
