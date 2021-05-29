@@ -1,7 +1,7 @@
 const Queue = require('../structure/Queue.js');
 const ytsr = require('ytsr');
 const ytpl = require('ytpl');
-const regex = /https?:\/\/youtu(?:be\.com|\.be)\/(?:watch\?v=)?(\w{1,})(?:&?[^\?list=]\w+)*(?:(?:&|?)list=(\w{0,}))?.*/;
+const regex = /https?:\/\/youtu(?:be\.com|\.be)\/(?:watch\?v=)?(\w{1,})(?:&?[^\?list=]\w+)*(?:(?:&|\?)list=(\w{0,}))?.*/;
 
 module.exports = async(message, args, client) => {
     const data = queues.get(message.guild.id);
