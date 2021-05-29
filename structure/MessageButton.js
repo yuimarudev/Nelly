@@ -1,10 +1,12 @@
 const { resolveString } = Discord.Util;
 
 module.exports = class MessageButton {
+    /* eslint-disable */
     #_style = 1;
     #_label = "button";
     #_url;
     #_custom_id = "the_button_has_just_been_clicked";
+    /* eslint-enable */
     constructor({type=2, style, label, custom_id=null, disabled=false, url=null} = {}) {
         if (type !== 2) throw Error("Invalid Type: This is not button type.");
         if (custom_id !== null && url !== null)
