@@ -28,7 +28,7 @@ jobs:
           npm install
       - name: lint
         run: |
-          ./node_modules/.bin/eslint ./**/*.js /*.js --fix
+          ./node_modules/.bin/eslint ./commands/*.js ./structure/*.js ./*.js --fix
       - name: push
         run: |
           git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
