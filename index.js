@@ -16,6 +16,7 @@ const prefix = '%';
 ["MessageEmbed", "MessageAttachment"]
   .forEach(v => global[v] = Discord[v]);
 
+
 const extClasses = require('./ModifyDjs.js');
 Object.assign(global, extClasses);
 Object.assign(Discord, extClasses);
