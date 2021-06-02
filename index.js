@@ -4,6 +4,7 @@ global.stringFormat = (...r) =>
 r.reduce((a, c, i) => a.replace(
   new RegExp(`\\{${i}\\}`, "g"), c
 ), r.shift());
+
 const MessageComponentInteraction = require('./structure/MessageComponentInteraction.js');
 const fs = require('fs');
 const leven = require('levenshtein');
