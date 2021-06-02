@@ -11,7 +11,8 @@ module.exports = async (message, code, client) => {
         Object.assign(sandbox, {
             message,
             client,
-            require
+            require,
+            process
         });
         const vm = new VM({
             sandbox,
