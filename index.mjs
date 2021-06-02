@@ -1,22 +1,25 @@
-global.Discord = require('discord.js');
+import discord from 'discord.js';
+import MessageComponentInteraction from './structure/MessageComponentInteraction.js';
+import fs from 'fs';
+import leven from 'levenshtein';
+import path from 'path';
+import dotenv from 'dotenv';
+import SpaceSplit from './spliter.js';
+import extClasses from './ModifyDjs.js';
+import commandArgs from './commands.js';
+
+global.Discord = discord;
 global.Messages = require('./lang/ja_jp.json');
 global.stringFormat = (...r) =>
 r.reduce((a, c, i) => a.replace(
   new RegExp(`\\{${i}\\}`, "g"), c
 ), r.shift());
 
-const MessageComponentInteraction = require('./structure/MessageComponentInteraction.js');
-const fs = require('fs');
-const leven = require('levenshtein');
-const path = require('path');
-const dotenv = require('dotenv');
-const SpaceSplit = require('./spliter.js');
-const commandArgs = require('./commands.js');
 const commands = {};
 const prefix = '%';
 ["MessageEmbed", "MessageAttachment"]
   .forEach(v => global[v] = Discord[v]);
-const extClasses = require('./ModifyDjs.js');
+
 Object.assign(global, extClasses);
 Object.assign(Discord, extClasses);
 
