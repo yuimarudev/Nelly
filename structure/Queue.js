@@ -62,7 +62,7 @@ async function play(queue) {
   async function next() {
     if (song.loop) queue.songs.unshift(song);
     else if (queue.loop) queue.songs.push(song);
-    await queue.nowPlayingMsg.delete()
+    if (queue.nowPlayingMsg) await queue.nowPlayingMsg.delete()
     .then(
       () => queue.nowPlayingMsg = null,
       () => queue.nowPlayingMsg = null
