@@ -58,7 +58,7 @@ async function play(queue) {
     )
   );
   queue.dispatcher = queue.connection.play(stream)
-  .once('close', next);
+  .once('finish', next);
   async function next() {
     if (song.loop) queue.songs.unshift(song);
     else if (queue.loop) queue.songs.push(song);
