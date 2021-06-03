@@ -1,3 +1,7 @@
+let _this = this;
+Object.entries(global).forEach((v, k) => {
+  Object.defineProperty(_this, k, { value: v });
+});
 const { resolveString } = Discord.Util;
 
 export default (class MessageButton {
