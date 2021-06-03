@@ -1,4 +1,4 @@
-module.exports = class extends Discord.Interaction {
+class comp extends Discord.Interaction {
   constructor(client, data) {
     super(client, data);
     this.message = this.channel.messages.add(data.message);
@@ -22,4 +22,5 @@ module.exports = class extends Discord.Interaction {
 }
 
 for (const key of ["defer", "deleteReply", "editReply", "fetchReply", "followUp", "reply"])
-module.exports.prototype[key] = Discord.CommandInteraction.prototype[key];
+  comp.prototype[key] = Discord.CommandInteraction.prototype[key];
+export default comp
