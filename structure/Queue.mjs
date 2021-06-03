@@ -5,7 +5,7 @@ import {
   Messages,
   stringFormat,
   queues
-} from '../../global.mjs';
+} from '../global.mjs';
 
 import Song from './Song.mjs';
 import ytdl from 'ytdl-core';
