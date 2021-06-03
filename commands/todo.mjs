@@ -24,7 +24,7 @@ const logTheList = () => {
 };
 
 
-export default ((message, args, client) => {
+export default (async(message, args, client) => {
   switch (args.shift()) {
     case "show":
       await showList(message, args, client);
