@@ -7,7 +7,7 @@ import {
   queues
 } from '../global.mjs';
 
-export default (message => {
+export default (async message => {
   const serverQueue = queues.get(message.guild.id);
   const song = serverQueue.playingSong;
   if(!song) return void await message.reply(Messages.NoMusic);
