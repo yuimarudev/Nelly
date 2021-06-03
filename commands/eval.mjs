@@ -1,6 +1,6 @@
-const { VM } = require('vm2');
+import { VM } from 'vm2';
 
-module.exports = async (message, code, client) => {
+export default (message, code, client) => {
     if (!(await client.application.fetch()).owner.members.has(message.author.id)) return;
     let result;
     try {
@@ -27,7 +27,7 @@ module.exports = async (message, code, client) => {
     if (Object.prototype.toString.call(result) === "[object Error]")
     await message.channel.send(Error.prototype.toString.call(result));
     else await message.channel.send(
-        require('util').inspect(result),
+        (await import('util')).inspect(result),
         { split: true, code: "js" }
     );
 }
