@@ -1,4 +1,4 @@
-module.exports = class {
+export default (class {
   constructor(data, message) {
     let details = data.videoDetails;
     this.title = details.title;
@@ -10,4 +10,4 @@ module.exports = class {
     this.loop = false;
     this._info = data;
   }
-}
+})
