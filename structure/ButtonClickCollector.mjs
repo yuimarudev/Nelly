@@ -1,3 +1,8 @@
+let _this = this;
+Object.entries(global).forEach((v, k) => {
+  Object.defineProperty(_this, k, { value: v });
+});
+
 const { Collector, Collection } = Discord;
 const { Events } = Discord.Constants;
 
