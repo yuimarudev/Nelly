@@ -2,17 +2,17 @@
   "name": "nelly",
   "version": "1.0.0",
   "description": "ツ",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
-    "test": "node index.js",
-    "start": "node index.js"
+    "test": "node index.mjs",
+    "start": "node index.mjs"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sueqkjs/Nelly.git"
   },
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "author": "Sueqkjs",
   "license": "CC0-1.0",
