@@ -24,7 +24,7 @@ const logTheList = () => {
 };
 
 
-export default (async(message, args, client) => {
+export default async function def(message, args, client) {
   switch (args.shift()) {
     case "show":
       await showList(message, args, client);
@@ -42,7 +42,7 @@ export default (async(message, args, client) => {
       await message.channel.send(`:x: 第一引数の値が無効です。`);
       break;
   }
-})
+}
 
 async function showList(m) {
   await m.channel.send(
