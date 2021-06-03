@@ -79,7 +79,7 @@ async function restoreElement(m, args) {
   await m.channel.send(
     `:white_check_mark: Restored!`
   );
-})
+}
 
 async function deleteElement(m, args) {
   let index = parseInt(args[0], 10);
