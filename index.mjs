@@ -28,23 +28,6 @@ const client = new Discord.Client({
     }
   }
 });
-// events
-const ready = on(
-  client,
-  'ready'
-);
-const messageEvent = on(
-  client,
-  'message'
-);
-const voiceStateUpdate = on(
-  client,
-  'voiceStateUpdate'
-);
-const interactionEvent = on(
-  client,
-  'interaction'
-);
 
 const prefix = '%';
 
@@ -64,8 +47,7 @@ process.stdin.on('data', chunk => {
   };
 });
 
-for await (let _ of ready) {
-  _;
+client.on('ready', () => {
   console.log("ちょっと待ってね！(   ◜ω◝ )");
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
     .filter(x => x.endsWith('.mjs') || x.endsWith('.js'))
@@ -81,101 +63,91 @@ for await (let _ of ready) {
       client.user.setActivity('ready At: ' + client.readyAt);
     }, 3000);
   }, 6000);
-};
+});
 
-(async function Events() {
-  for await (let [message] of messageEvent) {
-    if (message.author.bot) continue;
-    if (!message.content.startsWith(prefix) && !message.mentions.users.has(client.user.id))
-      continue;
-    message.content = message.content.replace(new RegExp(`^<@!?${client.user.id}`), prefix);
-    if (message.content.startsWith(prefix + "eval")) {
-      try {
-        await commands.eval(message, message.content.replace(prefix + "eval", ""), client);
-      } catch(ex) {
-        await message.reply(Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```');
-      }
-      continue;
+client.on('message', message => {
+  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix) && !message.mentions.users.has(client.user.id))
+    return;
+  message.content = message.content.replace(new RegExp(`^<@!?${client.user.id}`), prefix);
+  if (message.content.startsWith(prefix + "eval")) {
+    try {
+      await commands.eval(message, message.content.replace(prefix + "eval", ""), client);
+    } catch(ex) {
+      await message.reply(Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```');
     }
-    const args = SpaceSplit(message.content.slice(prefix.length));
-    let command = args.shift();
-    const commandDict = commandArgs.commands;
-    const aliasDict = commandArgs.aliases;
-    const curs = (command in commandDict) ? command : (aliasDict[command] in commandDict ? aliasDict[command] : false);
-    if (curs) {
-      let cursor = commandArgs.commands[curs];
-      if (cursor.variadic || cursor.args.some(x => x.length === args.length)) {
-        let result;
-        try {
-          result = await commands[curs](message, args, client);
+    return;
+  }
+  const args = SpaceSplit(message.content.slice(prefix.length));
+  let command = args.shift();
+  const commandDict = commandArgs.commands;
+  const aliasDict = commandArgs.aliases;
+  const curs = (command in commandDict) ? command : (aliasDict[command] in commandDict ? aliasDict[command] : false);
+  if (curs) {
+    let cursor = commandArgs.commands[curs];
+    if (cursor.variadic || cursor.args.some(x => x.length === args.length)) {
+      let result;
+      try { result = await commands[curs](message, args, client);
         } catch(ex) {
           result = Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```';
         };
-        if (result) {
-          message.channel.send(result);
-          continue;
-        };
-      } else {
-        message.reply(stringFormat(Messages.InvalidArgMessage, curs));
-        continue;
-      };
+      if (result) return message.channel.send(result);
     } else {
-      let dym = Object.keys(commandDict).concat(Object.keys(aliasDict).filter(alias => 2 < alias.length))
-        .reduce((acc, cur) => {
-          let { distance } = new leven(cur, command);
-          return distance < acc[0] ? [distance, cur] : acc;
-        }, [3, ""])[1];
-      dym ?
-       message.reply(Messages.SimilarMessage + dym) :
-       void 0;
-      continue;
+      return message.reply(stringFormat(Messages.InvalidArgMessage, curs));
     };
+  } else {
+    let dym = Object.keys(commandDict).concat(Object.keys(aliasDict).filter(alias => 2 < alias.length))
+    .reduce((acc, cur) => {
+      let { distance } = new leven(cur, command);
+      return distance < acc[0] ? [distance, cur] : acc;
+    }, [3, ""])[1];
+    return dym ?
+      message.reply(Messages.SimilarMessage + dym) :
+    void 0;
   };
+});
 
-  for await (let [old, now] of voiceStateUpdate) {
-    if (now.id !== client.user.id) continue;
-    if (!old.channel && now.channel) {
-      // join
-      console.log("join!");
-      if (now.channel.type === "stage")
+client.on('voiceStateUpdate', (old, now) => {
+  if (now.id !== client.user.id) return;
+  if (!old.channel && now.channel) {
+    // join
+    console.log("join!");
+    if (now.channel.type === "stage")
       now.setSuppressed(false);
-    } else if (old.channel && !now.channel) {
-      // leave
-      console.log("leave!");
-      queues.delete(now.guild.id);
-    } else if (old.channel.id !== now.channel.id) {
-      // move
-      console.log("move!");
-      if (now.channel.type === "stage")
+  } else if (old.channel && !now.channel) {
+    // leave
+    console.log("leave!");
+    queues.delete(now.guild.id);
+  } else if (old.channel.id !== now.channel.id) {
+    // move
+    console.log("move!");
+    if (now.channel.type === "stage")
       now.setSuppressed(false);
-    }
-  };
+  }
+});
 
-  for await (let [interaction] of interactionEvent) {
-    if (interaction.isCommand()) {
-      // Slash Commands
-      interaction.reply("Catch!");
-    } else if (interaction.isMessageComponent) {
-      // from Buttons
-      if (interaction.customID == "delete_the_message") {
-        await interaction.reply("Deleted!", { ephemeral: true });
-        void await interaction.message.delete();
-        continue;
-      } else if (interaction.customID == "remove_the_buttons") {
-        await interaction.reply("Removed!", { ephemeral: true });
-        void await client.api.channels[interaction.channel.id]
-        .messages[interaction.message.id].patch({
-          data: { components: [ ] }
-        });
-        continue;
-      } else if (interaction.customID == "right_choice") {
-        interaction.reply(":white_check_mark: 正解！", { ephemeral: true });
-      } else if (interaction.customID == "wrong_choice") {
-        interaction.reply(":x: 不正解...", { ephemeral: true });
-      }
+client.on('interaction', interaction => {
+  if (interaction.isCommand()) {
+    // Slash Commands
+    interaction.reply("Catch!");
+  } else if (interaction.isMessageComponent) {
+    // from Buttons
+    if (interaction.customID == "delete_the_message") {
+      await interaction.reply("Deleted!", { ephemeral: true });
+      return void await interaction.message.delete();
+    } else if (interaction.customID == "remove_the_buttons") {
+      await interaction.reply("Removed!", { ephemeral: true });
+      return void await client.api.channels[interaction.channel.id]
+      .messages[interaction.message.id].patch({
+        data: { components: [ ] }
+      });
+    } else if (interaction.customID == "right_choice") {
+      interaction.reply(":white_check_mark: 正解！", { ephemeral: true });
+    } else if (interaction.customID == "wrong_choice") {
+      interaction.reply(":x: 不正解...", { ephemeral: true });
     }
-  };
-}())
+  }
+});
 
 MessageComponentInteraction.addHandler(client);
 client.login(process.env.token);
