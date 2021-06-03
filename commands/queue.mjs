@@ -1,4 +1,4 @@
-module.exports = async message => {
+ export default (message => {
   const serverQueue = queues.get(message.guild.id);
   if (!serverQueue) {
     return void await message.reply(
@@ -22,4 +22,4 @@ module.exports = async message => {
     .setTitle(`Queue (${i + 1}/${texts.length})`)
     .setDescription(texts[i])
   );
-};
+})
