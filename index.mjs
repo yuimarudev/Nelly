@@ -90,10 +90,10 @@ for await (let _ of ready) {
   }, 6000);
 };
 
-for await (let message of messageEvent) {
-  if (message.author.bot) return;
+for await (let [message] of messageEvent) {
+  if (message.author.bot) continue;
   if (!message.content.startsWith(prefix) && !message.mentions.users.has(client.user.id))
-    return;
+    continue;
   message.content = message.content.replace(new RegExp(`^<@!?${client.user.id}`), prefix);
   if (message.content.startsWith(prefix + "eval")) {
     try {
@@ -101,7 +101,7 @@ for await (let message of messageEvent) {
     } catch(ex) {
         await message.reply(Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```');
     }
-    return;
+    continue;
   }
   const args = SpaceSplit(message.content.slice(prefix.length));
   let command = args.shift();
@@ -117,9 +117,13 @@ for await (let message of messageEvent) {
       } catch(ex) {
         result = Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```';
       };
-      if (result) return message.channel.send(result);
+      if (result) {
+        message.channel.send(result);
+        continue;
+      };
     } else {
-      return message.reply(stringFormat(Messages.InvalidArgMessage, curs));
+      message.reply(stringFormat(Messages.InvalidArgMessage, curs));
+      continue;
     };
   } else {
     let dym = Object.keys(commandDict).concat(Object.keys(aliasDict).filter(alias => 2 < alias.length))
@@ -127,14 +131,15 @@ for await (let message of messageEvent) {
         let { distance } = new leven(cur, command);
         return distance < acc[0] ? [distance, cur] : acc;
       }, [3, ""])[1];
-     return dym ?
+    dym ?
      message.reply(Messages.SimilarMessage + dym) :
      void 0;
+    continue;
   };
 };
 
 for await (let [old, now] of voiceStateUpdate) {
-  if (now.id !== client.user.id) return;
+  if (now.id !== client.user.id) continue;
   if (!old.channel && now.channel) {
     // join
     console.log("join!");
@@ -152,7 +157,7 @@ for await (let [old, now] of voiceStateUpdate) {
   }
 };
 
-for await (let interaction of interactionEvent) {
+for await (let [interaction] of interactionEvent) {
   if (interaction.isCommand()) {
     // Slash Commands
     interaction.reply("Catch!");
@@ -160,10 +165,12 @@ for await (let interaction of interactionEvent) {
     // from Buttons
     if (interaction.customID == "delete_the_message") {
       await interaction.reply("Deleted!", { ephemeral: true });
-      return void await interaction.message.delete();
+      void await interaction.message.delete();
+      continue;
     } else if (interaction.customID == "remove_the_buttons") {
       await interaction.reply("Removed!", { ephemeral: true });
-      return void await client.api.channels[interaction.channel.id]
+      void await client.api.channels[interaction.channel.id];
+      continue;
       .messages[interaction.message.id].patch({
         data: { components: [ ] }
       });
