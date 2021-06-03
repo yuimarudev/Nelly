@@ -7,7 +7,7 @@ import {
   queues
 } from '../global.mjs';
 
-import Queue from '../structure/Queue.js';
+import Queue from '../structure/Queue.mjs';
 import ytsr from 'ytsr';
 import ytpl from 'ytpl';
 const regex = /https?:\/\/youtu(?:be\.com|\.be)\/(?:watch\?v=)?(\w{1,})(?:&?[^\?list=]\w+)*(?:(?:&|\?)list=(\w{0,}))?.*/; // eslint-disable-line
