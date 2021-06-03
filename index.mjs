@@ -6,10 +6,10 @@ import leven from 'levenshtein';
 import discord from 'discord.js';
 
 ["MessageEmbed", "MessageAttachment"]
-  .forEach(v => global[v] = discord[v]);
-global.Discord = discord;
-global.Messages = JSON.parse(fs.readFileSync('./lang/ja_jp.json'));
-global.stringFormat = (...r) =>
+  .forEach(v => globalThis[v] = discord[v]);
+globalThis.Discord = discord;
+globalThis.Messages = JSON.parse(fs.readFileSync('./lang/ja_jp.json'));
+globalThis.stringFormat = (...r) =>
 r.reduce((a, c, i) => a.replace(
   new RegExp(`\\{${i}\\}`, "g"), c
 ), r.shift());
@@ -19,7 +19,7 @@ import commandArgs from './commands.js';
 import extClasses from './ModifyDjs.mjs';
 import MessageComponentInteraction from './structure/MessageComponentInteraction.js';
 
-Object.assign(global, extClasses);
+Object.assign(globalThis, extClasses);
 Object.assign(Discord, extClasses);
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
