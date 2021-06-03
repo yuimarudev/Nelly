@@ -5,7 +5,7 @@ import {
   Messages,
   stringFormat,
   queues
-} from '../../global.mjs';
+} from '../global.mjs';
 
 const { resolveString } = Discord.Util;
 
