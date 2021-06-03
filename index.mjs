@@ -5,14 +5,17 @@ import { on } from 'events';
 import leven from 'levenshtein';
 import discord from 'discord.js';
 
+const _export = {};
 ["MessageEmbed", "MessageAttachment"]
-  .forEach(v => global[v] = discord[v]);
-global.Discord = discord;
-global.Messages = JSON.parse(fs.readFileSync('./lang/ja_jp.json'));
-global.stringFormat = (...r) =>
+  .forEach(v => _export[v] = discord[v]);
+_export.Discord = discord;
+_export.Messages = JSON.parse(fs.readFileSync('./lang/ja_jp.json'));
+_export.stringFormat = (...r) =>
 r.reduce((a, c, i) => a.replace(
   new RegExp(`\\{${i}\\}`, "g"), c
 ), r.shift());
+export _export;
+
 import SpaceSplit from './spliter.mjs';
 import commandArgs from './commands.js';
 import MessageComponentInteraction from './structure/MessageComponentInteraction.mjs';
