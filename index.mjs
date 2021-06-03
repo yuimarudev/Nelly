@@ -5,7 +5,7 @@ import { on } from 'events';
 import leven from 'levenshtein';
 import discord from 'discord.js';
 import SpaceSplit from './spliter.mjs';
-import extClasses from './ModifyDjs.js';
+import extClasses from './ModifyDjs.mjs';
 import commandArgs from './commands.js';
 import MessageComponentInteraction from './structure/MessageComponentInteraction.js';
 
