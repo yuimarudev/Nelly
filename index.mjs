@@ -169,11 +169,11 @@ for await (let [interaction] of interactionEvent) {
       continue;
     } else if (interaction.customID == "remove_the_buttons") {
       await interaction.reply("Removed!", { ephemeral: true });
-      void await client.api.channels[interaction.channel.id];
-      continue;
+      void await client.api.channels[interaction.channel.id]
       .messages[interaction.message.id].patch({
         data: { components: [ ] }
       });
+      continue;
     } else if (interaction.customID == "right_choice") {
       interaction.reply(":white_check_mark: 正解！", { ephemeral: true });
     } else if (interaction.customID == "wrong_choice") {
