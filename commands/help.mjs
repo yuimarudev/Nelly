@@ -6,9 +6,9 @@ import {
   stringFormat,
   queues
 } from '../global.mjs';
+import dict from '../commands.js';
 
 export default ((message, args) => {
-  import dict from '../commands.js';
   if (args.length) {
     const info = dict.commands[args[0]];
     if (info) {
