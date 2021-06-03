@@ -66,7 +66,7 @@ export default (async(message, args, client) => {
       if (messages.size) {
         const songInfo = filtered?.[messages.first().content - 1];
         songInfo 
-          ? (() => {
+          ? (async () => {
           serverQueue.addMusic(songInfo.url, message);
           await message.reply(Messages.MusicAdded + songInfo.title);
         })()
