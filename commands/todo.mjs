@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 const toDoList = [ ];
 const deleted = [ ];
 const logPath = "./todo.log";
@@ -15,33 +15,33 @@ const logTheList = () => {
 };
 
 
-module.exports = async (message, args, client) => {
+export default ((message, args, client) => {
   switch (args.shift()) {
     case "show":
-      await showList(message, args, client);
+      showList(message, args, client);
       break;
     case "add":
-      await addToList(message, args, client);
+      addToList(message, args, client);
       break;
     case "del":
-      await deleteElement(message, args, client);
+      deleteElement(message, args, client);
       break;
     case "res":
-      await restoreElement(message, args, client);
+      restoreElement(message, args, client);
       break;
     default:
       await message.channel.send(`:x: 第一引数の値が無効です。`);
       break;
   }
-}
+})
 
-async function showList(m) {
+function showList(m) {
   await m.channel.send(
     toDoList.map(v => "・" + v).join('\n') || "List is empty."
   );
 }
 
-async function addToList(m, args) {
+function addToList(m, args) {
   toDoList.push(args[0]);
   logTheList();
   await m.channel.send(
@@ -49,7 +49,7 @@ async function addToList(m, args) {
   );
 }
 
-async function restoreElement(m, args) {
+function restoreElement(m, args) {
   let len = 1;
   if (0 < args.length) {
     len = parseInt(args[0], 10);
@@ -70,9 +70,9 @@ async function restoreElement(m, args) {
   await m.channel.send(
     `:white_check_mark: Restored!`
   );
-}
+})
 
-async function deleteElement(m, args) {
+function deleteElement(m, args) {
   let index = parseInt(args[0], 10);
   if (Number.isNaN(index))
     return void await m.channel.send(
