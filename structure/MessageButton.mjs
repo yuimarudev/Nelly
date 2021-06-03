@@ -1,4 +1,6 @@
 let keysglob = Object.entries(global);
+console.log(keysglob);
+console.log(global);
 for(let [k, v] of keysglob) {
   Object.defineProperty(this, k, { value: v });
 };
