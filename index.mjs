@@ -66,7 +66,7 @@ client.on('ready', () => {
   }, 6000);
 });
 
-client.on('message', message => {
+client.on('message', async message => {
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix) && !message.mentions.users.has(client.user.id))
     return;
@@ -88,7 +88,8 @@ client.on('message', message => {
     let cursor = commandArgs.commands[curs];
     if (cursor.variadic || cursor.args.some(x => x.length === args.length)) {
       let result;
-      try { result = await commands[curs](message, args, client);
+      try {
+        result = await commands[curs](message, args, client);
         } catch(ex) {
           result = Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```';
         };
@@ -108,7 +109,7 @@ client.on('message', message => {
   };
 });
 
-client.on('voiceStateUpdate', (old, now) => {
+client.on('voiceStateUpdate', async(old, now) => {
   if (now.id !== client.user.id) return;
   if (!old.channel && now.channel) {
     // join
@@ -127,7 +128,7 @@ client.on('voiceStateUpdate', (old, now) => {
   }
 });
 
-client.on('interaction', interaction => {
+client.on('interaction', async interaction => {
   if (interaction.isCommand()) {
     // Slash Commands
     interaction.reply("Catch!");
