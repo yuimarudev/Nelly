@@ -9,11 +9,11 @@ import {
   SnowflakeUtil,
   Util
 } from 'discord.js';
-import MessageButton from './structure/MessageButton';
+import MessageButton from './structure/MessageButton.js';
 const Embed = MessageEmbed;
 const { MessageTypes } = Discord.Constants;
 
-exports { MessageButton };
+export default { MessageButton };
 
 Discord.Message.prototype._patch = function(data) {
     this.id = data.id;
