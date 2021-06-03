@@ -15,7 +15,10 @@ _export.stringFormat = (...r) =>
 r.reduce((a, c, i) => a.replace(
   new RegExp(`\\{${i}\\}`, "g"), c
 ), r.shift());
-export { ..._export };
+const exportent = Object.entries(_export);
+for(let [k, v] of exportent) {
+  export k as v;
+};
 
 const {
   MessageEmbed,
