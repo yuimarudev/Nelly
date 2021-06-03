@@ -5,7 +5,7 @@ import {
   Messages,
   stringFormat,
   queues
-} from '../index.mjs';
+} from './global.mjs';
 
 export default (class {
   constructor(data, message) {
