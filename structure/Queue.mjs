@@ -1,4 +1,4 @@
-import Song from './Song.js';
+import Song from './Song.mjs';
 import ytdl from 'ytdl-core';
 
 export default class {
