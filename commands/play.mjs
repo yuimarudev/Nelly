@@ -1,3 +1,12 @@
+import {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat,
+  queues
+} from '../index.mjs';
+
 import Queue from '../structure/Queue.js';
 import ytsr from 'ytsr';
 import ytpl from 'ytpl';
