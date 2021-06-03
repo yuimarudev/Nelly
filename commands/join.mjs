@@ -9,7 +9,7 @@ import {
 
 import Queue from '../structure/Queue.mjs';
 
- export default (message => {
+ export default (async message => {
    if (!message.member.voice.channel) {
      return void await message.reply(Messages. PleaseJoinVoiceChannelMessage);
    }
