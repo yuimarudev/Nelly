@@ -17,7 +17,7 @@ r.reduce((a, c, i) => a.replace(
 import SpaceSplit from './spliter.mjs';
 import commandArgs from './commands.js';
 import extClasses from './ModifyDjs.mjs';
-import MessageComponentInteraction from './structure/MessageComponentInteraction.js';
+import MessageComponentInteraction from './structure/MessageComponentInteraction.mjs';
 
 Object.assign(globalThis, extClasses);
 Object.assign(Discord, extClasses);
