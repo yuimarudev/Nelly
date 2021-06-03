@@ -1,4 +1,13 @@
- export default (message => {
+ import {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat,
+  queues
+} from '../index.mjs';
+
+export default (message => {
   const serverQueue = queues.get(message.guild.id);
   if (!serverQueue) {
     return void await message.reply(
