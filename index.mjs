@@ -1,13 +1,18 @@
-import discord from 'discord.js';
-import MessageComponentInteraction from './structure/MessageComponentInteraction.js';
 import fs from 'fs';
-import leven from 'levenshtein';
 import path from 'path';
 import dotenv from 'dotenv';
-import SpaceSplit from './spliter.js';
-import extClasses from './ModifyDjs.js';
-import commandArgs from './commands.js';
+import { on } from 'events';
+import leven from 'levenshtein';
+import discord from 'discord.js';
+import SpaceSplit from './spliter';
+import extClasses from './ModifyDjs';
+import commandArgs from './commands';
+import MessageComponentInteraction from './structure/MessageComponentInteraction';
 
+["MessageEmbed", "MessageAttachment"]
+  .forEach(v => global[v] = Discord[v]);
+Object.assign(global, extClasses);
+Object.assign(Discord, extClasses);
 global.Discord = discord;
 global.Messages = require('./lang/ja_jp.json');
 global.stringFormat = (...r) =>
@@ -15,13 +20,28 @@ r.reduce((a, c, i) => a.replace(
   new RegExp(`\\{${i}\\}`, "g"), c
 ), r.shift());
 
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const commands = {};
-const prefix = '%';
-["MessageEmbed", "MessageAttachment"]
-  .forEach(v => global[v] = Discord[v]);
 
-Object.assign(global, extClasses);
-Object.assign(Discord, extClasses);
+// events
+const ready = on(
+  client,
+  'ready'
+);
+const messageEvent = on(
+  client,
+  'message'
+);
+const voiceStateUpdate = on(
+  client,
+  'voiceStateUpdate'
+);
+const interactionEvent = on(
+  client,
+  'interaction'
+);
+
+const prefix = '%';
 
 let dotenvPath = path.join(__dirname, '.env');
 if (fs.existsSync(dotenvPath)) {
@@ -50,13 +70,14 @@ process.stdin.on('data', chunk => {
   };
 });
 
-client.on('ready', () => {
+for await (let _ of ready) {
+  _;
   console.log("ちょっと待ってね！(   ◜ω◝ )");
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
     .filter(x => x.endsWith('.js'))
     .map(x => x.replace(/\.js$/,''));
   for (let command of list) {
-    let run = require(path.join(__dirname, 'commands', command));
+    let run = await import(path.join(__dirname, 'commands', command));
     commands[command] = run;
     console.log('\'' + command + '\'' + "を読み込んだよ！");
   };
@@ -67,9 +88,9 @@ client.on('ready', () => {
       client.user.setActivity('ready At: ' + client.readyAt);
     }, 3000);
   }, 6000);
-});
+};
 
-client.on('message', async message => {
+for await (let message of messageEvent) {
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix) && !message.mentions.users.has(client.user.id))
     return;
@@ -110,9 +131,9 @@ client.on('message', async message => {
      message.reply(Messages.SimilarMessage + dym) :
      void 0;
   };
-});
+};
 
-client.on('voiceStateUpdate', (old, now) => {
+for await (let [old, now] of voiceStateUpdate) {
   if (now.id !== client.user.id) return;
   if (!old.channel && now.channel) {
     // join
@@ -129,9 +150,9 @@ client.on('voiceStateUpdate', (old, now) => {
     if (now.channel.type === "stage")
     now.setSuppressed(false);
   }
-});
+};
 
-client.on("interaction", async interaction => {
+for await (let interaction of interactionEvent) {
   if (interaction.isCommand()) {
     // Slash Commands
     interaction.reply("Catch!");
@@ -152,7 +173,7 @@ client.on("interaction", async interaction => {
       interaction.reply(":x: 不正解...", { ephemeral: true });
     }
   }
-});
+};
 
 MessageComponentInteraction.addHandler(client);
 client.login(process.env.token);
