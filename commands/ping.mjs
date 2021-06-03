@@ -5,7 +5,7 @@ import {
   Messages,
   stringFormat,
   queues
-} from '../index.mjs';
+} from '../global.mjs';
 
 export default ((message, _, client) => {
   return void await message.channel.send(`Pong!🏓 ${client.ws.ping}ms`);
