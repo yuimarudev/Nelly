@@ -10,7 +10,7 @@ import {
 import Queue from '../structure/Queue.mjs';
 import ytsr from 'ytsr';
 
-export default ((message, args, client) => {
+export default (async(message, args, client) => {
   const serverQueue = queues.get(message.guild.id);
   if (!serverQueue) {
     if (message.member.voice.channel) {
