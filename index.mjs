@@ -1,4 +1,4 @@
-import fs from 'fs';
+import * as fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import { on } from 'events';
