@@ -19,6 +19,15 @@ import {
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const commands = {};
 
+const client = new Discord.Client({
+  intents: Discord.Intents.NON_PRIVILEGED,
+  ws: {
+    intents: Discord.Intents.NON_PRIVILEGED,
+    properties: {
+        $browser: 'Nelly Client'
+    }
+  }
+});
 // events
 const ready = on(
   client,
@@ -46,16 +55,6 @@ if (fs.existsSync(dotenvPath)) {
     process.env[key] = env[key];
   }
 }
-
-const client = new Discord.Client({
-  intents: Discord.Intents.NON_PRIVILEGED,
-  ws: {
-    intents: Discord.Intents.NON_PRIVILEGED,
-    properties: {
-        $browser: 'Nelly Client'
-    }
-  }
-});
 
 process.stdin.on('data', chunk => {
   chunk = String(chunk);
