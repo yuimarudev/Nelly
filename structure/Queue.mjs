@@ -4,7 +4,7 @@ import {
   Discord,
   Messages,
   stringFormat
-} from './index.mjs';
+} from '../index.mjs';
 
 import Song from './Song.mjs';
 import ytdl from 'ytdl-core';
