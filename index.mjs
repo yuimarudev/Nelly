@@ -17,6 +17,15 @@ r.reduce((a, c, i) => a.replace(
 ), r.shift());
 export _export;
 
+const {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat,
+  queues
+} = _export;
+
 import SpaceSplit from './spliter.mjs';
 import commandArgs from './commands.js';
 import MessageComponentInteraction from './structure/MessageComponentInteraction.mjs';
