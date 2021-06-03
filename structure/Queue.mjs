@@ -26,7 +26,7 @@ export default class {
     this.autoPlayHistory = [];
   }
   
-  addMusic(url, message) {
+  async addMusic(url, message) {
     const info = await ytdl.getInfo(url);
     const song = new Song(info, message);
     this.songs.push(song);
@@ -36,7 +36,7 @@ export default class {
   
 }
 
-function play(queue) {
+async function play(queue) {
   if (!queue.songs.length) {
     queue.isPlaying = false;
     queue.playingSong = null;
@@ -71,7 +71,7 @@ function play(queue) {
   );
   queue.dispatcher = queue.connection.play(stream)
   .once('finish', next);
-  function next() {
+  async function next() {
     if (song.loop) queue.songs.unshift(song);
     else if (queue.loop) queue.songs.push(song);
     if (queue.nowPlayingMsg) await queue.nowPlayingMsg.delete()
