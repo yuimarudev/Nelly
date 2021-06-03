@@ -1,7 +1,7 @@
 const { Collector, Collection } = Discord;
- const { Events } = Discord.Constants;
+const { Events } = Discord.Constants;
 
- module.exports = class ButtonClickCollector extends Collector {
+export default (class ButtonClickCollector extends Collector {
    constructor(message, filter, options) {
      super(message.client, filter, options);
      this.message = message;
@@ -86,4 +86,4 @@ const { Collector, Collection } = Discord;
    static key(button) {
      return button.id;
    }
- }
+ })
