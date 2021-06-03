@@ -1,3 +1,12 @@
+import {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat,
+  queues
+} from '../index.mjs';
+
 export default ((message, args) => {
   import dict from '../commands.js';
   if (args.length) {
