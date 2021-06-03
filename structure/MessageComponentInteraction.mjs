@@ -1,11 +1,12 @@
-import {
+import * as shit from '../index.mjs';
+const {
   MessageEmbed,
   MessageAttachment,
   Discord,
   Messages,
-  stringFormat
-} from '../index.mjs';
-
+  stringFormat,
+  queues
+} = shit;
 class comp extends Discord.Interaction {
   constructor(client, data) {
     super(client, data);
