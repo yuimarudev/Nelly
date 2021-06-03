@@ -1,4 +1,4 @@
-module.exports = async message => {
+export default (message => {
   const queue = queues.get(message.guild.id);
   const skipReqs = queue.skipReqs;
   if (!queue)
@@ -39,7 +39,7 @@ module.exports = async message => {
   } catch {
     void 0;
   }
-};
+})
 
 function skipTo({songs, dispatcher}, index) {
   if (typeof index !== "number" || index < 1) return songs;
