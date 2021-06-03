@@ -52,7 +52,8 @@ client.on('ready', () => {
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
     .filter(x => x.endsWith('.mjs') || x.endsWith('.js'))
   for (let command of list) {
-    let run = await (import(path.join(__dirname, 'commands', command)));
+    let run = import(path.join(__dirname, 'commands', command));
+    run = await run;
     commands[command] = run;
     console.log('\'' + command + '\'' + "を読み込んだよ！");
   };
