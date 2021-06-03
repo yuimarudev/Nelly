@@ -1,3 +1,12 @@
+import {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat,
+  queues
+} from '../index.mjs';
+
 export default ((message, args) => {
   let { voiceChannel, songs } = queues.get(message.guild.id);
   if (songs.length < args.length)
