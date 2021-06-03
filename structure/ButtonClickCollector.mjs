@@ -1,7 +1,10 @@
-let _this = this;
-Object.entries(global).forEach((v, k) => {
-  Object.defineProperty(_this, k, { value: v });
-});
+import {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat
+} from '../index.mjs';
 
 const { Collector, Collection } = Discord;
 const { Events } = Discord.Constants;
