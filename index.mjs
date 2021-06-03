@@ -52,10 +52,9 @@ client.on('ready', () => {
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
     .filter(x => x.endsWith('.mjs') || x.endsWith('.js'))
   for (let command of list) {
-    import(path.join(__dirname, 'commands', command)).then(run => {
-      commands[command] = run;
-      console.log('\'' + command + '\'' + "を読み込んだよ！");
-    });
+    const run = await import(path.join(__dirname, 'commands', command))
+    commands[command] = run;
+    console.log('\'' + command + '\'' + "を読み込んだよ！");
   };
   console.log('ready');
   setInterval(() => {
