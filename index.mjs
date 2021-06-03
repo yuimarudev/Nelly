@@ -4,17 +4,17 @@ import dotenv from 'dotenv';
 import { on } from 'events';
 import leven from 'levenshtein';
 import discord from 'discord.js';
-import SpaceSplit from './spliter';
-import extClasses from './ModifyDjs';
-import commandArgs from './commands';
-import MessageComponentInteraction from './structure/MessageComponentInteraction';
+import SpaceSplit from './spliter.mjs';
+import extClasses from './ModifyDjs.js';
+import commandArgs from './commands.js';
+import MessageComponentInteraction from './structure/MessageComponentInteraction.js';
 
 ["MessageEmbed", "MessageAttachment"]
   .forEach(v => global[v] = Discord[v]);
 Object.assign(global, extClasses);
 Object.assign(Discord, extClasses);
 global.Discord = discord;
-global.Messages = require('./lang/ja_jp.json');
+global.Messages = JSON.parse(fs.readFileSync('./lang/ja_jp.json'));
 global.stringFormat = (...r) =>
 r.reduce((a, c, i) => a.replace(
   new RegExp(`\\{${i}\\}`, "g"), c
@@ -74,8 +74,7 @@ for await (let _ of ready) {
   _;
   console.log("ちょっと待ってね！(   ◜ω◝ )");
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
-    .filter(x => x.endsWith('.js'))
-    .map(x => x.replace(/\.js$/,''));
+    .filter(x => x.endsWith('.mjs') || x.endsWith('.js'))
   for (let command of list) {
     let run = await import(path.join(__dirname, 'commands', command));
     commands[command] = run;
