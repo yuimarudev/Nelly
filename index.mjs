@@ -13,14 +13,9 @@ global.stringFormat = (...r) =>
 r.reduce((a, c, i) => a.replace(
   new RegExp(`\\{${i}\\}`, "g"), c
 ), r.shift());
-console.log(global);
 import SpaceSplit from './spliter.mjs';
 import commandArgs from './commands.js';
-import extClasses from './ModifyDjs.mjs';
 import MessageComponentInteraction from './structure/MessageComponentInteraction.mjs';
-
-Object.assign(global, extClasses);
-Object.assign(Discord, extClasses);
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const commands = {};
