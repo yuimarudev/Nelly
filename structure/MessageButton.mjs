@@ -1,9 +1,10 @@
-let keysglob = Object.entries(global);
-console.log(keysglob);
-console.log(global);
-for(let [k, v] of keysglob) {
-  Object.defineProperty(this, k, { value: v });
-};
+import {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat
+} from '../index.mjs';
 
 const { resolveString } = Discord.Util;
 
