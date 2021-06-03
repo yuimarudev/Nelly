@@ -17,7 +17,7 @@ r.reduce((a, c, i) => a.replace(
 ), r.shift());
 const exportent = Object.entries(_export);
 for(let [k, v] of exportent) {
-  export k as v;
+  export { k as v };
 };
 
 const {
