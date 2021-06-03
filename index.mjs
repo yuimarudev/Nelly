@@ -15,7 +15,7 @@ _export.stringFormat = (...r) =>
 r.reduce((a, c, i) => a.replace(
   new RegExp(`\\{${i}\\}`, "g"), c
 ), r.shift());
-export _export;
+export default _export;
 
 const {
   MessageEmbed,
