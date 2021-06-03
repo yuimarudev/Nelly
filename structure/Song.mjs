@@ -1,11 +1,10 @@
-
 import {
   MessageEmbed,
   MessageAttachment,
   Discord,
   Messages,
   stringFormat
-} from './index.mjs';
+} from '../index.mjs';
 
 export default (class {
   constructor(data, message) {
