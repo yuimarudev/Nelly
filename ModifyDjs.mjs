@@ -1,20 +1,28 @@
-const {
+import {		
+  MessageEmbed,		
+  MessageAttachment,		
+  Discord,		
+  Messages,		
+  stringFormat		
+} from './global.mjs';
+
+import {
   ClientApplication,
   Collection,
   MessageFlags,
   MessageAttachment,
   MessageEmbed,
-  MessageMentions: Mentions,
+  MessageMentions,
   ReactionManager,
   SnowflakeUtil,
   Util
-} = Discord;
-const MessageButton = require('./structure/MessageButton');
+} from 'discord.js';
+import MessageButton from './structure/MessageButton.mjs';
 const Embed = MessageEmbed;
+const Mentions = MessageMentions;
 const { MessageTypes } = Discord.Constants;
 
-
-module.exports = { MessageButton };
+export default { MessageButton };
 
 Discord.Message.prototype._patch = function(data) {
     this.id = data.id;

@@ -1,4 +1,13 @@
-module.exports = class {
+import {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat,
+  queues
+} from '../global.mjs';
+
+export default (class {
   constructor(data, message) {
     let details = data.videoDetails;
     this.title = details.title;
@@ -10,4 +19,4 @@ module.exports = class {
     this.loop = false;
     this._info = data;
   }
-}
+})

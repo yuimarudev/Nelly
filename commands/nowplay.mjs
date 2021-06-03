@@ -1,4 +1,13 @@
-module.exports = async(message) => {
+import {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat,
+  queues
+} from '../global.mjs';
+
+export default (message => {
   const serverQueue = queues.get(message.guild.id);
   const song = serverQueue.playingSong;
   if(!song) return void await message.reply(Messages.NoMusic);
@@ -11,7 +20,7 @@ module.exports = async(message) => {
   .setDescription(secformat(serverQueue.dispatcher.streamTime / 1000) + ' / ' + secformat(song.duration))
   .setColor(0x00ff00);
   message.channel.send([embed]);
-};
+})
 
 function secformat(number) {
   var dt = new Date(number * 1000).toISOString();

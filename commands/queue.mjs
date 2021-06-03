@@ -1,4 +1,13 @@
-module.exports = async message => {
+ import {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat,
+  queues
+} from '../global.mjs';
+
+export default (message => {
   const serverQueue = queues.get(message.guild.id);
   if (!serverQueue) {
     return void await message.reply(
@@ -22,4 +31,4 @@ module.exports = async message => {
     .setTitle(`Queue (${i + 1}/${texts.length})`)
     .setDescription(texts[i])
   );
-};
+})

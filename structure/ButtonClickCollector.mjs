@@ -1,7 +1,16 @@
-const { Collector, Collection } = Discord;
- const { Events } = Discord.Constants;
+import {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat,
+  queues
+} from '../global.mjs';
 
- module.exports = class ButtonClickCollector extends Collector {
+const { Collector, Collection } = Discord;
+const { Events } = Discord.Constants;
+
+export default (class ButtonClickCollector extends Collector {
    constructor(message, filter, options) {
      super(message.client, filter, options);
      this.message = message;
@@ -86,4 +95,4 @@ const { Collector, Collection } = Discord;
    static key(button) {
      return button.id;
    }
- }
+ })
