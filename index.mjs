@@ -6,6 +6,7 @@ import leven from 'levenshtein';
 import discord from 'discord.js';
 
 const _export = {};
+_export.queues = new Discord.Collection();
 ["MessageEmbed", "MessageAttachment"]
   .forEach(v => _export[v] = discord[v]);
 _export.Discord = discord;
@@ -50,6 +51,7 @@ if (fs.existsSync(dotenvPath)) {
     process.env[key] = env[key];
   }
 }
+
 const client = new Discord.Client({
   intents: Discord.Intents.NON_PRIVILEGED,
   ws: {
@@ -59,8 +61,6 @@ const client = new Discord.Client({
     }
   }
 });
-
-global.queues = new Discord.Collection();
 
 process.stdin.on('data', chunk => {
   chunk = String(chunk);
