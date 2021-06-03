@@ -4,13 +4,14 @@ import {
   MessageFlags,
   MessageAttachment,
   MessageEmbed,
-  MessageMentions: Mentions,
+  MessageMentions,
   ReactionManager,
   SnowflakeUtil,
   Util
 } from 'discord.js';
 import MessageButton from './structure/MessageButton.js';
 const Embed = MessageEmbed;
+const Mentions = MessageMentions;
 const { MessageTypes } = Discord.Constants;
 
 export default { MessageButton };
