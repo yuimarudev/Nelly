@@ -1,7 +1,7 @@
-const Song = require('./Song.js');
-const ytdl = require('ytdl-core');
+import Song from './Song.js';
+import ytdl from 'ytdl-core';
 
-module.exports = class {
+export default class {
   constructor(message, connection=null) {
     this.textChannel = message.channel;
     this.voiceChannel = message.member.voice.channel;
@@ -16,16 +16,18 @@ module.exports = class {
     this.skipReqs = new Set();
     this.autoPlayHistory = [];
   }
-  async addMusic(url, message) {
+  
+  addMusic(url, message) {
     const info = await ytdl.getInfo(url);
     const song = new Song(info, message);
     this.songs.push(song);
     if (!this.isPlaying && this.connection) play(this);
     return song;
   }
+  
 }
 
-async function play(queue) {
+function play(queue) {
   if (!queue.songs.length) {
     queue.isPlaying = false;
     queue.playingSong = null;
@@ -33,17 +35,18 @@ async function play(queue) {
     await queue.textChannel.send("Queue Finished...");
     return;
   }
+  
   queue.isPlaying = true;
   queue.skipReqs.clear();
   const song = queue.playingSong = queue.songs.shift();
   const stream = ytdl.downloadFromInfo(song._info)
-  .once('error', async err => {
+  .once('error', err => {
     queue.textChannel.send(
       new MessageEmbed()
       .setTitle(":x: Exception")
       .setDescription(`${err}`)
     );
-    await next();
+    next();
   });
   queue.autoPlayHistory.unshift(song._info.videoDetails.videoId);
   queue.autoPlayHistory.length = 10;
@@ -59,7 +62,7 @@ async function play(queue) {
   );
   queue.dispatcher = queue.connection.play(stream)
   .once('finish', next);
-  async function next() {
+  function next() {
     if (song.loop) queue.songs.unshift(song);
     else if (queue.loop) queue.songs.push(song);
     if (queue.nowPlayingMsg) await queue.nowPlayingMsg.delete()
