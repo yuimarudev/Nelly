@@ -1,5 +1,5 @@
-module.exports = (message, args) => {
-  const dict = require('../commands.js');
+export default ((message, args) => {
+  import dict from '../commands.js';
   if (args.length) {
     const info = dict.commands[args[0]];
     if (info) {
@@ -30,4 +30,4 @@ module.exports = (message, args) => {
       )
     );
   }
-};
+})
