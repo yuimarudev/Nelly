@@ -53,8 +53,7 @@ client.on('ready', async() => {
     .filter(x => x.endsWith('.mjs') || x.endsWith('.js'))
   for (let command of list) {
     const run = await import(path.join(__dirname, 'commands', command));
-    console.log(run);
-    commands[command] = run;
+    commands[command] = run.default;
     console.log('\'' + command + '\'' + "を読み込んだよ！");
   };
   console.log('ready');
