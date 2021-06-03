@@ -5,7 +5,7 @@ import {
   Messages,
   stringFormat,
   queues
-} from '../index.mjs';
+} from '../global.mjs';
 
 import { VM } from 'vm2';
 
