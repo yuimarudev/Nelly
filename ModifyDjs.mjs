@@ -1,10 +1,10 @@
-import {
-  MessageEmbed,
-  MessageAttachment,
-  Discord,
-  Messages,
-  stringFormat
-} from './index.mjs';
+import {		
+  MessageEmbed,		
+  MessageAttachment,		
+  Discord,		
+  Messages,		
+  stringFormat		
+} from './global.mjs';
 
 import {
   ClientApplication,
