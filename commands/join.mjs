@@ -5,7 +5,7 @@ import {
   Messages,
   stringFormat,
   queues
-} from '../index.mjs';
+} from '../global.mjs';
 
 import Queue from '../structure/Queue.mjs';
 
