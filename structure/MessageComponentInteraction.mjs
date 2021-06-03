@@ -1,3 +1,11 @@
+import {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat
+} from '../index.mjs';
+
 class comp extends Discord.Interaction {
   constructor(client, data) {
     super(client, data);
