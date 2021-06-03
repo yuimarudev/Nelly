@@ -5,7 +5,7 @@ import {
   Messages,
   stringFormat,
   queues
-} from '../index.mjs';
+} from '../global.mjs';
 
 export default (message => {
   const queue = queues.get(message.guild.id);
