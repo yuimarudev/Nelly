@@ -1,4 +1,4 @@
-import Queue from '../structure/Queue.js';
+import Queue from '../structure/Queue.mjs';
 
  export default (message => {
    if (!message.member.voice.channel) {
