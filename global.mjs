@@ -1,4 +1,5 @@
 import discord from 'discord.js';
+import fs from 'fs';
 
 const _export = {};
 _export.queues = new discord.Collection();
