@@ -1,3 +1,12 @@
+import {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat,
+  queues
+} from '../index.mjs';
+
 export default (message => {
     const q = queues.get(message.guild.id);
     if (!q) {
