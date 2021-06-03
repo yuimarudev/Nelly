@@ -3,7 +3,8 @@ import {
   MessageAttachment,
   Discord,
   Messages,
-  stringFormat
+  stringFormat,
+  queues
 } from '../index.mjs';
 
 export default (class {
