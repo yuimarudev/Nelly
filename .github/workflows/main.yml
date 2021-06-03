@@ -28,4 +28,4 @@ jobs:
           npm install
       - name: lint
         run: |
-          ./node_modules/.bin/eslint ./commands/*.js ./structure/*.js ./*.js --fix
+          ./node_modules/.bin/eslint ./commands/*.mjs ./structure/*.mjs ./*.mjs --fix
