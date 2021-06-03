@@ -54,7 +54,7 @@ export default (async(message, args, client) => {
       .setTitle("Found")
       .setDescription(filtered.map(({title, url, duration}, i) =>`${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})\n\t\t[${duration}]`).join('\n'))
     )
-      .then(({channel}) => {
+      .then(async ({channel}) => {
       const messages = await channel.awaitMessages(
         ({ author, content }) =>
         author.equals(message.author) &&
