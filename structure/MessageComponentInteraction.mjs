@@ -5,7 +5,7 @@ import {
   Messages,
   stringFormat,
   queues
-} from './global.mjs';
+} from '../../global.mjs';
 
 class comp extends Discord.Interaction {
   constructor(client, data) {
