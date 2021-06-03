@@ -13,7 +13,7 @@ global.stringFormat = (...r) =>
 r.reduce((a, c, i) => a.replace(
   new RegExp(`\\{${i}\\}`, "g"), c
 ), r.shift());
-
+console.log(global);
 import SpaceSplit from './spliter.mjs';
 import commandArgs from './commands.js';
 import extClasses from './ModifyDjs.mjs';
