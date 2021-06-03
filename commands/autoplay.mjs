@@ -7,7 +7,7 @@ import {
   queues
 } from '../global.mjs';
 
-export default (message => {
+export default (async message => {
   const queue = queues.get(message.guild.id);
   if (!queue)
     return void await message.reply(Messages.NoQueue);
