@@ -7,7 +7,7 @@ import {
   queues
 } from '../global.mjs';
 
-export default ((message, args) => {
+export default (async(message, args) => {
   let { voiceChannel, songs } = queues.get(message.guild.id);
   if (songs.length < args.length)
     return void await message.reply(Messages.ArgumentLengthOver);

@@ -9,7 +9,7 @@ import {
 
 import { VM } from 'vm2';
 
-export default ((message, code, client) => {
+export default (async(message, code, client) => {
   if (!(await client.application.fetch()).owner.members.has(message.author.id)) return;
   let result;
   try {

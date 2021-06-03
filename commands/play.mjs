@@ -12,7 +12,7 @@ import ytsr from 'ytsr';
 import ytpl from 'ytpl';
 const regex = /https?:\/\/youtu(?:be\.com|\.be)\/(?:watch\?v=)?(\w{1,})(?:&?[^\?list=]\w+)*(?:(?:&|\?)list=(\w{0,}))?.*/; // eslint-disable-line
 
-export default ((message, args, client) => {
+export default (async(message, args, client) => {
   const data = queues.get(message.guild.id);
   if (!data) {
     if (message.member.voice.channel) {

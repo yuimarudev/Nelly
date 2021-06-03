@@ -27,16 +27,16 @@ const logTheList = () => {
 export default ((message, args, client) => {
   switch (args.shift()) {
     case "show":
-      showList(message, args, client);
+      await showList(message, args, client);
       break;
     case "add":
-      addToList(message, args, client);
+      await addToList(message, args, client);
       break;
     case "del":
-      deleteElement(message, args, client);
+      await deleteElement(message, args, client);
       break;
     case "res":
-      restoreElement(message, args, client);
+      await restoreElement(message, args, client);
       break;
     default:
       await message.channel.send(`:x: 第一引数の値が無効です。`);
@@ -44,13 +44,13 @@ export default ((message, args, client) => {
   }
 })
 
-function showList(m) {
+async function showList(m) {
   await m.channel.send(
     toDoList.map(v => "・" + v).join('\n') || "List is empty."
   );
 }
 
-function addToList(m, args) {
+async function addToList(m, args) {
   toDoList.push(args[0]);
   logTheList();
   await m.channel.send(
@@ -58,7 +58,7 @@ function addToList(m, args) {
   );
 }
 
-function restoreElement(m, args) {
+async function restoreElement(m, args) {
   let len = 1;
   if (0 < args.length) {
     len = parseInt(args[0], 10);
@@ -81,7 +81,7 @@ function restoreElement(m, args) {
   );
 })
 
-function deleteElement(m, args) {
+async function deleteElement(m, args) {
   let index = parseInt(args[0], 10);
   if (Number.isNaN(index))
     return void await m.channel.send(
