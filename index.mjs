@@ -4,11 +4,6 @@ import dotenv from 'dotenv';
 import { on } from 'events';
 import leven from 'levenshtein';
 import discord from 'discord.js';
-import SpaceSplit from './spliter.mjs';
-import commandArgs from './commands.js';
-import extClasses from './ModifyDjs.mjs';
-import MessageComponentInteraction from './structure/MessageComponentInteraction.js';
-
 ["MessageEmbed", "MessageAttachment"]
   .forEach(v => global[v] = Discord[v]);
 Object.assign(global, extClasses);
@@ -19,6 +14,11 @@ global.stringFormat = (...r) =>
 r.reduce((a, c, i) => a.replace(
   new RegExp(`\\{${i}\\}`, "g"), c
 ), r.shift());
+
+import SpaceSplit from './spliter.mjs';
+import commandArgs from './commands.js';
+import extClasses from './ModifyDjs.mjs';
+import MessageComponentInteraction from './structure/MessageComponentInteraction.js';
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const commands = {};
