@@ -1,4 +1,4 @@
-import Queue from '../structure/Queue.js';
+import Queue from '../structure/Queue.mjs';
 import ytsr from 'ytsr';
 
 export default ((message, args, client) => {
