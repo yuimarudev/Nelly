@@ -1,4 +1,4 @@
-module.exports = async message => {
+export default (message => {
     const q = queues.get(message.guild.id);
     if (!q) {
       return void await message.reply(Messages.NoQueue);
@@ -8,4 +8,4 @@ module.exports = async message => {
     }
     const enabled = (q.playingSong.loop = ! q.playingSong.loop);
     await message.reply(Messages.MusicLoop + (enabled ? "ON" : "OFF"));
-}
+})
