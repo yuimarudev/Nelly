@@ -3,8 +3,9 @@ import {
   MessageAttachment,
   Discord,
   Messages,
-  stringFormat
-} from '../index.mjs';
+  stringFormat,
+  queues
+} from './global.mjs';
 
 const { Collector, Collection } = Discord;
 const { Events } = Discord.Constants;
