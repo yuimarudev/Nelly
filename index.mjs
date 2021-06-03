@@ -56,7 +56,6 @@ client.on('ready', async() => {
     commands[command.replace(/.(m)?js$/,'')] = run.default;
     console.log('\'' + command + '\'' + "を読み込んだよ！");
   };
-  console.log(commands);
   console.log('ready');
   setInterval(() => {
     client.user.setActivity(client.guilds.cache.size + 'guilds', { type: 'COMPETING' });
