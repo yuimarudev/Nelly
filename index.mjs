@@ -47,7 +47,7 @@ process.stdin.on('data', chunk => {
   };
 });
 
-client.on('ready', () => {
+client.on('ready', async() => {
   console.log("ちょっと待ってね！(   ◜ω◝ )");
   let list = fs.readdirSync(path.join(__dirname, 'commands'))
     .filter(x => x.endsWith('.mjs') || x.endsWith('.js'))
