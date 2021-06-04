@@ -29,7 +29,7 @@
     "ffmpeg-static": "^4.3.0",
     "levenshtein": "^1.0.5",
     "vm2": "^3.9.3",
-    "ytdl-core": "^4.8.0",
+    "ytdl-core": "^4.8.2",
     "ytpl": "^2.2.1",
     "ytsr": "^3.5.0",
     "eslint": "^7.27.0",
