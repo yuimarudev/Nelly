@@ -20,7 +20,6 @@ export default (async(message, code, client) => {
     Object.assign(sandbox, {
       message,
       client,
-      require,
       process
     });
     const vm = new VM({
