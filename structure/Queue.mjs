@@ -9,6 +9,7 @@ import {
 
 import Song from './Song.mjs';
 import ytdl from 'ytdl-core';
+import util from 'util';
 
 export default class {
   constructor(message, connection=null) {
@@ -53,7 +54,7 @@ async function play(queue) {
     queue.textChannel.send(
       new MessageEmbed()
       .setTitle(":x: Exception")
-      .setDescription(`${err}`)
+      .setDescription(util.inspect(err))
     );
     next();
   });
@@ -92,7 +93,7 @@ async function play(queue) {
       } catch(err) {
         queue.textChannel.send(
           new MessageEmbed()
-          .setTitle(":x: Exception")
+          .setTitle(":x: Exception(Autoplay)")
           .setDescription(`${err}`)
         );
       }
