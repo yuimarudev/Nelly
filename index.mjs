@@ -24,7 +24,7 @@ const client = new Discord.Client({
   ws: {
     intents: Discord.Intents.NON_PRIVILEGED,
     properties: {
-        $browser: 'Nelly Client'
+        $browser: 'God of Nelly'
     }
   }
 });
