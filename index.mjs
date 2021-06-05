@@ -16,6 +16,7 @@ import {
   queues
 } from './global.mjs';
 
+
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const commands = {};
 
