@@ -35,7 +35,7 @@ export default async function(message, code, client) {
       process,
       require
     });
-    result = execute(code, sandbox);
+    result = await execute(code, sandbox);
   } catch (e) {
     result = e;
   }
