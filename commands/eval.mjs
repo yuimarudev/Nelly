@@ -27,7 +27,8 @@ export default async function(message, code, client) {
       Messages,
       stringFormat,
       queues,
-      process
+      process,
+      moduleImport: name => import(name)
     });
     const vm = new VM({
       sandbox,
