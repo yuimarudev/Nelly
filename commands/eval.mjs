@@ -51,15 +51,15 @@ export default async function(message, code, client) {
   );
 }
 
-function withTimeout(promise) {
-  return typeof promise.then !== "function" ?
-  promise : new VM({
-    sandbox: { promise, loopWhile },
+function withTimeout(result) {
+  if (typeof result.then !== "function") return result;
+  return new VM({
+    sandbox: { result, loopWhile },
     timeout: 5000
   }).run(`
     (() => {
       let v, d, r;
-      promise.then(
+      result.then(
         a => { v = a; d = true; }, 
         e => { v = e; r = d = true; }
       );
