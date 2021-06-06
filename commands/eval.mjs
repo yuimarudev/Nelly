@@ -70,13 +70,12 @@ function withTimeout(promise) {
   `);
 }
 
-function require() {
-  async function _require(path) {
+function require(_path) {
+  async function _require(path) { 
     path = path.resolve(__dirname, path);
     const res = await import(path);
     return res.default || res;
   };
-  const _path = arguments[0];
   let result = _require(_path);
   let done = false;
   let _return;
@@ -92,3 +91,4 @@ function require() {
   loopWhile(() => !done);
   return _return;
 };
+require.prototype.toString(() => "function require() { }");
