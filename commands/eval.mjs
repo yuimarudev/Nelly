@@ -11,6 +11,7 @@ import { VM } from 'vm2';
 import { loopWhile } from 'deasync';
 import { fileURLToPath } from 'url';
 import { resolve, dirname } from 'node:path';
+import execute from '../execute.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -34,11 +35,7 @@ export default async function(message, code, client) {
       process,
       require
     });
-    const vm = new VM({
-      sandbox,
-      timeout: 1000
-    });
-    result = await withTimeout(vm.run(code));
+    result = execute(code, sandbox);
   } catch (e) {
     result = e;
   }
@@ -49,25 +46,6 @@ export default async function(message, code, client) {
     (await import('util')).inspect(result),
     { split: true, code: "js" }
   );
-}
-
-function withTimeout(result) {
-  if (typeof result.then !== "function") return result;
-  return new VM({
-    sandbox: { result, loopWhile },
-    timeout: 5000
-  }).run(`
-    (() => {
-      let v, d, r;
-      Promise.resolve(result).then(
-        a => { v = a; d = true; }, 
-        e => { v = e; r = d = true; }
-      );
-      loopWhile(_=>!d);
-      const [value, rejected] = [v, r];
-      if (rejected) throw value; return value;
-    })();
-  `);
 }
 
 function require(_path) {
