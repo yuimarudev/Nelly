@@ -37,26 +37,26 @@ module.exports = async(message, args, client) => {
             hl: "ja",
             limit: 20
         }));
-        const filtered = result.items.filter(({duration}) => duration && duration?.split(':').length <= 2 && 6 >+ duration?.split(':')[0]);
+        const filtered = result.items.filter(({duration}) => !duration || duration?.split(':').length <= 2 && 6 >+ duration?.split(':')[0]);
         if (!result || !filtered.length)
         return void await message.reply(Messages.NoSearchResult);
-        filtered.length>=9?filtered.length=9:null;
+        filtered.length>=9?filtered.length=9:0;
         message.channel.send(
             new MessageEmbed()
             .setTitle("Found")
-            .setDescription(filtered.map(({title, url, duration}, i) =>`${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})\n\t\t[${duration}]`).join('\n'))
+            .setDescription(filtered.map(({title, url, duration, length}, i) =>`${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})\n\t\t[${duration||(length+'曲')}]`).join('\n'))
         )
         .then(async ({channel}) => {
             const messages = await channel.awaitMessages(
                 ({ author, content }) =>
                 author.equals(message.author) &&
-                0 < content.normalize('NFKC') &&
-                content.normalize('NFKC') <= filtered.length ||
+                0 < content.normalize('NFKC')[0] &&
+                content.normalize('NFKC')[0] <= filtered.length ||
                 content.normalize('NFKC').match(/^(cancel|キャンセル)$/i),
                 { max: 1, time: 3e4 }
             );
             if (messages.size) {
-                const selected = filtered?.[messages.first().normalize('NFKC').content - 1];
+                const selected = filtered?.[messages.first().normalize('NFKC').content[0] - 1];
                 selected 
                     ? (async () => {
                      if () {
