@@ -10,7 +10,7 @@ import {
 import { VM } from 'vm2';
 import { loopWhile } from 'deasync';
 import { fileURLToPath } from 'url';
-import { resolve, dirname } from 'node:path';
+import pathModule from 'node:path';
 import execute from '../util/execute.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -49,24 +49,22 @@ export default async function(message, code, client) {
 }
 
 function require(_path) {
-  async function _require(path) { 
-    path = path.resolve(__dirname, path);
-    const res = await import(path);
-    return res.default || res;
-  };
-  let result = _require(_path);
-  let done = false;
-  let _return;
-  result
-  .then(v => {
-    _return = v;
-    done = true;
-  })
-  .catch(e => {
-    _return = e;
-    done = true;
-  });
+  const path = pathModule.resolve(__dirname, _path);
+  let mod, done, exception;
+  import(path).then(
+    value => {
+      mod = value;
+      done = true;
+    },
+    ex => {
+      exception = ex;
+      done = true;
+    }
+  );
   loopWhile(() => !done);
-  return _return;
+  if (exception) throw exception;
+  if (mod !== void 0 && mod !== null) {
+    return mod.default || mod;
+  }
 };
 require.prototype.toString(() => "function require() { }");
