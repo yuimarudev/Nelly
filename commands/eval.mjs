@@ -13,7 +13,7 @@ import { fileURLToPath } from 'url';
 import pathModule from 'node:path';
 import execute from '../util/execute.mjs';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = pathModule.dirname(fileURLToPath(import.meta.url));
 
 export default async function(message, code, client) {
   if (!(await client.application.fetch()).owner.members.has(message.author.id)) return;
