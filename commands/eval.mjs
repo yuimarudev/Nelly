@@ -11,7 +11,7 @@ import { VM } from 'vm2';
 import { loopWhile } from 'deasync';
 import { fileURLToPath } from 'url';
 import { resolve, dirname } from 'node:path';
-import execute from '../util/execute.js';
+import execute from '../util/execute.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
