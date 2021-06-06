@@ -6,20 +6,17 @@ const exe = (code, sandbox) => {
     sandbox,
     timeout: 1000
   }).run(code);
+  if (!result || typeof result.then !== "function") return result;
   const [value, rejected] = new VM({
     sandbox: { result, loopWhile },
     timeout: 8000
   }).run(`
     let v, d, r;
-    if (typeof result.then !== "function") {
-      v = result;
-    } else {
-      result.then(
-        a => { v = a; d = true; }, 
-        e => { v = e; r = d = true; }
-      );
-      loopWhile(_ => !d);
-    }
+    result.then(
+      a => { v = a; d = true; }, 
+      e => { v = e; r = d = true; }
+    );
+    loopWhile(_ => !d);
     [v, r];
   `);
   if (rejected) throw value; return value;
