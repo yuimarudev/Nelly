@@ -49,9 +49,9 @@ export default async function(message, code, client) {
 }
 
 function require(_path) {
-  const path = pathModule.resolve(__dirname, _path);
+  // _path = pathModule.resolve(__dirname, _path);
   let mod, done, exception;
-  import(path).then(
+  import(_path).then(
     value => {
       mod = value;
       done = true;
