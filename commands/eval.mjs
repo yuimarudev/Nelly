@@ -47,7 +47,8 @@ export default async function(message, code, client) {
 }
 
 function withTimeout(promise) {
-  return new VM({
+  return typeof promise.then !== "function" ?
+  promise : new VM({
     sandbox: { promise, loopWhile },
     timeout: 5000
   }).run(`
