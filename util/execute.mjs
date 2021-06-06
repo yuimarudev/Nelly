@@ -6,20 +6,23 @@ const exe = (code, sandbox) => {
     sandbox,
     timeout: 1000
   }).run(code);
-  return new VM({
+  const [value, rejected] = new VM({
     sandbox: { result, loopWhile },
     timeout: 8000
-  }).run(`(_ => {
+  }).run(`
     let v, d, r;
-    if (typeof result.then !== "function") return result;
-    result.then(
-      a => { v = a; d = true; }, 
-      e => { v = e; r = d = true; }
-    );
-    loopWhile(_ => !d);
-    const [value, rejected] = [v, r];
-   if (rejected) throw value; return value;
-  })()`);
+    if (typeof result.then !== "function") {
+      v = result;
+    } else {
+      result.then(
+        a => { v = a; d = true; }, 
+        e => { v = e; r = d = true; }
+      );
+      loopWhile(_ => !d);
+    }
+    [v, r];
+  `);
+  if (rejected) throw value; return value;
 };
 
 export default function(...a) {
