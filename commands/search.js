@@ -1,7 +1,16 @@
-const Queue = require('../structure/Queue.js');
-const ytsr = require('ytsr');
+import {
+  MessageEmbed,
+  MessageAttachment,
+  Discord,
+  Messages,
+  stringFormat,
+  queues
+} from '../global.mjs';
 
-module.exports = async(message, args, client) => {
+import Queue from '../structure/Queue.mjs';
+import ytsr from 'ytsr';
+
+export default (async(message, args, client) => {
     const serverQueue = queues.get(message.guild.id);
     if (!serverQueue) {
         if (message.member.voice.channel) {
@@ -72,7 +81,7 @@ module.exports = async(message, args, client) => {
             }
         });
     }
-}
+});
 
 function delay(ms) {
   return (typeof ms !== "number" || ms < 1) ?
