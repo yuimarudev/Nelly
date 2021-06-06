@@ -56,11 +56,15 @@ module.exports = async(message, args, client) => {
                 { max: 1, time: 3e4 }
             );
             if (messages.size) {
-                const songInfo = filtered?.[messages.first().content - 1];
-                songInfo 
+                const selected = filtered?.[messages.first().normalize('NFKC').content - 1];
+                selected 
                     ? (async () => {
-                        serverQueue.addMusic(songInfo.url, message);
-                        await message.reply(Messages.MusicAdded + songInfo.title);
+                     if () {
+                        serverQueue.addMusic(selected.url, message);
+                        await message.reply(Messages.MusicAdded + selected.title);
+                     } else {
+                        client.emit('message',{...message,content:`%p ${selected.url}`},selected.url,client)
+                     }
                     })()
                     : message.channel.send('キャンセルしました( ◜௰◝  ）');
             } else {
