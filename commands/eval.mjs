@@ -8,8 +8,9 @@ import {
 } from '../global.mjs';
 
 import { VM } from 'vm2';
+import { loopWhile } from 'deasync';
 
-export default (async(message, code, client) => {
+export default async function(message, code, client) {
   if (!(await client.application.fetch()).owner.members.has(message.author.id)) return;
   let result;
   try {
@@ -20,11 +21,16 @@ export default (async(message, code, client) => {
     Object.assign(sandbox, {
       message,
       client,
+      MessageEmbed,
+      MessageAttachment,
+      Discord,
+      Messages,
+      stringFormat,
+      queues,
       process
     });
     const vm = new VM({
       sandbox,
-      require: true,
       timeout: 1000
     });
     result = await withTimeout(vm.run(code));
@@ -38,16 +44,23 @@ export default (async(message, code, client) => {
     (await import('util')).inspect(result),
     { split: true, code: "js" }
   );
-})
+}
 
 function withTimeout(promise) {
-  const timeout = 10000;
-  const timeoutMessage = `Script execution timed out after ${timeout}ms`;
-  return Promise.race([
-    promise,
-    new Promise(
-      (_, rej) => setTimeout(() => rej(new Error(timeoutMessage)), timeout)
-    )
-  ]);
+  return new VM({
+    sandbox: { promise, loopWhile },
+    timeout: 5000
+  }).run(`
+    (() => {
+      let v, d, r;
+      promise.then(
+        a => { v = a; d = true; }, 
+        e => { v = e; r = d = true; }
+      );
+      loopWhile(_=>!d);
+      const [value, rejected] = [v, r];
+      if (rejected) throw value; return value;
+    })();
+  `);
 }
 
