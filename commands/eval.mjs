@@ -59,7 +59,7 @@ function withTimeout(result) {
   }).run(`
     (() => {
       let v, d, r;
-      result.then(
+      Promise.resolve(result).then(
         a => { v = a; d = true; }, 
         e => { v = e; r = d = true; }
       );
