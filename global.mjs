@@ -23,5 +23,6 @@ export {
   Messages,
   stringFormat,
   queues,
-  Discord
+  Discord,
+  client
 };
