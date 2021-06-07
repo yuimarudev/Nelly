@@ -43,7 +43,7 @@ export default async function(message, code, client) {
     stringFormat,
     queues,
     process,
-    require
+    requirm: require
   });
   exeCount++;
   result = await pool.exec('run', [code, sandbox]).timeout(5000).catch(a => a);
