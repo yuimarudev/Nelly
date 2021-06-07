@@ -13,6 +13,7 @@ const client = new Discord.Client({
   intents: Discord.Intents.NON_PRIVILEGED,
   ws: { intents: Discord.Intents.NON_PRIVILEGED }
 });
+client.login(process.env.token);
 
 const run = (code, sandbox) => {
   try {
