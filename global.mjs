@@ -2,8 +2,7 @@ import Discord from 'discord.js';
 import fs from 'fs';
 
 const queues = new Discord.Collection();
-["MessageEmbed", "MessageAttachment"]
-  .forEach(v => _export[v] = Discord[v]);
+const {MessageEmbed, MessageAttachment} = Discord;
 const client = new Discord.Client({
   intents: Discord.Intents.NON_PRIVILEGED,
   ws: {
