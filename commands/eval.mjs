@@ -38,7 +38,7 @@ export default async function(message, code, client) {
     process
   });
   exeCount++;
-  result = await pool.exec('run', [code, sandbox, { users: client.users.cache.values() }]).timeout(5000).catch(a => a);
+  result = await pool.exec('run', [code, sandbox, { users: [...client.users.cache.values()] }]).timeout(5000).catch(a => a);
   resetPool();
   if (result === void 0) return;
   if (result instanceof workerpool.Promise.TimeoutError || Object.prototype.toString.call(result) === "[object Error]")
