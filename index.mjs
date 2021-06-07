@@ -13,22 +13,13 @@ import {
   Discord,
   Messages,
   stringFormat,
-  queues
+  queues,
+  client
 } from './global.mjs';
 
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const commands = {};
-
-const client = new Discord.Client({
-  intents: Discord.Intents.NON_PRIVILEGED,
-  ws: {
-    intents: Discord.Intents.NON_PRIVILEGED,
-    properties: {
-        $browser: 'God of Nelly'
-    }
-  }
-});
 
 const prefix = '%';
 
