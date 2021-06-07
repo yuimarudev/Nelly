@@ -13,27 +13,33 @@ const client = new Discord.Client({
   intents: Discord.Intents.NON_PRIVILEGED,
   ws: { intents: Discord.Intents.NON_PRIVILEGED }
 });
-console.log(process.env.token);
 client.login(process.env.token);
 
-const run = (code, sandbox) => {
-  try {
-    const ch = client.channels.cache.get(sandbox.message.channel.id);
-    sandbox.message = ch.messages.add(sandbox.message);
-  } catch { }
-  Object.assign(sandbox, {
-    client,
-    MessageEmbed,
-    MessageAttachment,
-    Discord,
-    Messages,
-    stringFormat,
-    queues,
-    process,
-    require
+const run = (code, sandbox, clientData) => new Promise((s, e) => {
+  client.on("ready", () => {
+    try {
+      const ch = client.channels.cache.get(sandbox.message.channel.id);
+      sandbox.message = ch.messages.add(sandbox.message);
+    } catch { }
+    for (const u of clientData.users) client.users.cache.add(u);
+    Object.assign(sandbox, {
+      client,
+      MessageEmbed,
+      MessageAttachment,
+      Discord,
+      Messages,
+      stringFormat,
+      queues,
+      process,
+      require
+    });
+    try {
+      s(new VM({ sandbox }).run(code));
+    } catch(ex) {
+      e(ex);
+    }
   });
-  return new VM({ sandbox }).run(code);
-};
+});
 worker({ run });
 
 function require(_path) {
