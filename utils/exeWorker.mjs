@@ -21,7 +21,7 @@ const run = (code, sandbox, clientData) => new Promise((s, e) => {
       const ch = client.channels.cache.get(sandbox.message.channel.id);
       sandbox.message = ch.messages.add(sandbox.message);
     } catch { }
-    for (const u of clientData.users) client.users.cache.add(u);
+    for (const u of clientData.users) client.users.add(u);
     Object.assign(sandbox, {
       client,
       MessageEmbed,
