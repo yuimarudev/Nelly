@@ -7,13 +7,21 @@ import {
   queues
 } from '../global.mjs';
 
-import { VM } from 'vm2';
+import workerpool from 'workerpool';
 import { loopWhile } from 'deasync';
 import { fileURLToPath } from 'url';
 import pathModule from 'node:path';
-import execute from '../util/execute.mjs';
 
 const __dirname = pathModule.dirname(fileURLToPath(import.meta.url));
+let pool = workerpool.pool(pathModule.join(__dirname, '../utils/exeWorker.js'), {
+  workerType: 'process',
+});
+const resetPool = async () => {
+  await pool.terminate();
+  pool = workerpool.pool(pathModule.join(__dirname, '../utils/exeWorker.js'), {
+    workerType: 'process',
+  });
+}
 
 export default async function(message, code, client) {
   if (!(await client.application.fetch()).owner.members.has(message.author.id)) return;
@@ -35,12 +43,13 @@ export default async function(message, code, client) {
       process,
       require
     });
-    result = await execute(code, sandbox);
+    result = await pool.exec('run', [code, sandbox]).timeout(5000);
+    await resetPool();
   } catch (e) {
     result = e;
   }
   if (result === void 0) return;
-  if (Object.prototype.toString.call(result) === "[object Error]")
+  if (result instanceof workerpool.Promise.TimeoutError || Object.prototype.toString.call(result) === "[object Error]")
     await message.channel.send(Error.prototype.toString.call(result));
   else await message.channel.send(
     (await import('util')).inspect(result),
@@ -49,7 +58,6 @@ export default async function(message, code, client) {
 }
 
 function require(_path) {
-  // _path = pathModule.resolve(__dirname, _path);
   let mod, done, exception;
   import(_path).then(
     value => {
