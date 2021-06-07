@@ -35,15 +35,7 @@ export default async function(message, code, client) {
     sandbox[key] = global[key];
   Object.assign(sandbox, {
     message,
-    client,
-    MessageEmbed,
-    MessageAttachment,
-    Discord,
-    Messages,
-    stringFormat,
-    queues,
-    process,
-    requirm: require
+    process
   });
   exeCount++;
   result = await pool.exec('run', [code, sandbox]).timeout(5000).catch(a => a);
@@ -56,23 +48,3 @@ export default async function(message, code, client) {
     { split: true, code: "js" }
   );
 }
-
-function require(_path) {
-  let mod, done, exception;
-  import(_path).then(
-    value => {
-      mod = value;
-      done = true;
-    },
-    ex => {
-      exception = ex;
-      done = true;
-    }
-  );
-  loopWhile(() => !done);
-  if (exception) throw exception;
-  if (mod !== void 0 && mod !== null) {
-    return mod.default || mod;
-  }
-};
-require.prototype.toString(() => "function require() { }");
