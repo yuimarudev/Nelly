@@ -13,10 +13,12 @@ import { fileURLToPath } from 'url';
 import pathModule from 'node:path';
 
 const __dirname = pathModule.dirname(fileURLToPath(import.meta.url));
+let exeCount = 0;
 let pool = workerpool.pool(pathModule.join(__dirname, '../utils/exeWorker.js'), {
   workerType: 'process',
 });
 const resetPool = async () => {
+  if (exeCount) return;
   await pool.terminate();
   pool = workerpool.pool(pathModule.join(__dirname, '../utils/exeWorker.js'), {
     workerType: 'process',
@@ -43,7 +45,9 @@ export default async function(message, code, client) {
       process,
       require
     });
+    exeCount++;
     result = await pool.exec('run', [code, sandbox]).timeout(5000);
+    exeCount--;
     await resetPool();
   } catch (e) {
     result = e;
