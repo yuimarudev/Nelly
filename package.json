@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "ツ",
   "main": "index.mjs",
+  "type": "module",
   "scripts": {
     "test": "node index.mjs",
     "start": "node index.mjs"
@@ -12,7 +13,7 @@
     "url": "git+https://github.com/Sueqkjs/Nelly.git"
   },
   "engines": {
-    "node": "16.x"
+    "node": "^14.x"
   },
   "author": "Sueqkjs",
   "license": "CC0-1.0",
