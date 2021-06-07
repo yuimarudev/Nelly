@@ -79,6 +79,14 @@ client.on('message', async message => {
     }
     return;
   }
+  if (message.content.startsWith(prefix + "safeeval")) {
+    try {
+      await commands.safeeval(message, message.content.replace(prefix + "safeeval", ""), client);
+    } catch(ex) {
+      await message.reply(Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```');
+    }
+    return;
+  }
   const args = SpaceSplit(message.content.slice(prefix.length));
   let command = args.shift();
   const commandDict = commandArgs.commands;
