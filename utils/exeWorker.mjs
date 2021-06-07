@@ -27,7 +27,8 @@ const run = (code, sandbox) => {
     Messages,
     stringFormat,
     queues,
-    process
+    process,
+    require
   });
   return new VM({ sandbox }).run(code);
 };
