@@ -1,5 +1,6 @@
 import Discord from 'discord.js';
 import fs from 'fs';
+export Discord;
 
 const _export = {};
 _export.queues = new Discord.Collection();
@@ -23,7 +24,6 @@ r.reduce((a, c, i) => a.replace(
 export const {
   MessageEmbed,
   MessageAttachment,
-  Discord,
   Messages,
   stringFormat,
   queues
