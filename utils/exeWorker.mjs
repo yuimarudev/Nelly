@@ -10,6 +10,8 @@ import {
   client
 } from '../global.mjs';
 
+Object.defineProperty(client, "token", {value: process.env.token});
+
 const run = (code, sandbox) => {
   Object.assign(sandbox, {
     client,
