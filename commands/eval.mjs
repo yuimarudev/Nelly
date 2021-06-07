@@ -18,10 +18,9 @@ let pool = workerpool.pool(pathModule.join(__dirname, '../utils/exeWorker.js'), 
   workerType: 'process',
 });
 const resetPool = () => {
-  if (exeCount) return;
-  pool.workers
-  .splice(0, pool.workers.length)
-  .map(w => {try{w.worker.kill()}catch{}});
+  if (--exeCount) return;
+  const spliced = pool.workers.splice(0, pool.workers.length);
+  spliced.forEach(w => {try{w.worker.kill()}catch{}});
   pool = workerpool.pool(pathModule.join(__dirname, '../utils/exeWorker.js'), {
     workerType: 'process',
   });
@@ -48,7 +47,6 @@ export default async function(message, code, client) {
   });
   exeCount++;
   result = await pool.exec('run', [code, sandbox]).timeout(5000).catch(a => a);
-  exeCount--;
   resetPool();
   if (result === void 0) return;
   if (result instanceof workerpool.Promise.TimeoutError || Object.prototype.toString.call(result) === "[object Error]")
