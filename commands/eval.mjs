@@ -18,7 +18,6 @@ let pool = workerpool.pool(pathModule.join(__dirname, '../utils/exeWorker.js'), 
   workerType: 'process',
 });
 const resetPool = () => {
-  console.log("ec:",exeCount);
   if (exeCount) return;
   pool.workers
   .splice(0, pool.workers.length)
