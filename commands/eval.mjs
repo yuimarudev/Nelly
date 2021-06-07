@@ -19,11 +19,11 @@ let pool = workerpool.pool(pathModule.join(__dirname, '../utils/exeWorker.mjs'),
 });
 const resetPool = () => {
   if (--exeCount) return;
-  const spliced = pool.workers.splice(0, pool.workers.length);
+  /*const spliced = pool.workers.splice(0, pool.workers.length);
   spliced.forEach(w => {try{w.worker.kill()}catch{}});
   pool = workerpool.pool(pathModule.join(__dirname, '../utils/exeWorker.js'), {
     workerType: 'process',
-  });
+  });*/
 }
 
 export default async function(message, code, client) {
