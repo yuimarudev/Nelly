@@ -14,7 +14,7 @@ import pathModule from 'node:path';
 
 const __dirname = pathModule.dirname(fileURLToPath(import.meta.url));
 let exeCount = 0;
-let pool = workerpool.pool(pathModule.join(__dirname, '../utils/exeWorker.js'), {
+let pool = workerpool.pool(pathModule.join(__dirname, '../utils/exeWorker.mjs'), {
   workerType: 'process',
 });
 const resetPool = () => {
