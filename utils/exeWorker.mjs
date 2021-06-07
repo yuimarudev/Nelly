@@ -22,7 +22,7 @@ const run = (code, sandbox) => {
     process,
     require
   });
-  new VM({ sandbox }).run(code);
+  return new VM({ sandbox }).run(code);
 };
 worker({ run });
 
