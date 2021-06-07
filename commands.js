@@ -64,6 +64,9 @@ module.exports = {
     },
     eval: {
       args: [ ["code"] ]
+    },
+    safeeval: {
+      args: [ ["code"] ]
     }
   }
 }
