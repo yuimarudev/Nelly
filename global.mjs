@@ -12,6 +12,7 @@ const client = new Discord.Client({
     }
   }
 });
+client.login(process.env.token);
 const Messages = JSON.parse(fs.readFileSync('./lang/ja_jp.json'));
 const stringFormat = (...r) =>
 r.reduce((a, c, i) => a.replace(
