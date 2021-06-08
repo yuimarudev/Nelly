@@ -151,4 +151,3 @@ client.on('interaction', async interaction => {
 });
 
 MessageComponentInteraction.addHandler(client);
-client.login(process.env.token);
