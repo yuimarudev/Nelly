@@ -52,7 +52,14 @@ export default async function(message, code, client) {
 }
 
 function withTimeout(promise) {
-  return Promise.race([ promise, new Promise((_, e) => { e(new Error("timeout")); }) ]);
+  return Promise.race([
+    promise,
+    new Promise(
+      (_, e) => setTimeout(() => {
+        e(new Error("timeout"));
+      }, 5000)
+    )
+  ]);
 }
 
 function require(_path) {
