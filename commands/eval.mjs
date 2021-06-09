@@ -20,7 +20,7 @@ export default async function(message, code, client) {
   try {
     const sandbox = { };
     for (const key in global)
-    if ("global" !== key)
+    if (["setTimeout", "global", "setInterval"].includes(key))
       sandbox[key] = global[key];
     Object.assign(sandbox, {
       message,
@@ -32,7 +32,17 @@ export default async function(message, code, client) {
       stringFormat,
       queues,
       process,
-      require
+      require,
+      setTimeout(...a) {
+        const id = setTimeout(...a);
+        globalThis.timeouts.push(id);
+        return id;
+      },
+      setInterval(...a) {
+        const id = setInterval(...a);
+        globalThis.intervals.push(id);
+        return id;
+      }
     });
     const vm = new VM({
       sandbox,
