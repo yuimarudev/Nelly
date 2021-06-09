@@ -1,6 +1,4 @@
-module.exports = { };
-
-module.exports.default = {
+module.exports = {
   aliases: {
     h: 'help',
     j: 'join',
