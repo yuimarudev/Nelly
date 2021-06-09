@@ -2,7 +2,7 @@ import Discord from './node_modules/discord.js/src/index.js';
 import fs from 'fs';
 
 const queues = new Discord.Collection();
-const {MessageEmbed, MessageAttachment} = Discord;
+const { MessageEmbed, MessageAttachment } = Discord;
 const client = new Discord.Client({
   intents: Discord.Intents.NON_PRIVILEGED,
   ws: {
