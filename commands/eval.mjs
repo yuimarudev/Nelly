@@ -32,7 +32,8 @@ export default async function(message, code, client) {
       stringFormat,
       queues,
       process,
-      require,
+      // require,  どうやらVMとdeasyncは、相性が悪いようで。
+      import: (...a) => import(...a),
       setTimeout(...a) {
         const id = setTimeout(...a);
         globalThis.timeouts.push(id);
