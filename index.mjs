@@ -16,6 +16,8 @@ import {
   client
 } from './global.mjs';
 const discord = Discord;
+globalThis.timeouts = [];
+globalThis.intervals = [];
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const commands = {};
