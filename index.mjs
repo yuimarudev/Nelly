@@ -15,7 +15,6 @@ import {
   queues,
   client
 } from './global.mjs';
-const discord = Discord;
 globalThis.timeouts = [];
 globalThis.intervals = [];
 
