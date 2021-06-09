@@ -3,7 +3,6 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { on } from 'events';
 import leven from 'levenshtein';
-import discord from 'discord.js';
 import SpaceSplit from './spliter.mjs';
 import commandArgs from './commands.js';
 import MessageComponentInteraction from './structure/MessageComponentInteraction.mjs';
@@ -16,7 +15,7 @@ import {
   queues,
   client
 } from './global.mjs';
-
+const discord = Discord;
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const commands = {};
