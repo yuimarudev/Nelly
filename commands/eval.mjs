@@ -20,7 +20,7 @@ export default async function(message, code, client) {
   try {
     const sandbox = { };
     for (const key in global)
-    if (["setTimeout", "global", "setInterval"].includes(key))
+    if (!["setTimeout", "global", "setInterval"].includes(key))
       sandbox[key] = global[key];
     Object.assign(sandbox, {
       message,
