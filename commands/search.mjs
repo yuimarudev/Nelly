@@ -58,13 +58,13 @@ export default (async(message, args, client) => {
       const messages = await channel.awaitMessages(
         ({ author, content }) =>
         author.equals(message.author) &&
-        0 < content.normalize('NFKC') &&
-        content.normalize('NFKC') <= filtered.length ||
+        0 < content.normalize('NFKC')[0] &&
+        content.normalize('NFKC')[0] <= filtered.length ||
         content.normalize('NFKC').match(/^(cancel|キャンセル)$/i),
         { max: 1, time: 3e4 }
       );
       if (messages.size) {
-        const songInfo = filtered?.[messages.first().content - 1];
+        const songInfo = filtered?.[messages.first().content[0] - 1];
         songInfo 
           ? (async () => {
           serverQueue.addMusic(songInfo.url, message);
