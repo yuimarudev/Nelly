@@ -13,11 +13,11 @@ export default (async(message, args) => {
     return void await message.reply(Messages.ArgumentLengthOver);
   const msg = await message.channel.send(Messages.PleaseWait);
   const eliminated = [];
-  for (let i of new Set(args.filter(v => !Number.isNaN(+v)))) {
+  for (let i of new Set(args.map(n=>+n).filter(v => !Number.isNaN(v) && 0 < n && n < songs.length))) {
     --i;
     if (
       !voiceChannel.members.has(songs[i].member.id) ||
-      songs[i].member.id === message.member.id
+      songs[i].member.id === message.member.id || songs[i].member.user.bot
     ) {
       eliminated.push(songs[i]);
       songs[i] = void 0;
