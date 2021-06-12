@@ -60,7 +60,7 @@ export default (async(message, args, client) => {
               url,
               duration,
               length
-            },i)) =>
+            },i) =>
           `${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})\n\t\t[${duration||(length+'曲')}]`
       )
       .join('\n')
