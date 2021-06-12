@@ -88,8 +88,7 @@ client.on('message', async message => {
     if (cursor.variadic || cursor.args.some(x => x.length === args.length)) {
       let result;
       try {
-        console.log(`${curs}`);
-        result = await commands[curs](message, args, client);
+        result = await commands[curs]?.(message, args, client);
         } catch(ex) {
           result = Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```';
         };
