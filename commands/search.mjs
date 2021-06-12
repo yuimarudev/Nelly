@@ -68,7 +68,7 @@ export default (async(message, args, client) => {
         selected 
           ? (async () => {
           args?.[1]
-          ? client.emit('message',{...message, guild:message.guild, content:`%p ${selected.url}`})
+          ? client.emit('message',{...message, guild: {...message.guild, member: {voice: message.member.voice, id: message.member.id}}, content:`%p ${selected.url}`})
           : (async() => {
             serverQueue.addMusic(selected.url, message);
             await message.reply(Messages.MusicAdded + selected.title);
