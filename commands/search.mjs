@@ -40,7 +40,7 @@ export default (async(message, args, client) => {
     if (message.member.voice.channel.id != serverQueue.voiceChannel.id) {
       return void await message.reply(Messages.PleaseJoinVoiceChannelMessage + `\nVC: \`${serverQueue.voiceChannel.name}\``)
     }
-    const result = await ytsr.getFilters(args[0]).then(f => ytsr(f.get('Type').get((args[1]?'Playlist' : undefined)||'Video').url,{
+    const result = await ytsr.getFilters(args[0]).then(f => ytsr(f.get('Type').get((args[1]?'Playlist'||undefined)||'Video').url,{
       gl: "JP",
       hl: "ja",
       limit: 20
@@ -69,8 +69,8 @@ export default (async(message, args, client) => {
           ? (async () => {
           args?.[1]
           ? client.emit('message',{...message,content:`%p ${selected.url}`})
-          : serverQueue.addMusic(selected.url, message)
-          await message.reply(Messages.MusicAdded + songInfo.title)
+          : serverQueue.addMusic(selected.url, message);
+          await message.reply(Messages.MusicAdded + songInfo.title);
         })()
         : message.channel.send('キャンセルしました( ◜௰◝  ）');
       } else {
