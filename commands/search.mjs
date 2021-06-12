@@ -73,7 +73,7 @@ export default (async(message, args, client) => {
             guild: {
               ...message.guild,
               member: {
-                ...message.member
+                id: message.member.id
               }
             },
             content:`%p ${selected.url}`
