@@ -52,7 +52,19 @@ export default (async(message, args, client) => {
     message.channel.send(
       new MessageEmbed()
       .setTitle("Found")
-      .setDescription(filtered.map(({title, url, duration, length}, i) =>`${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})\n\t\t[${duration||(length+'曲')}]`).join('\n'))
+      .setDescription(
+        filtered.map(
+          (
+            {
+              title,
+              url,
+              duration,
+              length
+            },i)) =>
+          `${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})\n\t\t[${duration||(length+'曲')}]`
+      )
+      .join('\n')
+    )
     )
       .then(async ({channel}) => {
       const messages = await channel.awaitMessages(
