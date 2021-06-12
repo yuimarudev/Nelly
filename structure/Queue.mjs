@@ -85,8 +85,6 @@ async function play(queue) {
         const id = song._info.related_videos
           .find(({id, length_seconds}) => !queue.autoPlayHistory.includes(id) && length_seconds < 900).id;
         const url = "https://youtu.be/" + id;
-        queue.autoPlayHistory.unshift(id);
-        queue.autoPlayHistory.length = 10;
         await queue.addMusic(url, { member: queue.textChannel.guild.me });
         play(queue);
         return;
