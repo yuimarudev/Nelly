@@ -76,10 +76,10 @@ export default (async(message, args, client) => {
         { max: 1, time: 3e4 }
       );
       if (messages.size) {
-        const selected = filtered?.[messages.first().content[0] - 1];
+        const selected = filtered[messages.first().content[0] - 1];
         selected 
           ? (async () => {
-          args?.[1]
+          args[1]
           ? client.emit('message',{...message,content:`%p ${selected.url}`});
           : serverQueue.addMusic(selected.url, message);
           await message.reply(Messages.MusicAdded + songInfo.title);
