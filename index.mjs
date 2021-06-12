@@ -89,9 +89,9 @@ client.on('message', async message => {
       let result;
       try {
         result = await commands[curs]?.(message, args, client);
+        console.log(curs);
         } catch(ex) {
           result = Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```';
-          console.log(curs);
         };
       if (result) return message.channel.send(result);
     } else {
