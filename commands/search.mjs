@@ -69,8 +69,10 @@ export default (async(message, args, client) => {
           ? (async () => {
           args?.[1]
           ? client.emit('message',{...message,content:`%p ${selected.url}`})
-          : serverQueue.addMusic(selected.url, message);
-          await message.reply(Messages.MusicAdded + songInfo.title);
+          : (() => {
+            serverQueue.addMusic(selected.url, message);
+            await message.reply(Messages.MusicAdded + selected.title);
+          })()
         })()
         : message.channel.send('キャンセルしました( ◜௰◝  ）');
       } else {
