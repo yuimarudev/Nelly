@@ -10,7 +10,7 @@ import {
 import Queue from '../structure/Queue.mjs';
 import ytsr from 'ytsr';
 import ytpl from 'ytpl';
-const regex = /https?:\/\/youtu(?:be\.com|\.be)\/(?:watch\?v=)?(\w{1,})(?:&?[^\?list=]\w+)*(?:(?:&|\?)list=(\w{0,}))?.*/; // eslint-disable-line
+const regex = /https?:\/\/youtu(?:be\.com|\.be)\/(?:watch\?v=(\w{1,}))?(?:&?[^\?list=]\w+)*(?:(?:&|\?|play)list(?:\?|=)(\w{0,}))?.*/; // eslint-disable-line
 
 export default (async(message, args, client) => {
   const data = queues.get(message.guild.id);
