@@ -40,31 +40,19 @@ export default (async(message, args, client) => {
     if (message.member.voice.channel.id != serverQueue.voiceChannel.id) {
       return void await message.reply(Messages.PleaseJoinVoiceChannelMessage + `\nVC: \`${serverQueue.voiceChannel.name}\``)
     }
-    const result = await ytsr.getFilters(args[0]).then(f => ytsr(f.get('Type').get((args[1]?'Playlist':undefined)||'Video').url,{
+    const result = await ytsr.getFilters(args[0]).then(f => ytsr(f.get('Type').get((args[1]?'Playlist' : undefined)||'Video').url,{
       gl: "JP",
       hl: "ja",
       limit: 20
     }));
-    const filtered = result.items.filter(({duration,length}) => length || duration?.split(':').length <= 2 && 6 >+ duration?.split(':')[0]);
+    const filtered = result.items.filter(({duration}) => duration && duration?.split(':').length <= 2 && 6 >+ duration?.split(':')[0]);
     if (!result || !filtered.length)
       return void await message.reply(Messages.NoSearchResult);
     filtered.length>=9?filtered.length=9:null;
     message.channel.send(
       new MessageEmbed()
       .setTitle("Found")
-      .setDescription(
-        filtered.map(
-          (
-            {
-              title,
-              url,
-              duration,
-              length
-            },i) =>
-          `${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})\n\t\t[${duration||(length+'曲')}]`
-      )
-      .join('\n')
-    )
+      .setDescription(filtered.map(({title, url, duration, length}, i) =>`${i + 1}\u{fe0f}\u{20e3}：\t[${title}](${url})\n\t\t[${duration||(length+'曲')}]`).join('\n'))
     )
       .then(async ({channel}) => {
       const messages = await channel.awaitMessages(
@@ -76,10 +64,10 @@ export default (async(message, args, client) => {
         { max: 1, time: 3e4 }
       );
       if (messages.size) {
-        const selected = filtered[messages.first().content[0] - 1];
+        const selected = filtered?.[messages.first().content[0] - 1];
         selected 
           ? (async () => {
-          args[1]
+          args?.[1]
           ? client.emit('message',{...message,content:`%p ${selected.url}`});
           : serverQueue.addMusic(selected.url, message);
           await message.reply(Messages.MusicAdded + songInfo.title);
