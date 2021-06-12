@@ -73,9 +73,7 @@ export default (async(message, args, client) => {
             guild: {
               ...message.guild,
               member: {
-                ...message.member,
-                voice: message.member.voice,
-                displayName: message.member.displayName
+                ...message.member
               }
             },
             content:`%p ${selected.url}`
