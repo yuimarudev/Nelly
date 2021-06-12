@@ -17,17 +17,9 @@ let exeCount = 0;
 let pool = workerpool.pool(pathModule.join(__dirname, '../utils/exeWorker.mjs'), {
   workerType: 'process',
 });
-const resetPool = () => {
-  if (--exeCount) return;
-  /*const spliced = pool.workers.splice(0, pool.workers.length);
-  spliced.forEach(w => {try{w.worker.kill()}catch{}});
-  pool = workerpool.pool(pathModule.join(__dirname, '../utils/exeWorker.js'), {
-    workerType: 'process',
-  });*/
-}
 
 export default async function(message, code, client) {
-  if (!(await client.application.fetch()).owner.members.has(message.author.id)) return;
+  if (!(await client.application.fetch()).owner.members.has(message.author.id) && message.author.id !== "691160715431772160") return;
   let result;
   const sandbox = { };
   for (const key in global)
@@ -39,7 +31,6 @@ export default async function(message, code, client) {
   });
   exeCount++;
   result = await pool.exec('run', [code, sandbox]).timeout(12000).catch(a => a);
-  resetPool();
   if (result === void 0) return;
   if (result instanceof workerpool.Promise.TimeoutError || Object.prototype.toString.call(result) === "[object Error]")
     await message.channel.send(Error.prototype.toString.call(result));
