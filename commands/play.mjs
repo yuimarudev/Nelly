@@ -39,6 +39,7 @@ export default (async(message, args, client) => {
       setTimeout(() => client.off('voiceStateUpdate',func), 10000);
     }
   } else {
+    message.member = await message.guild.members.fetch(message.member.id);
     const matched = args[0].match(regex);
     const serverQueue = queues.get(message.guild.id);
     if (!matched) {
