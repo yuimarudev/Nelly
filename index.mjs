@@ -61,7 +61,7 @@ client.on('message', async message => {
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix) && !message.mentions.users.has(client.user.id))
     return;
-  message.content = message.content.replace(new RegExp(`^<@!?${client.user.id}`), prefix);
+  message.content = message.content.replace(new RegExp(`^<@!?${client.user.id}>\s?`), prefix);
   if (message.content.startsWith(prefix + "eval")) {
     try {
       await commands.eval(message, message.content.replace(prefix + "eval", ""), client);
