@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "ツ",
   "main": "index.mjs",
-  "type": "module",
   "scripts": {
     "test": "node index.mjs",
     "start": "node index.mjs"
@@ -24,18 +23,19 @@
   "dependencies": {
     "@discordjs/opus": "^0.5.0",
     "axios": "^0.21.1",
+    "deasync": "^0.1.21",
     "discord-buttons": "^2.4.1",
-    "discord.js": "github:discordjs/discord.js#master",
+    "discord.js": "^13.0.0-dev.02693bc02f45980d8165820a103220f0027b96b7",
     "dotenv": "^9.0.2",
+    "eslint": "^7.27.0",
+    "eslint-plugin-node": "^11.1.0",
     "ffmpeg-static": "^4.3.0",
     "levenshtein": "^1.0.5",
     "vm2": "^3.9.3",
+    "workerpool": "^6.1.4",
     "ytdl-core": "^4.8.2",
     "ytpl": "^2.2.1",
-    "ytsr": "^3.5.0",
-    "deasync": "^0.1.21",
-    "eslint": "^7.27.0",
-    "eslint-plugin-node": "^11.1.0"
+    "ytsr": "^3.5.0"
   },
   "devDependencies": {
     "express": "^4.17.1"
