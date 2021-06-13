@@ -18,34 +18,33 @@ import {
 globalThis.timeouts = [];
 globalThis.intervals = [];
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const commands = {};
 
 const prefix = '%';
 
-let dotenvPath = path.join(__dirname, '.env');
-if (fs.existsSync(dotenvPath)) {
-  const env = dotenv.parse(fs.readFileSync(dotenvPath));
-  for(let key in env) {
+let dotenvURL = new URL("./.env",import.meta.url);
+if (fs.existsSync(dotenvURL)) {
+  const env = dotenv.parse(fs.readFileSync(dotenvURL));
+  for (let key in env) {
     process.env[key] = env[key];
   }
 }
 
 process.stdin.on('data', chunk => {
   chunk = String(chunk);
-  if(typeof chunk.match === "function" && chunk.match('sine')) {
+  if (typeof chunk.match === "function" && chunk.match('sine')) {
     console.log("グハッ！");
     process.exit(-1); // eslint-disable-line
   };
 });
 
-client.on('ready', async() => {
+client.on('ready', async () => {
   console.log("ちょっと待ってね！(   ◜ω◝ )");
-  let list = fs.readdirSync(path.join(__dirname, 'commands'))
+  let list = fs.readdirSync(new URL("./commands", import.meta.url))
     .filter(x => x.endsWith('.mjs') || x.endsWith('.js'))
   for (let command of list) {
-    const run = await import(path.join(__dirname, 'commands', command));
-    commands[command.replace(/.(m)?js$/,'')] = run.default;
+    const run = await import(new URL(`./commands/${command}`, import.meta.url));
+    commands[command.replace(/.(m)?js$/, '')] = run.default;
     console.log('\'' + command + '\'' + "を読み込んだよ！");
   };
   console.log('ready');
@@ -65,7 +64,7 @@ client.on('message', async message => {
   if (message.content.startsWith(prefix + "eval")) {
     try {
       await commands.eval(message, message.content.replace(prefix + "eval", ""), client);
-    } catch(ex) {
+    } catch (ex) {
       await message.reply(Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```');
     }
     return;
@@ -73,7 +72,7 @@ client.on('message', async message => {
   if (message.content.startsWith(prefix + "safeeval")) {
     try {
       await commands.safeeval(message, message.content.replace(prefix + "safeeval", ""), client);
-    } catch(ex) {
+    } catch (ex) {
       await message.reply(Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```');
     }
     return;
@@ -89,26 +88,26 @@ client.on('message', async message => {
       let result;
       try {
         result = await commands[curs]?.(message, args, client);
-        } catch(ex) {
-          result = Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```';
-        };
+      } catch (ex) {
+        result = Messages.SomethingWentWrong + '\nエラー内容: ```js\n' + ex.message + '\n```';
+      };
       if (result) return message.channel.send(result);
     } else {
       return message.reply(stringFormat(Messages.InvalidArgMessage, curs));
     };
   } else {
     let dym = Object.keys(commandDict).concat(Object.keys(aliasDict).filter(alias => 2 < alias.length))
-    .reduce((acc, cur) => {
-      let { distance } = new leven(cur, command);
-      return distance < acc[0] ? [distance, cur] : acc;
-    }, [3, ""])[1];
+      .reduce((acc, cur) => {
+        let { distance } = new leven(cur, command);
+        return distance < acc[0] ? [distance, cur] : acc;
+      }, [3, ""])[1];
     return dym ?
       message.reply(Messages.SimilarMessage + dym) :
-    void 0;
+      void 0;
   };
 });
 
-client.on('voiceStateUpdate', async(old, now) => {
+client.on('voiceStateUpdate', async (old, now) => {
   if (now.id !== client.user.id) return;
   if (!old.channel && now.channel) {
     // join
@@ -139,9 +138,9 @@ client.on('interaction', async interaction => {
     } else if (interaction.customID == "remove_the_buttons") {
       await interaction.reply("Removed!", { ephemeral: true });
       return void await client.api.channels[interaction.channel.id]
-      .messages[interaction.message.id].patch({
-        data: { components: [ ] }
-      });
+        .messages[interaction.message.id].patch({
+          data: { components: [] }
+        });
     } else if (interaction.customID == "right_choice") {
       interaction.reply(":white_check_mark: 正解！", { ephemeral: true });
     } else if (interaction.customID == "wrong_choice") {
