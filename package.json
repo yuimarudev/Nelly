@@ -25,7 +25,7 @@
     "axios": "^0.21.1",
     "deasync": "^0.1.21",
     "discord-buttons": "^2.4.1",
-    "discord.js": "^13.0.0-dev.02693bc02f45980d8165820a103220f0027b96b7",
+    "discord.js": "^13.0.0-dev.c8d20a456b635ce6081ed8ad17315a9a0c0244bc",
     "dotenv": "^9.0.2",
     "eslint": "^7.27.0",
     "eslint-plugin-node": "^11.1.0",
