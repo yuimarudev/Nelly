@@ -16,9 +16,9 @@
   "AutoPlay": "オートプレイ ",
   "NoMusic": "曲がありません(´ω`)",
   "NoVideoResult": "見つかりませんでした(´・ω・)",
-  "MusicAdded": ":white_check_mark: **Added:** ",
+  "MusicAdded": ":white_check_mark: **キューに追加しました:** ",
   "ArgumentLengthOver": ":x: 引数の数が多すぎます。",
-  "NoSearchResult": ":x: リザルトがありません...",
+  "NoSearchResult": ":x: 見つかりませんでした",
   "TimedOut": "タイムアウトしました( ◜௰◝  ）",
   "SkipRequest": "スキップリクエスト ",
   "Skipped": ":fast_forward: スキップしました！"
