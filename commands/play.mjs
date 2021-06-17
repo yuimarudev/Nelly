@@ -7,6 +7,7 @@ import {
   queues
 } from '../global.mjs';
 
+import { inspect } = 'util';
 import Queue from '../structure/Queue.mjs';
 import ytsr from 'ytsr';
 import ytpl from 'ytpl';
@@ -33,7 +34,7 @@ export default (async(message, args, client) => {
           queues.set(message.guild.id, new Queue(message, conn));
           client.emit('message', message);
         })
-          .catch(err => message.channel.send(`${Messages.SomethingWentWrong}\nエラー内容: ${err}`))
+          .catch(err => message.channel.send(`${Messages.SomethingWentWrong}\nエラー内容: ${inspect(err)}`,{split:true}))
       }
       client.on('voiceStateUpdate',func)
       setTimeout(() => client.off('voiceStateUpdate',func), 10000);
