@@ -70,12 +70,7 @@ export default (async(message, args, client) => {
           args?.[1]
           ? client.emit('message',{
             ...message,
-            guild: {
-              ...message.guild,
-              member: {
-                id: message.member.id
-              }
-            },
+            member: message.member,
             content:`%p ${selected.url}`
           })
           : (async() => {
