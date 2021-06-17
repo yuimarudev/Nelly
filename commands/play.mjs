@@ -7,7 +7,7 @@ import {
   queues
 } from '../global.mjs';
 
-import { inspect } = 'util';
+import { inspect } from 'util';
 import Queue from '../structure/Queue.mjs';
 import ytsr from 'ytsr';
 import ytpl from 'ytpl';
