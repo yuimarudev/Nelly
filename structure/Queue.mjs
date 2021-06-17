@@ -49,7 +49,7 @@ async function play(queue) {
   queue.isPlaying = true;
   queue.skipReqs.clear();
   const song = queue.playingSong = queue.songs.shift();
-  const stream = ytdl(song.url)
+  const stream = ytdl(song.url,{quality:'highestaudio',filter:'audioonly'})
   .once('error', err => {
     queue.textChannel.send(
       new MessageEmbed()
