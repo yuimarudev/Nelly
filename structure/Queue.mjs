@@ -60,22 +60,41 @@ async function play(queue) {
   });
   queue.autoPlayHistory.unshift(song._info.videoDetails.videoId);
   queue.autoPlayHistory.length = 10;
-  queue.nowPlayingMsg = await queue.textChannel.send(
-    new MessageEmbed()
-    .setTitle("Now Playing")
-    .setDescription(`[${song.title}](${song.url})`)
-    .setThumbnail(song.thumbnail.url)
-    .setFooter(
-      `Requested by ${song.member.displayName}`,
-      song.member.user.displayAvatarURL()
-    )
-  );
+  if (queue.nowPlayingMsg.deleted) {
+      queue.nowPlayingMsg = await queue.nowPlayingMsg.edit(
+      new MessageEmbed()
+      .setTitle("Now Playing")
+      .setDescription(`[${song.title}](${song.url})`)
+      .setThumbnail(song.thumbnail.url)
+      .setFooter(
+        `Requested by ${song.member.displayName}`,
+        song.member.user.displayAvatarURL()
+      )
+    );
+  } else {
+    queue.nowPlayingMsg = await queue.textChannel.send(
+      new MessageEmbed()
+      .setTitle("Now Playing")
+      .setDescription(`[${song.title}](${song.url})`)
+      .setThumbnail(song.thumbnail.url)
+      .setFooter(
+        `Requested by ${song.member.displayName}`,
+        song.member.user.displayAvatarURL()
+      )
+    );
+  }
   queue.dispatcher = queue.connection.play(stream)
   .once('finish', next);
   async function next() {
     if (song.loop) queue.songs.unshift(song);
     else if (queue.loop) queue.songs.push(song);
-    if (queue.nowPlayingMsg) await queue.nowPlayingMsg.delete()
+    if (
+      queue.nowPlayingMsg &&
+      !queue.textChannel.messages.cache
+        .sort(({ createdTimestamp: B }, { createdTimestamp: A }) => A - B)
+        .first().equals(queue.nowPlayingMsg) &&
+      !queue.autoplay
+    ) await queue.nowPlayingMsg.delete()
     .then(
       () => queue.nowPlayingMsg = null,
       () => queue.nowPlayingMsg = null
