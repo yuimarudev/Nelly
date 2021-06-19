@@ -8,5 +8,5 @@ import {
 } from '../global.mjs';
 
 export default (async(message, _, client) => {
-  return void await message.channel.send(`Pong!🏓 ${client.ws.ping}ms`);
+  return void await message.channel.send(`Pong!!🏓 ${client.ws.ping}ms`);
 });
