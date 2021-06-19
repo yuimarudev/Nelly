@@ -60,7 +60,7 @@ async function play(queue) {
   });
   queue.autoPlayHistory.unshift(song._info.videoDetails.videoId);
   queue.autoPlayHistory.length = 10;
-  if (queue.nowPlayingMsg.deleted) {
+  if (queue.nowPlayingMsg?.deleted) {
       queue.nowPlayingMsg = await queue.nowPlayingMsg.edit(
       new MessageEmbed()
       .setTitle("Now Playing")
