@@ -70,7 +70,7 @@ export default (async(message, args, client) => {
         await delay(1500);
       }
       await message.channel.send(
-        stringFormat(Messages.SongsAdded, (1 < addCount ? `${addCount} songs` : `${addCount ? 1 : "no"} song`));
+        stringFormat(Messages.SongsAdded, (1 < addCount ? `${addCount} songs` : `${addCount ? 1 : "no"} song`))
       );
     }
   }
