@@ -16,7 +16,7 @@
   "AutoPlay": "Auto Play ",
   "NoMusic": "There is no music. (´ω`)",
   "NoVideoResult": "Video not found",
-  "MusicAdded": ":white_check_mark: **Added:** ",
+  "MusicAdded": ":white_check_mark: **Added:** {0}",
   "ArgumentLengthOver": ":x: Too many arguments",
   "NoSearchResult": ":x: No result...",
   "TimedOut": "Timeout ( ◜௰◝  ）",
