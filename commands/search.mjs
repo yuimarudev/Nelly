@@ -75,7 +75,7 @@ export default (async(message, args, client) => {
           })
           : (async() => {
             serverQueue.addMusic(selected.url, message);
-            await message.reply(Messages.MusicAdded + selected.title);
+            await message.reply(stringFormat(Messages.MusicAdded, selected.title));
           })()
         })()
         : message.channel.send('キャンセルしました( ◜௰◝  ）');
