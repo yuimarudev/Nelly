@@ -70,7 +70,6 @@ export default (async(message, args, client) => {
           args?.[1]
           ? client.emit('message',{
             ...message,
-            member: message.member,
             content:`%p ${selected.url}`
           })
           : (async() => {
