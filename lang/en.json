@@ -1,9 +1,9 @@
 {
   "PleaseWait": "Wait a minute (   ◜ω◝ )",
-  "SomethingWentWrong": ":x: おっと、何かがうまくいかなかったみたいですね。",
+  "SomethingWentWrong": ":x: Oops! Something went wrong...",
   "AccidentMessage": "おっと、問題が発生したみたいですね。",
-  "InvalidArgMessage": ":x: 引数が間違っています。引数は`%help {0}`で確認してください。",
-  "SimilarMessage": ":thinking: コマンドを間違えているようです。\nもしかして: ",
+  "InvalidArgMessage": ":x: Invalid argument. 引数は`%help {0}`で確認してください。",
+  "SimilarMessage": ":thinking: Invalid command.\ndid you mean: ",
   "InvalidCommandMessage": "Invalid command.",
   "Arguments": "Arguments",
   "Details": "Details",
