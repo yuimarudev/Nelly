@@ -16,7 +16,7 @@
   "AutoPlay": "オートプレイ ",
   "NoMusic": "曲がありません(´ω`)",
   "NoVideoResult": "見つかりませんでした(´・ω・)",
-  "MusicAdded": ":white_check_mark: **キューに追加しました:** ",
+  "MusicAdded": ":white_check_mark: {1} **をキューに追加しました:** ",
   "ArgumentLengthOver": ":x: 引数の数が多すぎます。",
   "NoSearchResult": ":x: 見つかりませんでした",
   "TimedOut": "タイムアウトしました( ◜௰◝  ）",
