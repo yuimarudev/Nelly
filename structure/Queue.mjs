@@ -4,6 +4,7 @@ import {
   Discord,
   Messages,
   stringFormat,
+  client,
   queues
 } from '../global.mjs';
 
