@@ -61,7 +61,7 @@ async function play(queue) {
   });
   queue.autoPlayHistory.unshift(song._info.videoDetails.videoId);
   queue.autoPlayHistory.length = 10;
-  if (queue.nowPlayingMsg && !queue.nowPlayingMsg?.deleted) {
+  if (queue.nowPlayingMsg && queue.nowPlayingMsg.deleted === false) {
       queue.nowPlayingMsg = await queue.nowPlayingMsg.edit(
       new MessageEmbed()
       .setTitle("Now Playing")
@@ -73,6 +73,7 @@ async function play(queue) {
       )
     );
   } else {
+    await queue.nowPlayingMsg?.delete();
     queue.nowPlayingMsg = await queue.textChannel.send(
       new MessageEmbed()
       .setTitle("Now Playing")
