@@ -61,7 +61,12 @@ async function play(queue) {
   });
   queue.autoPlayHistory.unshift(song._info.videoDetails.videoId);
   queue.autoPlayHistory.length = 10;
-  if (queue.nowPlayingMsg && queue.nowPlayingMsg.deleted === false) {
+  if (
+    client.channels.cache.get(queue.textChannel.id)?.messages.cache
+      .filter(({deleted}) => !deleted)
+      .sort(({ createdTimestamp: B }, { createdTimestamp: A }) => A - B)
+      .first()?.equals(queue.nowPlayingMsg) === true
+  ) {
       queue.nowPlayingMsg = await queue.nowPlayingMsg.edit(
       new MessageEmbed()
       .setTitle("Now Playing")
