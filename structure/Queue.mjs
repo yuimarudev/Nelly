@@ -49,7 +49,7 @@ async function play(queue) {
   queue.isPlaying = true;
   queue.skipReqs.clear();
   const song = queue.playingSong = queue.songs.shift();
-  const stream = ytdl(song.url,{quality:'highestaudio',filter:'audioonly'})
+  const stream = ytdl(song.url,{ quality:'highestaudio', filter:'audioonly' })
   .once('error', err => {
     queue.textChannel.send(
       new MessageEmbed()
@@ -91,9 +91,9 @@ async function play(queue) {
     if (
       queue.nowPlayingMsg &&
       !queue.textChannel.messages.cache
-        .filter(({deleted}) => deleted)
+        .filter(({deleted}) => !deleted)
         .sort(({ createdTimestamp: B }, { createdTimestamp: A }) => A - B)
-        .first().equals(queue.nowPlayingMsg) &&
+        .first()?.equals(queue.nowPlayingMsg) &&
       (!queue.autoplay || !queue.songs.length)
     ) await queue.nowPlayingMsg.delete()
     .then(
