@@ -90,7 +90,7 @@ async function play(queue) {
     else if (queue.loop) queue.songs.push(song);
     if (
       queue.nowPlayingMsg &&
-      !queue.textChannel.messages.cache
+      !client.channels.cache.get(queue.textChannel.id)?.messages.cache
         .filter(({deleted}) => !deleted)
         .sort(({ createdTimestamp: B }, { createdTimestamp: A }) => A - B)
         .first()?.equals(queue.nowPlayingMsg) &&
