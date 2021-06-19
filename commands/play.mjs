@@ -57,12 +57,12 @@ export default (async(message, args, client) => {
       let song = await serverQueue.addMusic(filtered[0].url, message).catch(e => {
         return message.channel.send(Messages.NoVideoResult + "\nError:```" + e + "```");
       });
-      await message.channel.send(Messages.MusicAdded + song.title);
+      await message.channel.send(stringFormat(Messages.MusicAdded, song.title));
     } else if (!matched[2]) {
       let song = await serverQueue.addMusic(matched[0], message).catch(e => {
         return message.channel.send(Messages.NoVideoResult + "\nError:```" + e + "```");
       });
-      await message.channel.send(Messages.MusicAdded + song.title);
+      await message.channel.send(stringFormat(Messages.MusicAdded, song.title));
     } else {
       let playlist = await ytpl(args[0]), addCount = 0;
       for (let v of playlist.items) {
@@ -70,7 +70,7 @@ export default (async(message, args, client) => {
         await delay(1500);
       }
       await message.channel.send(
-        Messages.MusicAdded + (1 < addCount ? `${addCount} songs!` : `${addCount ? 1 : "no"} song!`)
+        stringFormat(Messages.SongsAdded, (1 < addCount ? `${addCount} songs` : `${addCount ? 1 : "no"} song`));
       );
     }
   }
