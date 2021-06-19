@@ -91,9 +91,10 @@ async function play(queue) {
     if (
       queue.nowPlayingMsg &&
       !queue.textChannel.messages.cache
+        .filter(({deleted}) => deleted)
         .sort(({ createdTimestamp: B }, { createdTimestamp: A }) => A - B)
         .first().equals(queue.nowPlayingMsg) &&
-      !queue.autoplay
+      (!queue.autoplay || !queue.songs.length)
     ) await queue.nowPlayingMsg.delete()
     .then(
       () => queue.nowPlayingMsg = null,
