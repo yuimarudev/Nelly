@@ -133,18 +133,18 @@ client.on('interaction', async interaction => {
   } else if (interaction.isMessageComponent) {
     // from Buttons
     if (interaction.customID == "delete_the_message") {
-      await interaction.reply("Deleted!", { ephemeral: true });
+      await interaction.reply({ content: "Deleted!", ephemeral: true });
       return void await interaction.message.delete();
     } else if (interaction.customID == "remove_the_buttons") {
-      await interaction.reply("Removed!", { ephemeral: true });
+      await interaction.reply({ content: "Removed!", ephemeral: true });
       return void await client.api.channels[interaction.channel.id]
         .messages[interaction.message.id].patch({
           data: { components: [] }
         });
     } else if (interaction.customID == "right_choice") {
-      interaction.reply(":white_check_mark: 正解！", { ephemeral: true });
+      interaction.reply({ content: ":white_check_mark: 正解！", ephemeral: true });
     } else if (interaction.customID == "wrong_choice") {
-      interaction.reply(":x: 不正解...", { ephemeral: true });
+      interaction.reply({ content: ":x: 不正解...", ephemeral: true });
     }
   }
 });
