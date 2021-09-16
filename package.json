@@ -5,7 +5,7 @@
   "main": "index.mjs",
   "scripts": {
     "test": "node index.mjs",
-    "start": "node index.mjs"
+    "start": "npx node index.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "ytsr": "^3.5.0"
   },
   "devDependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "npm": "^7.23.0"
   }
 }
