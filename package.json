@@ -12,23 +12,21 @@
     "url": "git+https://github.com/Sueqkjs/Nelly.git"
   },
   "engines": {
-    "node": "^14.x"
+    "node": ">=16.x"
   },
   "author": "Sueqkjs",
-  "license": "CC0-1.0",
+  "license": "CC-BY-SA-3.0",
   "bugs": {
-    "url": "https://github.com/Sueqkjs/Nelly/issues"
+    "url": "https://github.com/Rotten-flour/RottenFlour"
   },
-  "homepage": "https://github.com/Sueqkjs/Nelly#readme",
+  "homepage": "https://github.com/Rotten-flour/RottenFlour#readme",
   "dependencies": {
     "@discordjs/opus": "^0.5.0",
     "axios": "^0.21.1",
     "deasync": "^0.1.21",
     "discord-buttons": "^2.4.1",
-    "discord.js": "^13.0.0-dev.c8d20a456b635ce6081ed8ad17315a9a0c0244bc",
+    "discord.js": "^13.1.0",
     "dotenv": "^9.0.2",
-    "eslint": "^7.27.0",
-    "eslint-plugin-node": "^11.1.0",
     "ffmpeg-static": "^4.3.0",
     "levenshtein": "^1.0.5",
     "vm2": "^3.9.3",

@@ -1,6 +1,9 @@
-# Nelly
-The most powerful discord music bot. <br>
-Pre-hosted bot: [link](https://discord.com/api/oauth2/authorize?client_id=729618045378494555&permissions=70372416&scope=bot)
+# RottenFlour
+Made in Japan<br>
+
 ## LICENSE
-[![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png "CC0")](http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+
+[![クリエイティブ・コモンズ](https://i.creativecommons.org/l/by-sa/3.0/80x15.png)](http://creativecommons.org/licenses/by-sa/3.0)
+
+<br />この 作品 は <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">クリエイティブ・コモンズ 表示 - 継承 3.0 非移植 ライセンス</a>の下に提供されています。
 
