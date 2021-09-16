@@ -4,20 +4,23 @@ import fs from 'fs';
 const queues = new Discord.Collection();
 const { MessageEmbed, MessageAttachment } = Discord;
 const client = new Discord.Client({
-  intents: Discord.Intents.NON_PRIVILEGED,
+  intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_VOICE_STATES"],
   ws: {
-    intents: Discord.Intents.NON_PRIVILEGED,
     properties: {
-        $browser: 'God of Nelly'
+        $browser: 'Discord Android'
     }
   }
 });
+
 client.login(process.env.token);
+
 const Messages = JSON.parse(fs.readFileSync('./lang/ja_jp.json'));
+
 const stringFormat = (...r) =>
 r.reduce((a, c, i) => a.replace(
   new RegExp(`\\{${i}\\}`, "g"), c
 ), r.shift());
+
 export {
   MessageEmbed,
   MessageAttachment,

@@ -13,7 +13,7 @@ export default ((message, args) => {
     const info = dict.commands[args[0]];
     if (info) {
       message.channel.send(
-        new MessageEmbed()
+        embeds: [ new MessageEmbed()
         .setTitle(args[0])
         .setDescription(info.description)
         .addField(Messages.Details, dict.details)
@@ -22,21 +22,21 @@ export default ((message, args) => {
           `%${args[0]} ${info.args.map(
             content => '<' + content.join('│') + '>'
           ).join(' ')}`
-        )
+        ) ]
       );
     } else {
       message.channel.send(Messages.InvalidCommandMessage);
     }
   } else {
     message.channel.send(
-      new MessageEmbed()
+      embeds: [ new MessageEmbed()
       .setTitle(Messages.CommandList)
       .setDescription(
         Object.keys(dict.commands)
         .sort()
         .map(v => '・' + v)
         .join('\n')
-      )
+      ) ]
     );
   }
 })

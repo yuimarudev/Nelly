@@ -1,14 +1,13 @@
 {
-  "PleaseWait": "ちょっと待ってね！(   ◜ω◝ )",
-  "SomethingWentWrong": ":x: おっと、何かがうまくいかなかったみたいですね。",
-  "AccidentMessage": "おっと、問題が発生したみたいですね。",
-  "InvalidArgMessage": ":x: 引数が間違っています。引数は`%help {0}`で確認してください。",
+  "PleaseWait": "ちょっと待ってね",
+  "AccidentMessage": "おっと、問題が発生したみたいですね。 {0}",
+  "InvalidArgMessage": ":x: 引数が間違っています。引数は`{0}help {1}`で確認してください。",
   "SimilarMessage": ":thinking: コマンドを間違えているようです。\nもしかして: ",
   "InvalidCommandMessage": "無効なコマンドです",
   "Arguments": "引数",
   "Details": "詳細",
   "CommandList": "コマンド一覧",
-  "PleaseJoinVoiceChannelMessage": "ボイスチャンネルに参加してください(  ˙༥˙  )",
+  "PleaseJoinVoiceChannelMessage": "ボイスチャンネルに参加してください",
   "NoQueue": ":x: キューが存在しません",
   "NoMusicPlaying": ":x: 再生中の曲がありません.",
   "MusicLoop": ":repeat_one: 一曲ループ",
@@ -19,7 +18,7 @@
   "MusicAdded": ":white_check_mark: {0} **をキューに追加しました**",
   "ArgumentLengthOver": ":x: 引数の数が多すぎます。",
   "NoSearchResult": ":x: 見つかりませんでした",
-  "TimedOut": "タイムアウトしました( ◜௰◝  ）",
+  "TimedOut": "タイムアウトしました",
   "SkipRequest": "スキップリクエスト ",
   "Skipped": ":fast_forward: スキップしました！"
 }
