@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import { on } from 'events';
 import leven from 'levenshtein';
 import SpaceSplit from './spliter.mjs';
@@ -21,14 +21,6 @@ globalThis.intervals = [];
 const commands = {};
 
 const prefix = '%';
-
-let dotenvURL = new URL("./.env",import.meta.url);
-if (fs.existsSync(dotenvURL)) {
-  const env = dotenv.parse(fs.readFileSync(dotenvURL));
-  for (let key in env) {
-    process.env[key] = env[key];
-  }
-}
 
 process.stdin.on('data', chunk => {
   chunk = String(chunk);
